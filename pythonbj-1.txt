@@ -1,0 +1,701 @@
+
+[root@room9pc01 ~]# echo   3  |clone-auto7
+created rh7_node11					[Done]
+created rh7_node12					[Done]
+created rh7_node13					[Done]
+
+
+~]# cat  ip.sh 
+#!/bin/bash
+x=$1
+ip=$2
+export LANG=en_US.UTF-8
+echo  1 |passwd  --stdin  root
+echo  V${x} > /etc/hostname
+echo  "LANG=\"en_US.UTF-8\"" >> /etc/sysconfig/i18n
+echo  "LANG=\"en_US.UTF-8\"" >>  /etc/rc.local
+chmod  a+x  /etc/rc.d/rc.local
+source   /etc/rc.local
+
+echo  "NAME=\"eth0\"
+DEVICE=\"eth0\"
+ONBOOT=yes
+NM_CONTROLLED=\"no\"
+TYPE=Ethernet
+IPV6INIT=no
+IPV4_FAILURE_FATAL=\"no\"
+BOOTPROTO=\"static\"
+IPADDR=\"192.168.0.${ip}\"
+NETMASK=\"255.255.255.0\"
+GATEWAY=\"192.168.0.254\""  > /etc/sysconfig/network-scripts/ifcfg-eth0
+
+echo  "NAME=\"eth1\"
+DEVICE=\"eth1\"
+ONBOOT=yes
+NM_CONTROLLED=\"no\"
+TYPE=Ethernet
+IPV6INIT=no
+IPV4_FAILURE_FATAL=\"no\"
+BOOTPROTO=\"static\"
+IPADDR=\"192.168.1.${ip}\"
+NETMASK=\"255.255.255.0\"
+GATEWAY=\"192.168.0.254\""  > /etc/sysconfig/network-scripts/ifcfg-eth1
+
+echo  "NAME=\"eth2\"
+DEVICE=\"eth2\"
+ONBOOT=yes
+NM_CONTROLLED=\"no\"
+TYPE=Ethernet
+IPV6INIT=no
+IPV4_FAILURE_FATAL=\"no\"
+BOOTPROTO=\"static\"
+IPADDR=\"192.168.2.${ip}\"
+NETMASK=\"255.255.255.0\"
+GATEWAY=\"192.168.0.254\""  > /etc/sysconfig/network-scripts/ifcfg-eth2
+
+sed  -i  "7c SELINUX=disabled"  /etc/selinux/config
+systemctl   restart  network
+
+
+[root@localhost ~]# vim  ip.sh
+................
+systemctl   restart  network
+"ip.sh" [新] 49L, 1146C 已写入
+[root@localhost ~]# cat  ip.sh
+#!/bin/bash
+x=$1
+ip=$2
+export LANG=en_US.UTF-8
+echo  1 |passwd  --stdin  root
+echo  V${x} > /etc/hostname
+echo  "LANG=\"en_US.UTF-8\"" >> /etc/sysconfig/i18n
+echo  "LANG=\"en_US.UTF-8\"" >>  /etc/rc.local
+chmod  a+x  /etc/rc.d/rc.local
+source   /etc/rc.local
+
+echo  "NAME=\"eth0\"
+DEVICE=\"eth0\"
+ONBOOT=yes
+NM_CONTROLLED=\"no\"
+TYPE=Ethernet
+IPV6INIT=no
+IPV4_FAILURE_FATAL=\"no\"
+BOOTPROTO=\"static\"
+IPADDR=\"192.168.0.${ip}\"
+NETMASK=\"255.255.255.0\"
+GATEWAY=\"192.168.0.254\""  > /etc/sysconfig/network-scripts/ifcfg-eth0
+
+echo  "NAME=\"eth1\"
+DEVICE=\"eth1\"
+ONBOOT=yes
+NM_CONTROLLED=\"no\"
+TYPE=Ethernet
+IPV6INIT=no
+IPV4_FAILURE_FATAL=\"no\"
+BOOTPROTO=\"static\"
+IPADDR=\"192.168.1.${ip}\"
+NETMASK=\"255.255.255.0\"
+GATEWAY=\"192.168.0.254\""  > /etc/sysconfig/network-scripts/ifcfg-eth1
+
+echo  "NAME=\"eth2\"
+DEVICE=\"eth2\"
+ONBOOT=yes
+NM_CONTROLLED=\"no\"
+TYPE=Ethernet
+IPV6INIT=no
+IPV4_FAILURE_FATAL=\"no\"
+BOOTPROTO=\"static\"
+IPADDR=\"192.168.2.${ip}\"
+NETMASK=\"255.255.255.0\"
+GATEWAY=\"192.168.0.254\""  > /etc/sysconfig/network-scripts/ifcfg-eth2
+
+sed  -i  "7c SELINUX=disabled"  /etc/selinux/config
+systemctl   restart  network
+
+[root@localhost ~]# .  ip.sh   20  20
+Changing password for user root.
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# reboot
+
+[root@localhost ~]# .  ip.sh   21  21
+Changing password for user root.
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# reboot
+
+
+[root@localhost ~]# .  ip.sh   22  22
+Changing password for user root.
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# reboot
+
+
+ cd - 回到上次目录下
+[root@xxx  ~]# cd -
+--------------
+0
+runlevel0.target, poweroff.target
+关机  runlevel0.target    poweroff.target
+------------------------------------
+1
+runlevel1.target, rescue.target
+单用户模式    runlevel1.target     rescue.target  
+----------------------------
+rescue    英 [ˈreskju:]   美 [ˈrɛskju]  
+vt.  营救，救援，使免遭损失;[法律] 非法劫回
+n. 营救，救援;
+
+
+
+[root@room9pc01 ~]# ssh  -X  -o StrictHostKeyChecking=no root@192.168.0.20
+..................
+---------------------- 设置 graphical.target  是5级别 #多用户的图形界面  --------
+
+[root@V20 ~]# systemctl  set-default  graphical.target 
+
+Removed symlink /etc/systemd/system/default.target.
+Created symlink from /etc/systemd/system/default.target to /usr/lib/systemd/system/graphical.target.
+
+[root@V20 ~]# systemctl  get-default    #查看默认界面(运行级别)
+graphical.target
+
+---------------  切换 graphical.target  是5级别 #多用户的图形界面  ---------
+
+[root@V20 ~]# systemctl  isolate graphical.target 
+
+[root@V20 ~]# echo  $?
+0
+[root@V20 ~]# ifconfig  |awk '/inet /{print $2}'
+192.168.0.20
+192.168.1.20
+192.168.2.20
+127.0.0.1
+192.168.122.1
+[root@V20 ~]#   route  -n
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         192.168.0.254   0.0.0.0         UG    0      0        0 eth0
+..........
+[root@V20 ~]#   vim  /etc/yum.repos.d/local.repo
+[root@V20 ~]# cat  /etc/yum.repos.d/local.repo
+[rhel7]
+name=rhel-server-7.4-x86_64-dvd.iso
+baseurl=ftp://192.168.0.254/rhel7
+enabled=1
+gpgcheck=0
+[root@V20 ~]# yum  clean  all >/dev/null &&  yum repolist |tail  -3
+源标识                   源名称                                            状态
+rhel7                    rhel-server-7.4-x86_64-dvd.iso                    4,986
+repolist: 4,986
+[root@V20 ~]# vim  /etc/yum.conf 
+[root@V20 ~]# grep  -Env  "^#|^$"  /etc/yum.conf
+1:[main]
+2:cachedir=/var/cache/yum/$basearch/$releasever
+3:keepcache=0
+4:debuglevel=2
+5:logfile=/var/log/yum.log
+6:exactarch=1
+7:obsoletes=1
+8:gpgcheck=0
+9:plugins=1
+10:installonly_limit=3
+[root@V20 ~]# 
+
+
+
+ http://mirrors.aliyun.com/repo/
+
+Index of /repo/
+../
+Centos-5.repo                                      15-Jun-2018 22:20                2960
+Centos-6.repo                                      15-Jun-2018 22:21                2523
+Centos-7.repo                                      15-Jun-2018 22:22                2523
+Centos-altarch-7.repo                              15-Mar-2018 07:52                1345
+Centos-openstack.repo                              24-Apr-2018 18:25                1033
+aliyun-5.repo                                      29-Jan-2015 10:01                2780
+debian6-lts.list                                   15-May-2015 03:11                 725
+debian7-lts.list                                   15-May-2015 01:53                 712
+epel-5-cloud.repo                                  11-May-2018 03:37                 688
+epel-5.repo                                        11-May-2018 03:34                 664
+epel-6-cloud.repo                                  11-May-2018 03:43                 688
+epel-6.repo                                        11-May-2018 03:34                 664
+epel-7-cloud.repo                                  11-May-2018 03:32                1084
+epel-7.repo                                        11-May-2018 03:35                 664
+epel-testing.repo                                  30-Dec-2013 08:46                1022
+epel.repo                                          10-Mar-2014 07:15                 923
+fedora-altarch-updates.repo                        15-Mar-2018 11:25                 993
+fedora-altarch.repo                                15-Mar-2018 11:24                1015
+fedora-updates.repo                                01-Jan-2014 15:45                1099
+fedora.repo                                        01-Jan-2014 15:45                1142
+ubuntu1204-lts.list                                15-May-2015 01:53                4389
+ubuntu1404-lts.list                                15-May-2015 01:53                4346
+version                                            13-Apr-2018 06:27              947790
+
+
+
+https://www.python.org/
+
+https://www.python.org/downloads/
+
+Looking for a specific release?
+Python releases by version number:
+
+Release version Release date   Click for more
+Python 2.7.16 March 4, 2019  Download Release Notes
+Python 3.7.2 Dec. 24, 2018  Download Release Notes
+Python 3.6.8 Dec. 24, 2018  Download Release Notes
+Python 3.5.5 Feb. 5, 2018  Download Release Notes
+Python 3.6.4 Dec. 19, 2017  Download(点击链接) Release Notes
+
+
+https://www.python.org/downloads/release/python-364/
+Python 3.6.4
+
+Release Date: Dec. 19, 2017
+
+
+
+https://www.python.org/downloads/release/python-364/
+
+档
+
+版本           操作系统                         描述                    MD5总和                                    文件大小         GPG
+Gzipped源码tarball( linux版本点击下载)	来源发布		9de6494314ea199e3633211696735f65	22710891	SIG
+XZ压缩源tarball	来源发布		1325134dd525b4a2c3272a1a0214dd54	16992824	SIG
+
+Files
+Version                  Operating System          Description                             MD5 Sum                 File Size       GPG
+Gzipped source tarball( linux版本点击下载)	Source release                                          9de6494314ea199e3633211696735f65   22710891        SIG
+
+Windows x86-64 executable installer(windows版本点击下载)   Windows   for AMD64/EM64T/x64, not Itanium processors   bee5746dc6ece6ab49573a9f54b5d0a1  31684744  SIG
+
+----------------------------------------------------------
+
+下载并安装Pycharm社区版
+Pycharm是由JetBrains打造的一款Python IDE
+•  支持的功能有:
+–  调试、语法高亮
+–  Project管理、代码跳转
+–  智能提示、自动完成
+–  单元测试、版本控制
+下载地址
+https://www.jetbrains.com/pycharm/download
+https://www.jetbrains.com/pycharm/download/#section=linux
+
+下载PyCharm
+
+视窗         苹果系统              [ Linux的 ]
+
+专业的                               社区
+
+用于Python和Web          用于Python和科学
+开发的 全功能IDE          开发的 轻量级IDE
+下载                           [ 下载 ] (点击下载pycharm社区版)
+免费试用                      免费，开源
+
+https://www.jetbrains.com/pycharm/download/download-thanks.html?platform=linux&code=PCC
+感谢您下载PyCharm！
+
+您的下载应该很快开始。如果没有，请使用 直接链接。
+下载并验证文件的 [ SHA-256校验和 ] (点击链接)。
+
+https://download.jetbrains.com/python/pycharm-community-2018.3.5.tar.gz.sha256
+
+a745eef8f2952c9eafb2db3f9af52b1171f09b969fa9e2990c93d780e86c78f3 *pycharm-community-2018.3.5.tar.gz
+
+[root@room9pc01 ~]# du  -sh  /root/桌面/pycharm-community-2018.3.5.tar.gz 
+298M	/root/桌面/pycharm-community-2018.3.5.tar.gz
+
+
+[root@room9pc01 ~]# du  -sh  '/root/桌面/Python-3.6.4.tgz' 
+22M	/root/桌面/Python-3.6.4.tgz
+
+
+[root@room9pc01 ~]# ll  '/root/桌面/Python-3.6.4.tgz'
+-rw-r--r-- 1 root root 22710891 3月  18 14:10 /root/桌面/Python-3.6.4.tgz
+
+[root@V20 ~]# systemctl is-active  firewalld.service 
+unknown
+[root@V20 ~]# systemctl is-enabled  firewalld.service 
+disabled
+
+[root@V20 ~]# scp  -r   root@192.168.0.254:/root/桌面/Python-3.6.4.tgz  ./
+ssh: connect to host 192.168.0.254 port 22: Connection refused
+
+[root@room9pc01 ~]# vim  /etc/ssh/sshd_config 
+[root@room9pc01 ~]# sed  -n  38p  /etc/ssh/sshd_config
+PermitRootLogin yes
+[root@room9pc01 ~]# systemctl  restart  sshd
+
+
+[root@V20 ~]# scp  -r   root@192.168.0.254:/root/桌面/Python-3.6.4.tgz   ./
+..........................
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: ..............
+root@192.168.0.254's password: 
+Python-3.6.4.tgz                                          100%   22MB  85.9MB/s   00:00 
+
+[root@V20 ~]#  scp  root@192.168.0.254:/root/桌面/pycharm-community-2018.3.5.tar.gz  ./
+root@192.168.0.254's password: 
+pycharm-community-2018.3.5.tar.gz                   100%  297MB 185.9MB/s   00:01  
+  
+[root@V20 ~]# ls
+anaconda-ks.cfg       pycharm-community-2018.3.5.tar.gz  模板  文档  桌面
+initial-setup-ks.cfg  Python-3.6.4.tgz                   视频  下载
+ip.sh                 公共                               图片  音乐
+
+[root@V20 ~]# ll  Python-3.6.4.tgz   pycharm-community-2018.3.5.tar.gz 
+
+-rw-r--r-- 1 root root 311914955 3月  18 21:08 pycharm-community-2018.3.5.tar.gz
+-rw-r--r-- 1 root root  22710891 3月  18 21:02 Python-3.6.4.tgz
+
+[root@V20 ~]# file   Python-3.6.4.tgz   pycharm-community-2018.3.5.tar.gz 
+
+Python-3.6.4.tgz:                  gzip compressed data, from Unix, last modified: Tue Dec 19 13:36:13 2017, max compression
+
+pycharm-community-2018.3.5.tar.gz: gzip compressed data, from FAT filesystem (MS-DOS, OS/2, NT)
+
+[root@V20 ~]# yum  -y install  gcc  gcc-c++  zlib-devel openssl-devel  readline-devel  libffi-devel  sqlite-devel  tcl-devel   tk-devel   |tail  -7
+...................
+  pcre-devel.x86_64 0:8.32-17.el7                                               
+  tcl.x86_64 1:8.5.13-8.el7                                                     
+  tk.x86_64 1:8.5.13-6.el7                                                      
+  xorg-x11-proto-devel.noarch 0:7.7-20.el7                                      
+  zlib-devel.x86_64 0:1.2.7-17.el7                                              
+
+完毕！
+
+[root@V20 ~]#  rpm  -q   gcc    gcc-c++    zlib-devel   openssl-devel  
+   readline-devel   libffi-devel   sqlite-devel    tcl-devel   tk-devel
+
+gcc-4.8.5-16.el7.x86_64
+gcc-c++-4.8.5-16.el7.x86_64
+zlib-devel-1.2.7-17.el7.x86_64
+openssl-devel-1.0.2k-8.el7.x86_64
+
+readline-devel-6.2-10.el7.x86_64
+libffi-devel-3.0.13-18.el7.x86_64
+sqlite-devel-3.7.17-8.el7.x86_64
+tcl-devel-8.5.13-8.el7.x86_64
+tk-devel-8.5.13-6.el7.x86_64
+
+[root@V20 ~]# type  python
+python 是 /usr/bin/python
+
+[root@V20 ~]# python
+Python 2.7.5 (default, May  3 2017, 07:55:04) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-14)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> exit
+Use exit() or Ctrl-D (i.e. EOF) to exit
+>>>     #(Ctrl + d 退出)
+
+[root@V20 ~]# type  python
+python 已被哈希 (/usr/bin/python)
+
+[root@V20 ~]# type  python3
+-bash: type: python3: 未找到
+
+[root@V20 ~]# tar   -zxf   Python-3.6.4.tgz 
+
+[root@V20 ~]# cd  Python-3.6.4/
+
+[root@V20 Python-3.6.4]# ls      # 这时候没有 makefile文件
+aclocal.m4    configure.ac  install-sh  Makefile.pre.in  Parser    pyconfig.h.in  Tools
+config.guess  Doc           Lib         Misc             PC        Python
+config.sub    Grammar       LICENSE     Modules          PCbuild   README.rst
+configure     Include       Mac         Objects          Programs  setup.py
+
+
+----------------------------------------------------  配置安装目录：
+configure是用来进行用户个性配置的工具，--prefix是说软件安装目录设置在哪里， 
+                                    =/usr/local就是你给出的安装目录
+
+[root@V20 Python-3.6.4]# ./configure  --prefix=/usr/local/  #Python-3.6.4文件夹中生成了makefile文件
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[root@room9pc01 ~]# ssh  -X  -o StrictHostKeyChecking=no root@192.168.0.21
+..................
+
+[root@V21 ~]# systemctl  get-default 
+multi-user.target   #multi-user.target 是3级别(命令行模式) #多用户的文本界面 
+
+---------------------------- 设置 graphical.target  是5级别 #多用户的图形界面  --------
+
+[root@V21 ~]# systemctl   set-default   graphical.target 
+
+Removed symlink /etc/systemd/system/default.target.
+Created symlink from /etc/systemd/system/default.target to /usr/lib/systemd/system/graphical.target.
+
+---------------  切换 graphical.target  是5级别 #多用户的图形界面  ---------
+
+[root@V21 ~]# systemctl  isolate   graphical.target 
+
+[root@V21 ~]# systemctl  get-default 
+graphical.target
+
+[root@V21 ~]# ifconfig  |awk '/inet /{print $2}'
+192.168.0.21
+192.168.1.21
+192.168.2.21
+127.0.0.1
+192.168.122.1
+[root@V21 ~]#   route  -n
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         192.168.0.254   0.0.0.0         UG    0      0        0 eth0
+...................
+
+[root@V21 ~]#   vim  /etc/yum.repos.d/local.repo
+[root@V21 ~]# cat  /etc/yum.repos.d/local.repo
+[rhel7]
+name=rhel-server-7.4-x86_64-dvd.iso
+baseurl=ftp://192.168.0.254/rhel7
+enabled=1
+gpgcheck=0
+[root@V21 ~]# yum  clean  all >/dev/null &&  yum repolist |tail  -3
+源标识                   源名称                                            状态
+rhel7                    rhel-server-7.4-x86_64-dvd.iso                    4,986
+repolist: 4,986
+[root@V21 ~]# vim  /etc/yum.conf 
+[root@V21 ~]# grep  -Env  "^#|^$"  /etc/yum.conf
+1:[main]
+2:cachedir=/var/cache/yum/$basearch/$releasever
+3:keepcache=0
+4:debuglevel=2
+5:logfile=/var/log/yum.log
+6:exactarch=1
+7:obsoletes=1
+8:gpgcheck=0
+9:plugins=1
+10:installonly_limit=3
+
+[root@V21 ~]# systemctl is-active  firewalld.service 
+unknown
+[root@V21 ~]# scp  -o  StrictHostKeyChecking=no   -r   root@192.168.0.254:/root/桌面/Python-3.6.4.tgz   ./
+Warning: Permanently added '192.168.0.254' (ECDSA) to the list of known hosts.
+root@192.168.0.254's password: 
+Python-3.6.4.tgz                                          100%   22MB  78.8MB/s   00:00    
+
+[root@V21 ~]# scp  root@192.168.0.254:/root/桌面/pycharm-community-2018.3.5.tar.gz  ./root@192.168.0.254's password: 
+pycharm-community-2018.3.5.tar.gz                   100%  297MB 187.0MB/s   00:01    
+[root@V21 ~]# ls
+anaconda-ks.cfg       pycharm-community-2018.3.5.tar.gz  模板  文档  桌面
+initial-setup-ks.cfg  Python-3.6.4.tgz                   视频  下载
+ip.sh                 公共                               图片  音乐
+
+[root@V21 ~]# ll  Python-3.6.4.tgz   pycharm-community-2018.3.5.tar.gz 
+-rw-r--r-- 1 root root 311914955 3月  18 21:08 pycharm-community-2018.3.5.tar.gz
+-rw-r--r-- 1 root root  22710891 3月  18 21:04 Python-3.6.4.tgz
+
+[root@V21 ~]# yum  -y install  gcc  gcc-c++  zlib-devel openssl-devel  readline-devel  libffi-devel  sqlite-devel  tcl-devel tk-devel   |tail  -7
+...................
+  pcre-devel.x86_64 0:8.32-17.el7                                               
+  tcl.x86_64 1:8.5.13-8.el7                                                     
+  tk.x86_64 1:8.5.13-6.el7                                                      
+  xorg-x11-proto-devel.noarch 0:7.7-20.el7                                      
+  zlib-devel.x86_64 0:1.2.7-17.el7                                              
+
+完毕！
+
+[root@V21 ~]#  rpm  -q   gcc    gcc-c++    zlib-devel   openssl-devel  
+   readline-devel   libffi-devel   sqlite-devel    tcl-devel   tk-devel
+
+gcc-4.8.5-16.el7.x86_64
+gcc-c++-4.8.5-16.el7.x86_64
+zlib-devel-1.2.7-17.el7.x86_64
+openssl-devel-1.0.2k-8.el7.x86_64
+
+readline-devel-6.2-10.el7.x86_64
+libffi-devel-3.0.13-18.el7.x86_64
+sqlite-devel-3.7.17-8.el7.x86_64
+tcl-devel-8.5.13-8.el7.x86_64
+tk-devel-8.5.13-6.el7.x86_64
+
+[root@V21 ~]# tar   -zxf   Python-3.6.4.tgz 
+[root@V21 ~]# cd  Python-3.6.4/
+
+[root@V21 Python-3.6.4]# ls      # 这时候没有 makefile文件
+aclocal.m4    configure.ac  install-sh  Makefile.pre.in  Parser    pyconfig.h.in  Tools
+config.guess  Doc           Lib         Misc             PC        Python
+config.sub    Grammar       LICENSE     Modules          PCbuild   README.rst
+configure     Include       Mac         Objects          Programs  setup.py
+
+
+----------------------------------------------------  配置安装目录：
+configure是用来进行用户个性配置的工具，--prefix是说软件安装目录设置在哪里， 
+                                    =/usr/local就是你给出的安装目录
+
+[root@V21 Python-3.6.4]# ./configure  --prefix=/usr/local/  #Python-3.6.4文件夹中生成了makefile文件
+...................
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[root@room9pc01 ~]# ssh  -X  -o StrictHostKeyChecking=no root@192.168.0.22
+.......................
+[root@V22 ~]# systemctl  get-default  
+multi-user.target     #multi-user.target 是3级别(命令行模式) #多用户的文本界面 
+
+[root@V22 ~]# systemctl  set-default  graphical.target 
+
+Removed symlink /etc/systemd/system/default.target.
+Created symlink from /etc/systemd/system/default.target to /usr/lib/systemd/system/graphical.target.
+
+[root@V22 ~]# systemctl  isolate   graphical.target 
+
+[root@V22 ~]# systemctl  get-default  
+graphical.target
+
+[root@V22 ~]# ifconfig  |awk '/inet /{print $2}'
+192.168.0.22
+192.168.1.22
+192.168.2.22
+127.0.0.1
+192.168.122.1
+[root@V22 ~]#   route  -n
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         192.168.0.254   0.0.0.0         UG    0      0        0 eth0
+..............
+[root@V22 ~]# ls  /etc/yum.repos.d/
+[root@V22 ~]# vim  /etc/yum.repos.d/local.repo
+[root@V22 ~]# cat  /etc/yum.repos.d/local.repo
+[rhel7]
+name=rhel-server-7.4-x86_64-dvd.iso
+baseurl=ftp://192.168.0.254/rhel7
+enabled=1
+gpgcheck=0
+[root@V22 ~]# yum  clean  all >/dev/null &&  yum repolist |tail  -3
+源标识                   源名称                                            状态
+rhel7                    rhel-server-7.4-x86_64-dvd.iso                    4,986
+repolist: 4,986
+[root@V22 ~]# vim  /etc/yum.conf 
+[root@V22 ~]# grep  -Env  "^#|^$"  /etc/yum.conf
+1:[main]
+2:cachedir=/var/cache/yum/$basearch/$releasever
+3:keepcache=0
+4:debuglevel=2
+5:logfile=/var/log/yum.log
+6:exactarch=1
+7:obsoletes=1
+8:gpgcheck=0     #改成不检查0
+9:plugins=1
+10:installonly_limit=3
+
+[root@V22 ~]# systemctl is-active  firewalld.service 
+unknown
+[root@V22 ~]# scp  -o  StrictHostKeyChecking=no   -r   root@192.168.0.254:/root/桌面/Python-3.6.4.tgz   ./
+Warning: Permanently added '192.168.0.254' (ECDSA) to the list of known hosts.
+root@192.168.0.254's password: 
+Python-3.6.4.tgz                                          100%   22MB 109.0MB/s   00:00    
+
+[root@V22 ~]# scp  root@192.168.0.254:/root/桌面/pycharm-community-2018.3.5.tar.gz  ./root@192.168.0.254's password: 
+pycharm-community-2018.3.5.tar.gz                   100%  297MB 189.5MB/s   00:01    
+[root@V22 ~]# ls
+anaconda-ks.cfg       pycharm-community-2018.3.5.tar.gz  模板  文档  桌面
+initial-setup-ks.cfg  Python-3.6.4.tgz                   视频  下载
+ip.sh                 公共                               图片  音乐
+
+[root@V22 ~]# ll  Python-3.6.4.tgz   pycharm-community-2018.3.5.tar.gz 
+-rw-r--r-- 1 root root 311914955 3月  18 21:08 pycharm-community-2018.3.5.tar.gz
+-rw-r--r-- 1 root root  22710891 3月  18 21:04 Python-3.6.4.tgz
+
+
+[root@V22 ~]# yum  -y install  gcc  gcc-c++  zlib-devel openssl-devel  readline-devel  libffi-devel  sqlite-devel  tcl-devel tk-devel   |tail  -7
+...................
+  pcre-devel.x86_64 0:8.32-17.el7                                               
+  tcl.x86_64 1:8.5.13-8.el7                                                     
+  tk.x86_64 1:8.5.13-6.el7                                                      
+  xorg-x11-proto-devel.noarch 0:7.7-20.el7                                      
+  zlib-devel.x86_64 0:1.2.7-17.el7                                              
+
+完毕！
+
+[root@V22 ~]#  rpm  -q   gcc    gcc-c++    zlib-devel   openssl-devel  
+   readline-devel   libffi-devel   sqlite-devel    tcl-devel   tk-devel
+
+gcc-4.8.5-16.el7.x86_64
+gcc-c++-4.8.5-16.el7.x86_64
+zlib-devel-1.2.7-17.el7.x86_64
+openssl-devel-1.0.2k-8.el7.x86_64
+
+readline-devel-6.2-10.el7.x86_64
+libffi-devel-3.0.13-18.el7.x86_64
+sqlite-devel-3.7.17-8.el7.x86_64
+tcl-devel-8.5.13-8.el7.x86_64
+tk-devel-8.5.13-6.el7.x86_64
+
+[root@V22 ~]# tar   -zxf   Python-3.6.4.tgz 
+[root@V22 ~]# cd  Python-3.6.4/
+
+[root@V22 Python-3.6.4]# ls    # 这时候没有 makefile文件
+aclocal.m4    configure.ac  install-sh  Makefile.pre.in  Parser    pyconfig.h.in  Tools
+config.guess  Doc           Lib         Misc             PC        Python
+config.sub    Grammar       LICENSE     Modules          PCbuild   README.rst
+configure     Include       Mac         Objects          Programs  setup.py
+
+
+----------------------------------------------------  配置安装目录：
+configure是用来进行用户个性配置的工具，--prefix是说软件安装目录设置在哪里， 
+                                    =/usr/local就是你给出的安装目录
+
+[root@V22 Python-3.6.4]# ./configure  --prefix=/usr/local/  #Python-3.6.4文件夹中生成了makefile文件
+..............
+creating Modules/Setup
+creating Modules/Setup.local
+creating Makefile
+
+
+If you want a release build with all stable optimizations active (PGO, etc),
+please run ./configure --enable-optimizations
+
+如果您希望在所有稳定优化都处于活动状态（pgo等）的情况下进行发布构建，
+请运行./configure --启用优化
+
+release  释放; 发布; 发行; 放开; 释放，排放，解除; 释放令; 公映的新影片，发布的新闻[消息]
+build    建立; 建造，构筑; 开发; 为…建立基础; 建造，营造; 扩大，扩展; ....
+with all 尽管
+stable  稳定的; 沉稳[持重]的; 稳定平衡的; 持久的; ..........
+active  积极的，活跃的，有生气的; 迅速的，敏捷的; 有效的，起作用的; .....
+etc     等等及其他;  诸如此类;  et cetera（常读作 and so forth）
+forth   adv. 向前，向前方;露着的，往外的;[废语]出外，离家
+        prep. 出自，从…离开
+
+please  请; 讨好; 使高兴; 使满意; 讨人喜欢
+run     跑; 移动; 流动; 奔跑; 行程; .............
+configure 配置; 设定; 使成形; 使具一定形式
+
+optimization    n. 最佳化，最优化;优选法;优化组合
+
+[root@V22 Python-3.6.4]# make  && make  install  #编译源码#执行安装
+
+
+
+
+
+
