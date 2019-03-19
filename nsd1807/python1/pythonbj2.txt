@@ -1,0 +1,174 @@
+
+
+# yum install -y  sqlite-devel   tk-devel   tcl-devel   readline-devel
+         zlib-devel   gcc    gcc-c++    openssl-devel   libffi-devel
+# tar xzf Python-3.6.7.tgz
+# cd Python-3.6.7
+# ./configure --prefix=/usr/local/
+# make && make install
+
+
+-----------------------------------------------------------------------------
+               New Project (于 V20)
+   Location: [ /root/PycharmProjects/untitled   ]
+  |>(点击) Project Interpreter: New Virtualenv environment (组合下拉菜单)
+                     项目解释器：新的Virtualenv 环境
+ (*) New environment  using  [](下拉菜单Virtualenv,Pipenv,Conda)
+  Location:         [ /root/PycharmProjects/untitled/venv  ]
+
+  Base interpreter: [ /usr/bin/python2.7 (注意这里修改解释器路径) ][下拉菜单..] [打开文件路径的菜单]
+
+/***************
+[root@V20 ~]# which python3
+/usr/local/bin/python3     # 注意这里解释器路径
+**************/
+
+[root@room9pc01 ~]# ls /var/git/python/PyScript/
+hello.py  .idea/    venv/   
+
+[root@room9pc01 ~]# ls /var/git/python/PyScript/.idea/
+
+inspectionProfiles  misc.xml  modules.xml  PyScript.iml  workspace.xml
+
+[root@room9pc01 ~]# ls /var/git/python/PyScript/venv/
+bin  include  lib  pip-selfcheck.json
+
+[root@room9pc01 ~]# ls /var/git/python/PyScript/venv/bin/
+
+activate       activate_this.py  pip     python     python-config
+activate.csh   easy_install      pip3    python3    wheel
+activate.fish  easy_install-3.6  pip3.6  python3.6
+
+
+[root@room9pc01 ~]# ls /var/git/python/PyScript/
+hello.py  venv
+[root@room9pc01 ~]# python3  /var/git/python/PyScript/hello.py 
+hello 	 hehe 	 xixi
+helloboy! 
+[root@room9pc01 ~]# cat  /var/git/python/PyScript/hello.py
+print("hello \t hehe \t xixi\nhelloboy! ")[root@room9pc01 ~]# 
+
+[root@room9pc01 ~]# free  -m
+              total        used        free      shared  buff/cache   available
+Mem:          15781        7759         574         422        7446        7210
+Swap:             0           0           0
+
+
+[root@room9pc01 ~]# python3  --version
+Python 3.6.1
+[root@room9pc01 ~]# python  --version
+Python 2.7.5
+[root@room9pc01 ~]# ls  -a  /var/git/python/PyScript/
+.  ..  hello.py  .idea  venv
+
+[root@room9pc01 ~]# cd  /var/git/python/PyScript/
+
+[root@room9pc01 PyScript]# ls
+hello.py  venv
+
+
+[root@V20 ~]# python3  --version
+Python 3.6.4
+[root@V20 ~]# python  --version
+Python 2.7.5
+
+[root@V20 ~]# python3  #python2版本 和python3 版本的区别
+
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> a = input('name:')
+name:xingming    #手动输入 xingming
+>>> print('$a')
+$a
+>>> print(a)
+xingming     #注意变量值 a
+>>> print("a")
+a
+>>> print('a')
+a
+>>> quit()
+[root@V20 ~]# python   #python2版本 和python3 版本的区别
+
+Python 2.7.5 (default, May  3 2017, 07:55:04) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-14)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> a = raw_input('name: ')
+name: xingmingxx   #手动输入 xingmingxx
+>>> a         #查看变量 a 的 值
+'xingmingxx'
+>>> print   a   #python2版本 和python3 版本的区别
+xingmingxx    #注意变量值 a
+>>> exit
+Use exit() or Ctrl-D (i.e. EOF) to exit
+>>> exit()
+[root@V20 ~]#  free  -m
+              total        used        free      shared  buff/cache   available
+Mem:           1444         255         627           5         561         984
+Swap:          2047           3        2044
+
+[root@V20 ~]# python3
+
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+>>> if 100 > 88 :  #注意 冒号":"
+...   print(100)  #注意 缩进 至少 2 个空格(表示父子语句关系)
+                       #每个 子语句 必须是 相同的 缩进 级别(建议使用 4 个空格 )
+...  #敲回车
+100
+>>> if  10 < 22:  print("101022")  #可读性差,不推荐, #注意 冒号":"
+...    #敲回车
+101022
+>>> long_str = "abcde" +\  #符号 " +\" 表示续行
+... "12345" +\          #符号 " +\" 表示续行
+... "ccccc"
+>>> print(long_str)
+abcde12345ccccc
+
+>>> a = 10; b=23; print(a+b)  #可读性差,不推荐, #注意 英文分号" ; "
+33
+>>> a = 10;b=23;print(a+b)    #可读性差,不推荐, #注意 英文分号" ; "
+33
+
+
+
+[root@room9pc01 ~]# ls  -a  /var/git/python/PyScript/
+.  ..  hello.py  .idea  venv
+-------------------------------------------------------------------------------------------------------------------------
+  PyScript[/var/git/python/PyScript]- .../hello.py[PyScript]-PyCharm
+-----------------------------------------------------------
+File  Edit  View  Navigate  Code  Refactor  Run  Tools  VCS  Window  Help
+文件    编辑   视图      导航      代码      重构      运行   工具    VCS    窗口    帮助
+-------------------------------------------------------------------------------
+
+if 3 > 0 :
+    # print("yes")  #Ctrl + ? (作用 添加注释 或取消注释)
+    # print("a")
+
+if 3 > 0 :
+    print("yes")   #Ctrl + ? (作用 添加注释 或取消注释)
+    print("a")
+if 10 < 18:  print('abc')   #可读性差,不推荐, #注意 英文冒号" : "
+
+long_str = "abcde" +\      #符号 " +\" 表示续行
+           "123456789" +\       #符号 " +\" 表示续行
+    'cccccc'
+print(long_str)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
