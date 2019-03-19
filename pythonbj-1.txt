@@ -201,7 +201,7 @@ repolist: 4,986
 [root@V20 ~]# 
 
 
-
+-----------------------------------------------------------------------------------
  http://mirrors.aliyun.com/repo/
 
 Index of /repo/
@@ -230,7 +230,7 @@ ubuntu1204-lts.list                                15-May-2015 01:53            
 ubuntu1404-lts.list                                15-May-2015 01:53                4346
 version                                            13-Apr-2018 06:27              947790
 
-
+----------------------------------------------------------
 
 https://www.python.org/
 
@@ -318,6 +318,7 @@ unknown
 [root@V20 ~]# systemctl is-enabled  firewalld.service 
 disabled
 
+------------------------------
 [root@V20 ~]# scp  -r   root@192.168.0.254:/root/桌面/Python-3.6.4.tgz  ./
 ssh: connect to host 192.168.0.254 port 22: Connection refused
 
@@ -326,6 +327,7 @@ ssh: connect to host 192.168.0.254 port 22: Connection refused
 PermitRootLogin yes
 [root@room9pc01 ~]# systemctl  restart  sshd
 
+---------------------------------------------
 
 [root@V20 ~]# scp  -r   root@192.168.0.254:/root/桌面/Python-3.6.4.tgz   ./
 ..........................
@@ -387,7 +389,7 @@ Python 2.7.5 (default, May  3 2017, 07:55:04)
 Type "help", "copyright", "credits" or "license" for more information.
 >>> exit
 Use exit() or Ctrl-D (i.e. EOF) to exit
->>>     #(Ctrl + d 退出)
+>>>     #(Ctrl + d 退出)(window系统 Ctrl + z 退出)
 
 [root@V20 ~]# type  python
 python 已被哈希 (/usr/bin/python)
@@ -399,7 +401,7 @@ python 已被哈希 (/usr/bin/python)
 
 [root@V20 ~]# cd  Python-3.6.4/
 
-[root@V20 Python-3.6.4]# ls      # 这时候没有 makefile文件
+[root@V20 Python-3.6.4]# ls      # 这时候没有 Makefile文件
 aclocal.m4    configure.ac  install-sh  Makefile.pre.in  Parser    pyconfig.h.in  Tools
 config.guess  Doc           Lib         Misc             PC        Python
 config.sub    Grammar       LICENSE     Modules          PCbuild   README.rst
@@ -410,23 +412,509 @@ configure     Include       Mac         Objects          Programs  setup.py
 configure是用来进行用户个性配置的工具，--prefix是说软件安装目录设置在哪里， 
                                     =/usr/local就是你给出的安装目录
 
-[root@V20 Python-3.6.4]# ./configure  --prefix=/usr/local/  #Python-3.6.4文件夹中生成了makefile文件
+[root@V20 Python-3.6.4]# ./configure  --prefix=/usr/local/  
+...............
+creating Modules/Setup
+creating Modules/Setup.local
+creating Makefile
 
 
+If you want a release build with all stable optimizations active (PGO, etc),
+please run ./configure --enable-optimizations
 
 
+[root@V20 Python-3.6.4]# ls    #Python-3.6.4文件夹中生成了 Makefile文件
+aclocal.m4     configure.ac  LICENSE          Modules   pyconfig.h
+config.guess   Doc           Mac              Objects   pyconfig.h.in
+config.log     Grammar       Makefile         Parser    Python
+config.status  Include       Makefile.pre     PC        README.rst
+config.sub     install-sh    Makefile.pre.in  PCbuild   setup.py
+configure      Lib           Misc             Programs  Tools
+
+[root@V20 Python-3.6.4]#  make  && make  install  #编译源码#执行安装
+....................
+/usr/bin/install -c -m 644 ./Misc/python.man \
+	/usr/local/share/man/man1/python3.6.1
+if test ! -d /usr/local/lib/pkgconfig; then \
+	echo "Creating directory /usr/local/lib/pkgconfig"; \
+	/usr/bin/install -c -d -m 755 /usr/local/lib/pkgconfig; \
+fi
+if test -f /usr/local/bin/python3 -o -h /usr/local/bin/python3; \
+then rm -f /usr/local/bin/python3; \
+else true; \
+fi
+(cd /usr/local/bin; ln -s python3.6 python3)
+if test "3.6" != "3.6m"; then \
+	rm -f /usr/local/bin/python3.6-config; \
+	(cd /usr/local/bin; ln -s python3.6m-config python3.6-config); \
+	rm -f /usr/local/lib/pkgconfig/python-3.6m.pc; \
+	(cd /usr/local/lib/pkgconfig; ln -s python-3.6.pc python-3.6m.pc); \
+fi
+rm -f /usr/local/bin/python3-config
+(cd /usr/local/bin; ln -s python3.6-config python3-config)
+rm -f /usr/local/lib/pkgconfig/python3.pc
+(cd /usr/local/lib/pkgconfig; ln -s python-3.6.pc python3.pc)
+rm -f /usr/local/bin/idle3
+(cd /usr/local/bin; ln -s idle3.6 idle3)
+rm -f /usr/local/bin/pydoc3
+(cd /usr/local/bin; ln -s pydoc3.6 pydoc3)
+rm -f /usr/local/bin/2to3
+(cd /usr/local/bin; ln -s 2to3-3.6 2to3)
+rm -f /usr/local/bin/pyvenv
+(cd /usr/local/bin; ln -s pyvenv-3.6 pyvenv)
+if test "x" != "x" ; then \
+	rm -f /usr/local/bin/python3-32; \
+	(cd /usr/local/bin; ln -s python3.6-32 python3-32) \
+fi
+rm -f /usr/local/share/man/man1/python3.1
+(cd /usr/local/share/man/man1; ln -s python3.6.1 python3.1)
+if test "xupgrade" != "xno"  ; then \
+	case upgrade in \
+		upgrade) ensurepip="--upgrade" ;; \
+		install|*) ensurepip="" ;; \
+	esac; \
+	 ./python -E -m ensurepip \
+		$ensurepip --root=/ ; \
+fi
+Collecting setuptools
+Collecting pip
+Installing collected packages: setuptools, pip
+Successfully installed pip-9.0.1 setuptools-28.8.0
+
+[root@V20 Python-3.6.4]# ls
+aclocal.m4     Include          Modules         Python
+build          install-sh       Objects         python-config
+config.guess   Lib              Parser          python-config.py
+config.log     libpython3.6m.a  PC              python-gdb.py
+config.status  LICENSE          PCbuild         README.rst
+config.sub     Mac              Programs        setup.py
+configure      Makefile         pybuilddir.txt  Tools
+configure.ac   Makefile.pre     pyconfig.h
+Doc            Makefile.pre.in  pyconfig.h.in
+Grammar        Misc             python
+
+[root@V20 Python-3.6.4]# ls  /usr/local/
+bin  etc  games  include  lib  lib64  libexec  sbin  share  src
+
+[root@V20 Python-3.6.4]# 
+
+/****************
+
+[root@V20 ~]# type  python3   #未安装前的python3 命令不能找到
+-bash: type: python3: 未找到
+
+**********/
+[root@V20 ~]# type  python3   #验证 python3 安装成功
+python3 是 /usr/local/bin/python3
+[root@V20 ~]# python3
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> quit()
+[root@V20 ~]# type  python3
+python3 已被哈希 (/usr/local/bin/python3)
+
+/****************
+[root@V20 ~]#  scp  root@192.168.0.254:/root/桌面/pycharm-community-2018.3.5.tar.gz  ./
+******/
+
+integrated
+英 [ˈɪntɪgreɪtɪd]   美 [ˈɪntɪɡretɪd]  
+adj. 完整的;整体的;结合的;（各组成部分）和谐的
+v. 使一体化( integrate的过去式和过去分词 );使整合;使完整;使结合成为整体
+
+集成开发环境（IDE，Integrated Development Environment ）
+是用于提供程序开发环境的应用程序，
+一般包括代码编辑器、编译器、调试器和图形用户界面等工具。
+集成了代码编写功能、分析功能、编译功能、调试功能等一体化的开发软件服务套。
+所有具备这一特性的软件或者软件套（组）都可以叫集成开发环境。
+如微软的Visual Studio系列，
+Borland的C++ Builder、Delphi系列等。
+该程序可以独立运行，也可以和其它程序并用。
+IDE多被用于开发HTML应用软件。
+例如，许多人在设计网站时使用IDE（如HomeSite、DreamWeaver等）
 
 
+[root@V20 ~]# file   pycharm-community-2018.3.5.tar.gz 
+pycharm-community-2018.3.5.tar.gz: gzip compressed data, from FAT filesystem (MS-DOS, OS/2, NT)
+
+2)释放文件：
+[root@V20 ~]# tar  -xzf  pycharm-community-2018.3.5.tar.gz 
+
+[root@V20 ~]# ls   pycharm-community-2018.3.5/
+bin        help     index                  jre64  license  product-info.json
+build.txt  helpers  Install-Linux-tar.txt  lib    plugins
 
 
+3)运行下面的命令进入PyCharm 目录
+
+[root@V20 ~]# cd   pycharm-community-2018.3.5/bin/
+[root@V20 bin]# ls
+format.sh       idea.properties  printenv.py          pycharm.svg
+fsnotifier      inspect.sh       pycharm64.vmoptions  pycharm.vmoptions
+fsnotifier64    libdbm64.so      pycharm.png          restart.py
+fsnotifier-arm  log.xml          pycharm.sh
+
+4)通过运行下面的命令来运行PyCharm进入图形化安装界面
+
+[root@V20 bin]# systemctl  get-default 
+graphical.target
+[root@V20 bin]# cat  /etc/shells 
+/bin/sh
+/bin/bash
+/sbin/nologin
+/usr/bin/sh
+/usr/bin/bash
+/usr/sbin/nologin
+/bin/tcsh
+/bin/csh
+
+[root@V20 bin]# file  pycharm.sh 
+pycharm.sh: POSIX shell script, ASCII text executable
+
+[root@V20 bin]# ll  /root/pycharm-community-2018.3.5/bin/pycharm.sh 
+-rwxr-xr-x 1 root root 6859 2月  26 17:00 /root/pycharm-community-2018.3.5/bin/pycharm.sh
+
+[root@V20 bin]# /root/pycharm-community-2018.3.5/bin/pycharm.sh  &
+[1] 13782
+[root@V20 bin]# jobs
+[1]+  运行中               /root/pycharm-community-2018.3.5/bin/pycharm.sh &
 
 
+5)Pycharm打开后，如果你需要导入之前安装版本的设置的话，可以选择第 2 个选项，
+如果没有的话，
+选择(Do not import settings)默认不导入设置，
+点击/同意，就可以进入pycharm进行配置
+
+        Import  PyCharm  Settings From...(于 V20)
+[  ] Config or  installation folder:
+    [                          ] [ --- ]
+[ * ] Do not import settings
+                             [ ok ] 点击/同意
+--------------------------------------------------------------------------------
+
+                JetBrains Privacy Policy(于 V20)
+Please  read  and accept  these terms  and conditions.Scroll down for full text:
+JetBrains  Privacy Plicy
+...............
+Definitions
+.............
+Why We Collect Data and What We Collect
+...........
+Children
+.........
+Transparency
+................
+Sharing
+.....
+Reaching out 
+If you  have any questions or concerns,or
+............ privacy@jetbrains.com
+[ * ] I confirm that I  have read  and accept the terms of this User Agreement
+    我确认我已阅读并接受此用户协议的条款
+                      [ Continue (点击)]  [ Reject and Exit ]
+----------------------------------------------
+
+       Data Sharing (于 V20)
+Help  JetBrains improve its products by sending anonymous data about features  
+and plugins used, .....number of files per project, etc
+通过发送有关所用功能和插件、.....每个项目的文件数等的匿名数据，帮助JetBrains改进其产品
+.............
+           [ Send Usage Statistics (发送使用率统计信息)]  [ Don't send ](点击不发送)
+-----------------------------------
+license  英 [ˈlaɪsns]   美 [ˈlaɪsəns]  
+         n. 许可证，执照;特许
+         vt. 同意;发许可证
+
+6)激活Pycharm：在弹出的激活窗口中，
+选择“License server”输入激活服务器地址“http://127.0.0.1:1017”，
+之后点击‘Activate’，
+完成pycharm激活，
+
+   customize  英 [ˈkʌstəmaɪz]   美 [ˈkʌstəˌmaɪz]  
+              vt. 定制，定做;按规格改制
+--------------------------------------
+           Customize(自定义) PyCharm (于 V20)
+ UI Themes --> Launcher Script --> Featured plugins
+ UI  主题 ——>     启动程序脚本 ——>  特色插件
+ Set UI theme  
+ 设置用户界面主题
+ [ ] Darcula      [ * ] Light (点击)
+...........
+UI theme can be changed later in Settings |Appearance & Behavior |Appearance
+ 稍后可以在“设置”“外观和行为”“外观”中更改UI主题。
+
+[Skip Remaining and Set Defaults(跳过剩余部分并设置默认值)]   [Next:Launcher Script(下一步：启动程序脚本)](点击)
+---------------------------------------------
+--------------------------------------
+           Customize(自定义) PyCharm (于 V20)
+ UI Themes --> Launcher Script --> Featured plugins
+ Create Launcher Script  创建启动程序脚本
+ [ * ] Create  a script  for opening files and projects from the command line
+         创建用于从命令行打开文件和项目的脚本
+     Please specify the path where the script should be create:
+      请指定创建脚本的路径
+
+     [ /usr/local/bin/charm  ]
+
+ Launcher script  can be created later via Tools |Create Command-Line Launcher...
+ 稍后可以通过工具 创建启动程序脚本 | 创建 命令行 启动程序…
+
+[Skip Remaining and Set Defaults]  [ back to UI Themes]  [Next:Featured plugins(特色插件)](点击)
+---------------------------------------------
+--------------------------------------
+           Customize(自定义) PyCharm (于 V20)
+ UI Themes --> Launcher Script --> Featured plugins
+ Download featured plugins  下载特色插件
+ We have a few plugins in our repository that most users like to download.
+ Perhaps, you need them too?
+ 我们的存储库中有一些大多数用户喜欢下载的插件。
+ 也许，你也需要它们？
+
+   Cannot get featured plugins  description online.
+    无法联机获取特色插件说明
+
+ New plugins can also be downloaded in Settings |Plugins
+ 也可以在“设置”插件中下载新插件
+
+[Skip Remaining and Set Defaults]  [ Back to Launcher Script]  [Start using PyCharm](点击)
+
+7)启动完成进入欢迎界面
+
+    Welcome  to  PyCharm (于 V20)
+           PyCharm
+       Version 2018.3.5
+  
+    + Create New Project  (点击)
+     ^ Open (文件打开的路径按钮)
+     |-^ Check out from Version Control [下拉菜单 CVS Git ...]
+
+          [1]Events[下拉菜单..] * Configure[下拉菜单..] Get Help[下拉菜单..]
+
+-------------------------------------------------------------------------------
+untitled      英 [ˌʌnˈtaɪtld]   美 [ʌnˈtaɪtld]  
+               adj. 无标题的，无称号的，无权利的
+-----------------------------------------------------------------------------
+               New Project (于 V20)
+   Location: [ /root/PycharmProjects/untitled   ]
+  |>(点击) Project Interpreter: New Virtualenv environment (组合下拉菜单)
+                     项目解释器：新的Virtualenv 环境
+ (*) New environment  using  [](下拉菜单Virtualenv,Pipenv,Conda)
+  Location:         [ /root/PycharmProjects/untitled/venv  ]
+  Base interpreter: [ /usr/bin/python2.7  ][下拉菜单..] [打开文件路径的菜单]
+
+/***************
+[root@V20 ~]# which python3
+/usr/local/bin/python3
+**************/
+
+  [ ]     Inherit global site-packages 继承全局站点包
+
+  [ * ](点击) Make available to all projects 提供给所有项目
+
+ ( ) Existing interpreter
+     Interpreter: [ <No interpreter> ] [下拉菜单..] [打开文件路径的菜单]
+
+                   [ Create (点击)]  [Cancel]
+------------------------------------------------------------
+tip   英 [tɪp]   美 [tɪp]  
+       n. 小费;小窍门;末梢,提示
+       vt. 给小费;
+-----------------------------------
+   untitled [!/PycharmProjects/untitled] - PyCharm (于 V20)
+
+       Tip of the Day (于 V20)
+ Welcome to PyCharm 2018.3.5
+Get familiar with the main features of the IDE by reading these tips.
+Try out the features described in the tips while this dialog stays open on the screen.
+If you close the dialog,you can always get back to it using Help |Tip of the Day on the menu bar.
+ 每日提示（V20）
+欢迎来到Pycharm 2018.3.5
+通过阅读这些提示，熟悉IDE的主要功能。
+当此对话框在屏幕上保持打开时，尝试提示中描述的功能。
+如果关闭对话框，您可以随时使用菜单栏上的“帮助”提示返回对话框。
+
+[*] Show tips on  startup(启动时显示提示)  [Previous Tip] [Next Tip]  [Close](点击关闭提示窗口)
+
+--------------------------------
+previous   英 [ˈpri:viəs]   美 [ˈpriviəs]  
+            adj. 以前的;先前的;过早的;（时间上）稍前的
+            adv. 在先，在…以前
+-------------------------------------------------------------------------------------------
+
+[root@V20 bin]# jobs
+[1]+  运行中               /root/pycharm-community-2018.3.5/bin/pycharm.sh &
+[root@V20 bin]# 三月 19, 2019 10:35:33 上午 java.util.prefs.FileSystemPreferences$1 run
+INFO: Created user preferences directory.
+三月 19, 2019 10:35:33 上午 java.util.prefs.FileSystemPreferences$6 run
+WARNING: Prefs file removed in background /root/.java/.userPrefs/prefs.xml
+
+Prefs file 前置文件
+
+[1]+  完成                  ./pycharm.sh
+[root@V21 bin]# jobs
+
+-------------------------------------  在 第二个终端 查看 -------------------
+
+[root@V20 ~]# ls   /root/PycharmProjects/
+untitled
+[root@V20 ~]# ls
+anaconda-ks.cfg             pycharm-community-2018.3.5.tar.gz  公共  文档
+initial-setup-ks.cfg        PycharmProjects                    模板  下载
+ip.sh                       Python-3.6.4                       视频  音乐
+pycharm-community-2018.3.5  Python-3.6.4.tgz                   图片  桌面
+
+[root@V20 ~]# ls   /root/PycharmProjects/
+untitled
+[root@V20 ~]# ls   /root/PycharmProjects/untitled/
+venv
+[root@V20 ~]# ls   /root/PycharmProjects/untitled/venv/
+bin  include  lib  lib64  pip-selfcheck.json
+
+[root@V20 ~]# python
+python             python3            python3.6m         
+python2            python3.6          python3.6m-config  
+python2.7          python3.6-config   python3-config     
+[root@V20 ~]# python2.7 
+Python 2.7.5 (default, May  3 2017, 07:55:04) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-14)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> exit()
+[root@V20 ~]# python3
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> quit()
+
+[root@V20 ~]# netstat  -npult 
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 127.0.0.1:63342         0.0.0.0:*               LISTEN      13826/java 
+tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      1/systemd  
+tcp        0      0 192.168.122.1:53        0.0.0.0:*               LISTEN      1397/dnsmasq 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      1155/sshd  
+tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      1151/cupsd  
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      1286/master 
+.................
+[root@V20 ~]# netstat  -npult  |grep java
+tcp        0      0 127.0.0.1:63342         0.0.0.0:*               LISTEN      13826/java          
+tcp        0      0 127.0.0.1:6942          0.0.0.0:*               LISTEN      13826/java  
+
+------------------------------------------
+library    英 [ˈlaɪbrəri]   美 [ˈlaɪbreri]  
+           n. 藏书;图书馆，藏书楼;
+
+external  英 [ɪkˈstɜ:nl]   美 [ɪkˈstɜ:rnl]  
+          adj. 外面的，外部的;表面上的;外用的;外国的
+          n. 外部，外面;外观;
+
+scratch   英 [skrætʃ]   美 [skrætʃ]  
+        vt. 擦，刮;擦痛，擦伤;在…处搔痒;抓破
+        vi. 发出刮擦声;擦红，擦伤;搔痒;抓，扒
+        n. 擦，刮;刮擦声;
+------------------------------------------------------------------------------
+
+            untitled [~/PycharmProjects/untitled] - PyCharm (于 V20)
+File  Edit  View  Navigate  Code  Refactor  Run  Tools  VCS  Window  Help
+
+[下拉菜单.idea,venv]untitled       [Add Configuration...]
+[下拉菜单]Project    
+untitled  ~/PycharmProjects/
+External Libraries  外部库
+
+Scratches and Consoles 划痕和控制台
+
+             Search Everywhere      Double Shift 到处搜索双击 Shift键
+             Go to File             Ctrl + Shift + N
+             Recent  Files          Ctrl + E  (最近使用的文件)
+             Navigation  Bar(导航栏) Alt + Home
+             Drop files here to open 将文件拖到此处打开
+-----------------------------------------------------------
+
+[root@V20 ~]# ls   /root/PycharmProjects/untitled/
+hello.py  venv
+[root@V20 ~]# file  /root/PycharmProjects/untitled/hello.py 
+/root/PycharmProjects/untitled/hello.py: ASCII text, with no line terminators
+
+[root@V20 ~]# ll  /root/PycharmProjects/untitled/hello.py
+-rw-r--r-- 1 root root 34 3月  19 14:13 /root/PycharmProjects/untitled/hello.py
+
+[root@V20 ~]# python  /root/PycharmProjects/untitled/hello.py #运行python脚本
+hello boy 
+hello world
+
+[root@V20 ~]# cat  /root/PycharmProjects/untitled/hello.py
+print("hello boy \nhello world\n")
+
+[root@V20 ~]# ls   /root/PycharmProjects/untitled/venv/
+bin  include  lib  lib64  pip-selfcheck.json
+
+[root@V20 ~]# python  --version
+Python 2.7.5
+[root@V20 ~]# python3  --version
+Python 3.6.4
+
+/*********
+ pstree(process status tree) 
+功能说明： 以树状图显示程序
+
+语　　法：pstree [-acGhlnpuUV][-H <程序识别码>][<程序识别码>/<用户名称>]
+
+补充说明：pstree指令用ASCII字符显示树状结构，清楚地表达程序间的相互关系。
+
+如果不指定程序识别码或用户名称，
+则会把系统启动时的第一个程序视为基层，
+并显示之后的所有程序。
+
+若指定用户名称，
+便会以隶属该用户的第一个程序当作基层，
+然后显示该用户的所有程序。
+
+参　　数：
+　-a 　显示每个程序的完整指令，包含路径，参数或是常驻服务的标示。 
+　-u 　显示用户名称。
+　-c 　不使用精简标示法。 
+　-G 　使用VT100终端机的列绘图字符。 
+　-h 　列出树状图时，特别标明现在执行的程序。 
+　-H<程序识别码> 　此参数的效果和指定"-h"参数类似，但特别标明指定的程序。 
+　-l 　采用长列格式显示树状图。 
+　-n 　用程序识别码排序。预设是以程序名称来排序。 
+　-p 　显示程序识别码。 
+
+　-U 　使用UTF-8列绘图字符。 
+　-V 　显示版本信息。
+
+-------------------------------------
+
+ps
+每个参数的解释如下：
+- a 显示现行终端机下的所有程序，包括其他用户的程序。
+- x 显示所有程序，不以终端机来区分。
+- u 以用户为主的格式来显示程序状况。
+
+[root@V21 bin]# ps -aux |head -3
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.2 125428  3700 ?        Ss   09:27   0:01 /usr/lib/systemd/systemd --switched-root --system --deserialize 21
+root         2  0.0  0.0      0     0 ?        S    09:27   0:00 [kthreadd]
+
+各个字段的意思 STAT
+- R 正在运行可中在队列中可过行的；
+- S 处于休眠状态；
+- T 停止或被追踪；
+- D 无法中断的休眠状态（通常 IO 的进程）；
+- Z 僵尸进程；
 
 
+[root@room9pc01 ~]# which  python3
+/usr/local/bin/python3
 
 
-
-
+[root@room9pc01 ~]# file   /usr/bin/crack_pycharm
+/usr/bin/crack_pycharm: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, stripped
+[root@room9pc01 ~]# ll  /usr/bin/crack_pycharm 
+-rwxr-xr-x. 1 501 games 4304032 12月 10 2017 /usr/bin/crack_pycharm
+[root@room9pc01 ~]# wc -l  /usr/bin/crack_pycharm
+21023 /usr/bin/crack_pycharm
 
 [root@room9pc01 ~]# ssh  -X  -o StrictHostKeyChecking=no root@192.168.0.21
 ..................
@@ -492,7 +980,8 @@ root@192.168.0.254's password:
 Python-3.6.4.tgz                                          100%   22MB  78.8MB/s   00:00    
 
 [root@V21 ~]# scp  root@192.168.0.254:/root/桌面/pycharm-community-2018.3.5.tar.gz  ./root@192.168.0.254's password: 
-pycharm-community-2018.3.5.tar.gz                   100%  297MB 187.0MB/s   00:01    
+pycharm-community-2018.3.5.tar.gz                   100%  297MB 187.0MB/s   00:01  
+  
 [root@V21 ~]# ls
 anaconda-ks.cfg       pycharm-community-2018.3.5.tar.gz  模板  文档  桌面
 initial-setup-ks.cfg  Python-3.6.4.tgz                   视频  下载
@@ -529,7 +1018,7 @@ tk-devel-8.5.13-6.el7.x86_64
 [root@V21 ~]# tar   -zxf   Python-3.6.4.tgz 
 [root@V21 ~]# cd  Python-3.6.4/
 
-[root@V21 Python-3.6.4]# ls      # 这时候没有 makefile文件
+[root@V21 Python-3.6.4]# ls      # 这时候没有 Makefile文件
 aclocal.m4    configure.ac  install-sh  Makefile.pre.in  Parser    pyconfig.h.in  Tools
 config.guess  Doc           Lib         Misc             PC        Python
 config.sub    Grammar       LICENSE     Modules          PCbuild   README.rst
@@ -542,6 +1031,106 @@ configure是用来进行用户个性配置的工具，--prefix是说软件安装
 
 [root@V21 Python-3.6.4]# ./configure  --prefix=/usr/local/  #Python-3.6.4文件夹中生成了makefile文件
 ...................
+...............
+creating Modules/Setup
+creating Modules/Setup.local
+creating Makefile
+
+
+If you want a release build with all stable optimizations active (PGO, etc),
+please run ./configure --enable-optimizations
+
+
+[root@V21 Python-3.6.4]# ls    #Python-3.6.4文件夹中生成了 Makefile文件
+aclocal.m4     configure.ac  LICENSE          Modules   pyconfig.h
+config.guess   Doc           Mac              Objects   pyconfig.h.in
+config.log     Grammar       Makefile         Parser    Python
+config.status  Include       Makefile.pre     PC        README.rst
+config.sub     install-sh    Makefile.pre.in  PCbuild   setup.py
+configure      Lib           Misc             Programs  Tools
+
+[root@V21 Python-3.6.4]#  make  && make  install  #编译源码#执行安装
+..............
+rm -f /usr/local/share/man/man1/python3.1
+(cd /usr/local/share/man/man1; ln -s python3.6.1 python3.1)
+if test "xupgrade" != "xno"  ; then \
+	case upgrade in \
+		upgrade) ensurepip="--upgrade" ;; \
+		install|*) ensurepip="" ;; \
+	esac; \
+	 ./python -E -m ensurepip \
+		$ensurepip --root=/ ; \
+fi
+Collecting setuptools
+Collecting pip
+Installing collected packages: setuptools, pip
+Successfully installed pip-9.0.1 setuptools-28.8.0
+
+
+[root@V21 Python-3.6.4]# ls
+aclocal.m4     Include          Modules         Python
+build          install-sh       Objects         python-config
+config.guess   Lib              Parser          python-config.py
+config.log     libpython3.6m.a  PC              python-gdb.py
+config.status  LICENSE          PCbuild         README.rst
+config.sub     Mac              Programs        setup.py
+configure      Makefile         pybuilddir.txt  Tools
+configure.ac   Makefile.pre     pyconfig.h
+Doc            Makefile.pre.in  pyconfig.h.in
+Grammar        Misc             python
+
+[root@V21 Python-3.6.4]# ls  /usr/local/
+bin  etc  games  include  lib  lib64  libexec  sbin  share  src
+
+[root@V21 ~]# python
+python             python3            python3.6m         
+python2            python3.6          python3.6m-config  
+python2.7          python3.6-config   python3-config   
+  
+[root@V21 ~]# python3    #验证 python3 安装成功
+Python 3.6.4 (default, Mar 19 2019, 09:53:24) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> exit()
+
+2)释放文件：
+[root@V21 ~]# tar  -xzf  pycharm-community-2018.3.5.tar.gz
+
+[root@V21 ~]# ls   pycharm-community-2018.3.5/
+bin        help     index                  jre64  license  product-info.json
+build.txt  helpers  Install-Linux-tar.txt  lib    plugins
+
+3)运行下面的命令进入PyCharm 目录
+
+[root@V21 ~]# cd  pycharm-community-2018.3.5/bin/
+[root@V21 bin]# ls
+format.sh       idea.properties  printenv.py          pycharm.svg
+fsnotifier      inspect.sh       pycharm64.vmoptions  pycharm.vmoptions
+fsnotifier64    libdbm64.so      pycharm.png          restart.py
+fsnotifier-arm  log.xml          pycharm.sh
+
+4)通过运行下面的命令来运行PyCharm进入图形化安装界面
+
+
+
+5)Pycharm打开后，如果你需要导入之前安装版本的设置的话，可以选择第一个选项，
+如果没有的话，
+选择(Do not import settings)默认不导入设置，
+点击/同意，就可以进入pycharm进行配置
+
+
+
+
+
+6)激活Pycharm：在弹出的激活窗口中，
+选择“License serveer”输入激活服务器地址“http://127.0.0.1:1017”，
+之后点击‘Activate’，
+完成pycharm激活，
+
+
+
+
+7)启动完成进入欢迎界面
 
 
 
@@ -653,7 +1242,7 @@ tk-devel-8.5.13-6.el7.x86_64
 [root@V22 ~]# tar   -zxf   Python-3.6.4.tgz 
 [root@V22 ~]# cd  Python-3.6.4/
 
-[root@V22 Python-3.6.4]# ls    # 这时候没有 makefile文件
+[root@V22 Python-3.6.4]# ls    # 这时候没有 Makefile文件
 aclocal.m4    configure.ac  install-sh  Makefile.pre.in  Parser    pyconfig.h.in  Tools
 config.guess  Doc           Lib         Misc             PC        Python
 config.sub    Grammar       LICENSE     Modules          PCbuild   README.rst
@@ -692,7 +1281,147 @@ configure 配置; 设定; 使成形; 使具一定形式
 
 optimization    n. 最佳化，最优化;优选法;优化组合
 
+[root@V22 Python-3.6.4]# ls    #Python-3.6.4文件夹中生成了 Makefile文件
+aclocal.m4     configure.ac  LICENSE          Modules   pyconfig.h
+config.guess   Doc           Mac              Objects   pyconfig.h.in
+config.log     Grammar       Makefile         Parser    Python
+config.status  Include       Makefile.pre     PC        README.rst
+config.sub     install-sh    Makefile.pre.in  PCbuild   setup.py
+configure      Lib           Misc             Programs  Tools
+
 [root@V22 Python-3.6.4]# make  && make  install  #编译源码#执行安装
+............
+rm -f /usr/local/share/man/man1/python3.1
+(cd /usr/local/share/man/man1; ln -s python3.6.1 python3.1)
+if test "xupgrade" != "xno"  ; then \
+	case upgrade in \
+		upgrade) ensurepip="--upgrade" ;; \
+		install|*) ensurepip="" ;; \
+	esac; \
+	 ./python -E -m ensurepip \
+		$ensurepip --root=/ ; \
+fi
+Collecting setuptools
+Collecting pip
+Installing collected packages: setuptools, pip
+Successfully installed pip-9.0.1 setuptools-28.8.0
+
+[root@V22 Python-3.6.4]# ls  
+aclocal.m4     Include          Modules         Python
+build          install-sh       Objects         python-config
+config.guess   Lib              Parser          python-config.py
+config.log     libpython3.6m.a  PC              python-gdb.py
+config.status  LICENSE          PCbuild         README.rst
+config.sub     Mac              Programs        setup.py
+configure      Makefile         pybuilddir.txt  Tools
+configure.ac   Makefile.pre     pyconfig.h
+Doc            Makefile.pre.in  pyconfig.h.in
+Grammar        Misc             python
+
+[root@V22 Python-3.6.4]# ls  /usr/local/
+bin  etc  games  include  lib  lib64  libexec  sbin  share  src
+
+[root@V22 Python-3.6.4]# cd
+ -----------------------------------------------  #验证 python3 安装成功
+[root@V22 ~]# python
+python             python3            python3.6m         
+python2            python3.6          python3.6m-config  
+python2.7          python3.6-config   python3-config  
+   
+[root@V22 ~]# python3
+Python 3.6.4 (default, Mar 19 2019, 09:53:22) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> quit()
+
+2)释放文件：
+[root@V22 ~]# tar  -xzf  pycharm-community-2018.3.5.tar.gz
+
+[root@V22 ~]# ls   pycharm-community-2018.3.5/
+bin        help     index                  jre64  license  product-info.json
+build.txt  helpers  Install-Linux-tar.txt  lib    plugins
+
+
+3)运行下面的命令进入PyCharm 目录
+
+[root@V22 ~]# cd pycharm-community-2018.3.5/bin/
+[root@V22 bin]# ls
+format.sh       idea.properties  printenv.py          pycharm.svg
+fsnotifier      inspect.sh       pycharm64.vmoptions  pycharm.vmoptions
+fsnotifier64    libdbm64.so      pycharm.png          restart.py
+fsnotifier-arm  log.xml          pycharm.sh
+
+4)通过运行下面的命令来运行PyCharm进入图形化安装界面
+
+
+5)Pycharm打开后，如果你需要导入之前安装版本的设置的话，可以选择第一个选项，
+如果没有的话，
+选择(Do not import settings)默认不导入设置，
+点击/同意，就可以进入pycharm进行配置
+
+
+6)激活Pycharm：在弹出的激活窗口中，
+选择“License serveer”输入激活服务器地址“http://127.0.0.1:1017”，
+之后点击‘Activate’，
+完成pycharm激活，
+
+7)启动完成进入欢迎界面
+
+
+
+-----------------------------------------------------------------------------
+               New Project (于 V20)
+   Location: [ /root/PycharmProjects/untitled   ]
+  |>(点击) Project Interpreter: New Virtualenv environment (组合下拉菜单)
+                     项目解释器：新的Virtualenv 环境
+ (*) New environment  using  [](下拉菜单Virtualenv,Pipenv,Conda)
+  Location:         [ /root/PycharmProjects/untitled/venv  ]
+  Base interpreter: [ /usr/bin/python2.7  ][下拉菜单..] [打开文件路径的菜单]
+
+/***************
+[root@V20 ~]# which python3
+/usr/local/bin/python3
+**************/
+
+  [ ]     Inherit global site-packages 继承全局站点包
+
+  [ * ](点击) Make available to all projects 提供给所有项目
+
+ ( ) Existing interpreter
+     Interpreter: [ <No interpreter> ] [下拉菜单..] [打开文件路径的菜单]
+
+                   [ Create (点击)]  [Cancel]
+------------------------------------------------------------
+
+[root@room9pc01 ~]# ls  /var/git/python/PyScript/.idea/
+inspectionProfiles  misc.xml  modules.xml  PyScript.iml  workspace.xml
+
+[root@room9pc01 ~]# ls  -ld  /var/git/python/PyScript/venv/
+drwxr-xr-x 5 root root 4096 3月  19 16:13 /var/git/python/PyScript/venv/
+
+[root@room9pc01 ~]# ls    /var/git/python/PyScript/venv/
+bin  include  lib  pip-selfcheck.json
+
+
+[root@room9pc01 ~]# ls /var/git/python/PyScript/
+hello.py  venv
+[root@room9pc01 ~]# python3  /var/git/python/PyScript/hello.py 
+hello 	 hehe 	 xixi
+helloboy! 
+[root@room9pc01 ~]# cat  /var/git/python/PyScript/hello.py
+print("hello \t hehe \t xixi\nhelloboy! ")[root@room9pc01 ~]# 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
