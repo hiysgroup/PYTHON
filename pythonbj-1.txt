@@ -1376,7 +1376,8 @@ fsnotifier-arm  log.xml          pycharm.sh
                      项目解释器：新的Virtualenv 环境
  (*) New environment  using  [](下拉菜单Virtualenv,Pipenv,Conda)
   Location:         [ /root/PycharmProjects/untitled/venv  ]
-  Base interpreter: [ /usr/bin/python2.7  ][下拉菜单..] [打开文件路径的菜单]
+
+  Base interpreter: [ /usr/bin/python2.7 (注意这里修改解释器路径) ][下拉菜单..] [打开文件路径的菜单]
 
 /***************
 [root@V20 ~]# which python3

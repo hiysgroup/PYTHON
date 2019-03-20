@@ -1,0 +1,786 @@
+
+
+# yum install -y  sqlite-devel   tk-devel   tcl-devel   readline-devel
+         zlib-devel   gcc    gcc-c++    openssl-devel   libffi-devel
+# tar xzf Python-3.6.7.tgz
+# cd Python-3.6.7
+# ./configure --prefix=/usr/local/
+# make && make install
+
+
+-----------------------------------------------------------------------------
+               New Project (于 V20)
+   Location: [ /root/PycharmProjects/untitled   ]
+  |>(点击) Project Interpreter: New Virtualenv environment (组合下拉菜单)
+                     项目解释器：新的Virtualenv 环境
+ (*) New environment  using  [](下拉菜单Virtualenv,Pipenv,Conda)
+  Location:         [ /root/PycharmProjects/untitled/venv  ]
+
+  Base interpreter: [ /usr/bin/python2.7 (注意这里修改解释器路径) ][下拉菜单..] [打开文件路径的菜单]
+
+/***************
+[root@V20 ~]# which python3
+/usr/local/bin/python3     # 注意这里解释器路径
+**************/
+
+[root@room9pc01 ~]# ls /var/git/python/PyScript/
+hello.py  .idea/    venv/   
+
+[root@room9pc01 ~]# ls /var/git/python/PyScript/.idea/
+
+inspectionProfiles  misc.xml  modules.xml  PyScript.iml  workspace.xml
+
+[root@room9pc01 ~]# ls /var/git/python/PyScript/venv/
+bin  include  lib  pip-selfcheck.json
+
+[root@room9pc01 ~]# ls /var/git/python/PyScript/venv/bin/
+
+activate       activate_this.py  pip     python     python-config
+activate.csh   easy_install      pip3    python3    wheel
+activate.fish  easy_install-3.6  pip3.6  python3.6
+
+
+[root@room9pc01 ~]# ls /var/git/python/PyScript/
+hello.py  venv
+[root@room9pc01 ~]# python3  /var/git/python/PyScript/hello.py 
+hello 	 hehe 	 xixi
+helloboy! 
+[root@room9pc01 ~]# cat  /var/git/python/PyScript/hello.py
+print("hello \t hehe \t xixi\nhelloboy! ")[root@room9pc01 ~]# 
+
+[root@room9pc01 ~]# free  -m
+              total        used        free      shared  buff/cache   available
+Mem:          15781        7759         574         422        7446        7210
+Swap:             0           0           0
+
+
+[root@room9pc01 ~]# python3  --version
+Python 3.6.1
+[root@room9pc01 ~]# python  --version
+Python 2.7.5
+[root@room9pc01 ~]# ls  -a  /var/git/python/PyScript/
+.  ..  hello.py  .idea  venv
+
+[root@room9pc01 ~]# cd  /var/git/python/PyScript/
+
+[root@room9pc01 PyScript]# ls
+hello.py  venv
+
+
+[root@V20 ~]# python3  --version
+Python 3.6.4
+[root@V20 ~]# python  --version
+Python 2.7.5
+
+[root@V20 ~]# python3  #python2版本 和python3 版本的区别
+
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> a = input('name:')
+name:xingming    #手动输入 xingming
+>>> print('$a')
+$a
+>>> print(a)
+xingming     #注意变量值 a
+>>> print("a")
+a
+>>> print('a')
+a
+>>> quit()
+[root@V20 ~]# python   #python2版本 和python3 版本的区别
+
+Python 2.7.5 (default, May  3 2017, 07:55:04) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-14)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> a = raw_input('name: ')
+name: xingmingxx   #手动输入 xingmingxx
+>>> a         #查看变量 a 的 值
+'xingmingxx'
+>>> print   a   #python2版本 和python3 版本的区别
+xingmingxx    #注意变量值 a
+>>> exit
+Use exit() or Ctrl-D (i.e. EOF) to exit
+>>> exit()
+[root@V20 ~]#  free  -m
+              total        used        free      shared  buff/cache   available
+Mem:           1444         255         627           5         561         984
+Swap:          2047           3        2044
+
+[root@V20 ~]# python3
+
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+>>> if 100 > 88 :  #注意 冒号":"
+...   print(100)  #注意 缩进 至少 2 个空格(表示父子语句关系)
+                       #每个 子语句 必须是 相同的 缩进 级别(建议使用 4 个空格 )
+...  #敲回车
+100
+>>> if  10 < 22:  print("101022")  #可读性差,不推荐, #注意 冒号":"
+...    #敲回车
+101022
+                                  # 字符串可以使用" + "进行拼接
+>>> long_str = "abcde" +\  #符号 " +\" 表示续行
+... "12345" +\          #符号 " +\" 表示续行
+... "ccccc"
+>>> print(long_str)
+abcde12345ccccc
+
+>>> a = 10; b=23; print(a+b)  #可读性差,不推荐, #注意 英文分号" ; "
+33
+>>> a = 10;b=23;print(a+b)    #可读性差,不推荐, #注意 英文分号" ; "
+33
+
+>>> a = input('number: ')
+number: 100      #手动输入 数字 100
+>>> print(a)     #打印变量 a
+100
+
+>>> print(int(a) + 12)  # 将a转成整数后和12相加，再打印出出结果
+112
+                        # 字符串可以使用 " + " 进行拼接
+>>> print(a + str(12))   # 将12 转成字符串后和a拼接，再打印出出结果
+10012
+>>> print('Hello', 'World')
+Hello World       # # print语句各项之间默认用空格分隔
+
+>>> print('Hello', 'world', sep='***')
+Hello***world   # print语句各项之间也可以自定义分隔符(例如 '***' )
+
+    # print语句默认最后会加入一个回车\n，可以用end来自定义结束(例如 ' AAA ' )
+>>> print('Hello World', end='AAA')
+Hello WorldAAA>>> 
+
+>>> print('Hello World', end='\n')  # print语句默认最后会加入一个回车\n
+Hello World
+
+>>> type(10)   # Python 是动态类型的语言,变量类型由它 的值 决定
+<class 'int'>  # 值 10 是 整数类型
+>>> type('abc') 
+<class 'str'>   # 值 abc 是 字符串类型
+
+>>> a = 100   # # 变量 a 必须先赋值
+>>> type(a)
+<class 'int'>  # 变量 a 是 整数类型
+
+>>> a = 'abcdhello'
+>>> type(a)
+<class 'str'>  # 变量 a 是 字符串类型
+
+>>> a = 100*3  # 变量 a 必须先赋值
+>>> a
+300
+>>> a = a /90
+>>> a
+3.3333333333333335
+>>> a -= 10
+>>> a
+-6.666666666666666
+>>> a += 100
+>>> a
+93.33333333333333
+
+>>> a = 100
+>>> ++a    #Python 不支持 a++ a--  
+100
+>>> ++a    # ++ 表示正正符号
+100
+>>> a++
+  File "<stdin>", line 1
+    a++
+      ^
+SyntaxError: invalid syntax
+
+   zen    英 [zen]   美 [zen]  
+          n. 禅，禅宗（中国佛教宗派）
+
+>>> import  this
+
+The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+美胜于丑。
+显式优于隐式。
+简单胜于复杂。
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+复杂总比复杂好。
+平的比嵌套的好。
+稀疏胜于稠密。
+
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+可读性计数。
+特殊情况不足以打破规则。
+尽管实用性胜过纯洁性。
+
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+错误永远不会悄悄地过去。
+除非明确沉默。
+面对歧义，拒绝猜测的诱惑。
+
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+应该有一种——最好只有一种——显而易见的方法来做到这一点。
+不过，如果不是荷兰语的话，这种方式一开始可能并不明显。
+现在总比没有好。
+
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
+虽然从来没有比现在更好。
+如果实现很难解释，那是个坏主意。
+如果实现很容易解释，这可能是一个好主意。
+名称空间是一个非常好的主意——让我们做更多的事情吧！
+>>> 
+
+/****************
+
+[root@V21 ~]# python
+Python 2.7.5 (default, May  3 2017, 07:55:04) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-14)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 5/2   #python2 不支持小数
+2
+>>> 9/4   #python2 不支持小数
+2
+>>> 9//4
+2
+>>> 5/3    #python2 不支持小数
+1
+>>> 5//3
+1
+>>> 5%3
+2
+>>> 
+*****************/
+
+>>> 5/2    #python3 支持小数
+2.5
+>>> 5//2
+2
+>>> 5%2    # 求 余,模 运算
+1
+>>> 9%3   # 求 余,模 运算
+0
+>>> 9%4
+1
+>>> 9/4   #python3 支持小数
+2.25
+>>> 9//4
+2
+>>> 
+
+
+
+
+
+
+
+[root@room9pc01 ~]# ls  -a  /var/git/python/PyScript/
+.  ..  hello.py  .idea  venv
+-------------------------------------------------------------------------------------------------------------------------
+  PyScript[/var/git/python/PyScript]- .../hello.py[PyScript]-PyCharm
+-----------------------------------------------------------
+File  Edit  View  Navigate  Code  Refactor  Run  Tools  VCS  Window  Help
+文件    编辑   视图      导航      代码      重构      运行   工具    VCS    窗口    帮助
+-------------------------------------------------------------------------------
+
+if 3 > 0 :
+    # print("yes")  #Ctrl + ? (作用 添加注释 或取消注释)
+    # print("a")
+
+if 3 > 0 :
+    print("yes")   #Ctrl + ? (作用 添加注释 或取消注释)
+    print("a")
+if 10 < 18:  print('abc')   #可读性差,不推荐, #注意 英文冒号" : "
+
+long_str = "abcde" +\      #符号 " +\" 表示续行
+           "123456789" +\       #符号 " +\" 表示续行
+    'cccccc'
+print(long_str)
+
+a = input('number: ')
+print(a)
+# b = a + 10     # input读入的数据都是字符型，字符不能和数字相加
+print(int(a) + 10)   # 将a转成整数后和10相加，再打印出出结果
+print(a + str(10))   # 将10转成字符串后和a拼接，再打印出出结果
+
+----------------------
+a = 10
+print(type(a))
+print(a)
+print(9 / 4)    # " / " 输出带有小数
+print(9 // 4)   #" // " 只输出整除的整数
+print(a == 10)  # 比较 数值的大小是否相等
+/var/git/python/PyScript/venv/bin/python /var/git/python/PyScript/hello.py
+<class 'int'>
+10
+2.25
+2
+True   # 比较 数值的大小是否相等返回 真假
+
+/************
+>>> a = 10
+>>> print(type(a))
+<type 'int'>
+
+>>> print(a)
+10
+>>> type(a)
+<type 'int'>
+
+>>> a = 5
+>>> print(a ** 2) #打印 变量a 的二次方 (幂运算)
+25
+>>> print(a == 5)   # 判断是否 相等
+True
+>>> print(a != 5)  # 判断是否 不相等
+False
+
+********/
+
+>>> 10 < 20 < 30  #python 支持 连续比较, 独有的语法
+True
+>>> 10 < 12 > 11   #python 支持 连续比较, 独有的语法, #可读性差,不推荐, 
+True
+
+>>> (10 < 12) and ( 12 > 11)   #可读性差,不推荐, 
+True
+>>> (10 < 12) and ( 12 > 11)
+True
+
+>>> (10 < 12)  or  ( 12 > 110 )
+True
+>>> (10 < 12)  and  ( 12 > 110 )  #且一个是假,则假
+False
+>>> (100 < 12)  or  ( 12 > 110 )
+False
+>>> (100 < 12)  or  ( 12 > 11 )   #或 一个是真,则真
+True
+
+>>> print(True and True)
+True
+>>> print(True and False)
+False
+
+>>> print(True  or  False)
+True
+>>> print(True  or  True)
+True
+>>> print(False  or  False)
+False
+
+
+
+
+>>> import  random    #引入模块
+>>> random.randint(1,100)
+46
+>>> random.randint(1,100)
+66
+>>> help(random   # 敲tab键 查看命令
+random
+>>> help(random)  #查看帮助信息
+
+Help on module random:
+
+NAME
+    random - Random variable generators.
+
+MODULE REFERENCE
+    https://docs.python.org/3.6/library/random
+    
+    The following documentation is automatically generated from the Python
+    source files.  It may be incomplete, incorrect or include features that
+    are considered implementation detail and may vary between Python
+    implementations.  When in doubt, consult the module reference at the
+    location listed above.
+
+DESCRIPTION
+        integers
+        --------
+               uniform within range
+    
+        sequences
+        ---------
+               pick random element
+               pick random sample
+               pick weighted random sample
+.......................
+CLASSES
+    _random.Random(builtins.object)
+        Random
+            SystemRandom
+    
+    class Random(_random.Random)
+     |  Random number generator base class used by bound module functions.
+     |  
+     |  Used to instantiate instances of Random to get generators that don't
+     |  share state.
+................
+    randint(a, b) method of Random instance
+        Return random integer in range [a, b], including both end points.
+    
+    random(...) method of Random instance
+        random() -> x in the interval [0, 1).
+    
+    randrange(start, stop=None, step=1, _int=<class 'int'>) method of Random in
+stance
+        Choose a random item from range(start, stop[, step]).
+        
+        This fixes the problem with randint() which includes the
+        endpoint; in Python this is usually not what you want.
+............
+FILE
+    /usr/local/lib/python3.6/random.py
+按 字母 "q" 退出
+[root@V20 ~]# ls /usr/local/lib/python3.6/ |wc  -l
+204
+
+[root@V20 ~]# ll /usr/local/lib/python3.6/random.py 
+-rw-r--r-- 1 root root 27310 3月  19 09:54 /usr/local/lib/python3.6/random.py
+
+[root@V20 ~]# cat  /usr/local/lib/python3.6/random.py
+"""Random variable generators.
+
+    integers
+    --------
+           uniform within range
+
+    sequences
+    ---------
+           pick random element
+           pick random sample
+           pick weighted random sample
+           generate random permutation
+...............
+import _random
+
+class Random(_random.Random):
+    """Random number generator base class used by bound module functions.
+
+    Used to instantiate instances of Random to get generators that don't
+    share state.
+
+    Class Random can also be subclassed if you want to use a different basic
+    generator of your own devising: in that case, override the following
+    methods:  random(), seed(), getstate(), and setstate().
+    Optionally, implement a getrandbits() method so that randrange()
+    can cover arbitrarily large ranges.
+..............
+        istep = _int(step)
+        if istep != step:
+            raise ValueError("non-integer step for randrange()")
+        if istep > 0:
+            n = (width + istep - 1) // istep
+        elif istep < 0:
+            n = (width + istep + 1) // istep
+        else:
+            raise ValueError("zero step for randrange()")
+
+        if n <= 0:
+            raise ValueError("empty range for randrange()")
+
+        return istart + istep*self._randbelow(n)
+...............
+
+==============================
+
+[root@room9pc01 PyScript]# ls  -a
+.  ..  .git  hello.py  .idea  importmode.py  __pycache__  venv
+[root@room9pc01 PyScript]# pwd
+/var/git/python/PyScript
+[root@room9pc01 PyScript]# git  ls-files    #查看暂存区中文件信息
+hello.py
+importmode.py
+
+[root@room9pc01 PyScript]# file   .git/index 
+.git/index: Git index, version 2, 2 entries
+
+[root@room9pc01 PyScript]# cat  importmode.py  && echo  #自定义的模块文件
+modename = "hello  world hai"   #左边是 全局变量名 modename ,右边是 值
+def  pstart():
+    print('*' * 10)  # 使用*号 将一个字符串 '*" 重复 10 次
+
+/********
+字符串连接操作
+•  使用+号可以将多个字符串拼接在一起
+•  使用*号可以将一个字符串重复多次
+*******/
+
+[root@room9pc01 PyScript]# python3
+Python 3.6.1 (default, Mar 20 2018, 00:12:35) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+>>> import   importmode  # #引入自定义的模块(注意把文件名的后缀名 .py 去除)
+
+>>> importmode.
+importmode.modename  importmode.pstart(   
+
+>>> importmode.modename   #执行
+'hello  world hai'
+>>> importmode.pstart()
+**********
+>>> help(importmode)   #查看自定义的模块帮助信息
+
+Help on module importmode:
+
+NAME
+    importmode
+
+FUNCTIONS
+    pstart()
+
+DATA
+    modename = 'hello  world hai'
+
+FILE
+    /var/git/python/PyScript/importmode.py
+
+---------------------------
+
+变量的类型和值在赋值那一刻被初始化
+•  变量赋值通过等号来执行
+>>>	counter	=	0	
+>>>	name	=	'bob'	
+•  python也支持增量赋值
+>>>n+=1	 #等价于n=n + 1
+>>>n*=1	 #等价于n = n * 1
+
+运算符
+•  标准算术运算符
++ - * / // % **
+•  比较运算符
+< <= > >= == != <>
+•  逻辑运算符
+and not or
+
+基本数字类型
+•  int:有符号整数
+•  bool:布尔值
+–  True:1
+–  False:0
+•  float:浮点数
+•  complex:复数
+
+
+
+
+>>> True * 10
+10
+>>> True + 10
+11
+>>> False + 10
+10
+
+
+[root@room9pc01 PyScript]# grep  -n python3   /usr/bin/env
+
+[root@room9pc01 PyScript]# file  /usr/bin/env
+/usr/bin/env: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.32, BuildID[sha1]=274ce64ad724e188f3a5e11a39496562e9273519, stripped
+
+[root@room9pc01 PyScript]# vim  login.py
+[root@room9pc01 PyScript]# cat  login.py
+
+#!/usr/bin/env  python3
+username = input('user: ')     #使用变量user接收用户输入的字符
+print('Welcom ', username)    #输出欢迎信息，
+                 字符串和变量名之间用逗号隔开，   两者之间自动会加上空格
+
+[root@room9pc01 PyScript]# python3  login.py
+user: boybo
+Welcom  boybo
+[root@room9pc01 PyScript]# 
+
+
+数字表示方式
+•  python默认以十进制数显示
+•  数字以0o或0O开头表示为8进制数 (注意数字零,大小写 英文字母 O)
+•  数字以0x或0X开头表示16进制数
+•  数字以0b或0B开头表示2进制数
+
+  0        1       2       3      4     5    6     7
+  1        1        1       1      1     1     1     1
+2097152  262144  32768  4096   512   64    8     1
+
+  0    0    0    0    0    0    0    0
+  1    1    1    1    1    1    1    1
+ 128  64   32   16   8   4    2    1
+ 0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
+
+    1    1    1      1       1      1    1    1         
+           1048576  65536  4096  256  16   1
+
+ (9)16 = (1001)2 =9
+ (A)16=(1010)2=10
+ (B)16=(1011)2=11
+ (C)16=(1100)2=12
+ (D)16=(1101)2=13
+ (E)16=(1110)2=14
+ (F)16=(1111)2=15
+
+[root@V21 ~]# echo  2^0 |bc
+1
+[root@V21 ~]# echo  2^1 |bc
+2
+[root@V21 ~]# echo  2^2 |bc
+4
+[root@V21 ~]# echo  2^3 |bc
+8
+[root@V21 ~]# echo  2^4 |bc
+16
+[root@V21 ~]# echo  2^5 |bc
+32
+[root@V21 ~]# echo  2^6 |bc
+64
+[root@V21 ~]# echo  2^7 |bc
+128
+[root@V21 ~]# echo  2^8-1 |bc
+255
+--------------------------------------------------------
+[root@V21 ~]# echo 8^0 |bc
+1
+[root@V21 ~]# echo 8^1 |bc
+8
+[root@V21 ~]# echo 8^2 |bc
+64
+[root@V21 ~]# echo 8^3 |bc
+512
+[root@V21 ~]# echo 8^4 |bc
+4096
+[root@V21 ~]# echo 8^5 |bc
+32768
+[root@V21 ~]# echo 8^6 |bc
+262144
+[root@V21 ~]# echo 8^7 |bc
+2097152
+[root@V21 ~]# echo 8^8-1 |bc
+16777215
+-------------------
+[root@V21 ~]# echo  16^0 |bc
+1
+[root@V21 ~]# echo  16^1 |bc
+16
+[root@V21 ~]# echo  16^2 |bc
+256
+[root@V21 ~]# echo  16^3 |bc
+4096
+[root@V21 ~]# echo  16^4 |bc
+65536
+[root@V21 ~]# echo  16^5 |bc
+1048576
+[root@V21 ~]# echo  32768*2 |bc
+65536
+
+[root@V21 ~]# echo  256+16+1 |bc
+273
+[root@V21 ~]# echo  64+8+1 |bc
+73
+[root@V21 ~]# echo   4+2+1 |bc
+7
+
+[root@V21 ~]# echo  16*15 |bc
+240
+
+数字表示方式
+•  python默认以十进制数显示
+•  数字以0o或0O开头表示为8进制数(注意数字零,大小写 英文字母 O)
+•  数字以0x或0X开头表示16进制数
+•  数字以0b或0B开头表示2进制数
+>>> 111
+111
+>>> 0b111
+7
+>>> 0B111  #表示2 进制数
+7
+>>> 0o111  #表示 8 进制数
+73
+>>> 0O111  #表示 8 进制数
+73
+>>> 0x111  #表示16 进制数
+273
+>>> 0X111
+273
+>>> 0xF0  #表示16 进制数
+240
+>>> 0xFF
+255
+>>> 0o10  #表示 8 进制数
+8
+>>> 0o70
+56
+>>> 0o77
+63
+>>> oct(63)  # 把十进制 63 转变成 8 进制
+'0o77'
+
+
+字符串切片
+•  使用索引运算符 [ ] 和 切片运算符 [ : ] 可得到 子字符串
+•  第一个字符的索引是0,最后一个字符的索引是  -1 
+•  子字符串 包含切片中的 起始下标, 但 不包含 结束下标
+
+>>> pystring = 'python678'
+>>> pystring[0]  #第一个字符的索引是0
+'p'
+>>> print(pystring[0])
+p
+>>> pystring[1]
+'y'
+
+>>> pystring = "a123efg789"
+>>> pystring[0]
+'a'
+>>> print(pystring[0])   #第一个字符的索引是0
+a
+>>> pystring[9]
+'9'
+>>> pystring[-1]  #最后一个字符的索引 -1
+'9'
+>>> pystring[-2]  #最后 第 2 个字符的索引 -2 
+'8'
+>>> pystring[4]
+'e'
+>>> pystring[0:4]  #从第一个字符的索引0 到 索引是4 的子字符串
+'a123'   #子字符串 包含切片中的 起始下标0, 但 不包含 结束下标4
+>>> pystring[4:3]  #不能按照 从大到小的索引顺序 切 字符串
+''
+>>> pystring[4:9] 
+'efg78'   #子字符串 包含切片中的 起始下标4 , 但 不包含 结束下标9
+>>> pystring[4:10]
+'efg789'
+>>> pystring[4:]  #从第5个字符的索引 4 到 字符串末尾 的子字符串
+'efg789'
+>>> 
+
+字符串连接操作
+•  使用+号可以将多个字符串拼接在一起
+•  使用*号可以将一个字符串重复多次
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
