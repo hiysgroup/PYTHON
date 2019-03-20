@@ -384,7 +384,7 @@ False
 
 
 
->>> import  random
+>>> import  random    #引入模块
 >>> random.randint(1,100)
 46
 >>> random.randint(1,100)
@@ -495,6 +495,279 @@ class Random(_random.Random):
         return istart + istep*self._randbelow(n)
 ...............
 
+==============================
+
+[root@room9pc01 PyScript]# ls  -a
+.  ..  .git  hello.py  .idea  importmode.py  __pycache__  venv
+[root@room9pc01 PyScript]# pwd
+/var/git/python/PyScript
+[root@room9pc01 PyScript]# git  ls-files    #查看暂存区中文件信息
+hello.py
+importmode.py
+
+[root@room9pc01 PyScript]# file   .git/index 
+.git/index: Git index, version 2, 2 entries
+
+[root@room9pc01 PyScript]# cat  importmode.py  && echo  #自定义的模块文件
+modename = "hello  world hai"   #左边是 全局变量名 modename ,右边是 值
+def  pstart():
+    print('*' * 10)  # 使用*号 将一个字符串 '*" 重复 10 次
+
+/********
+字符串连接操作
+•  使用+号可以将多个字符串拼接在一起
+•  使用*号可以将一个字符串重复多次
+*******/
+
+[root@room9pc01 PyScript]# python3
+Python 3.6.1 (default, Mar 20 2018, 00:12:35) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+>>> import   importmode  # #引入自定义的模块(注意把文件名的后缀名 .py 去除)
+
+>>> importmode.
+importmode.modename  importmode.pstart(   
+
+>>> importmode.modename   #执行
+'hello  world hai'
+>>> importmode.pstart()
+**********
+>>> help(importmode)   #查看自定义的模块帮助信息
+
+Help on module importmode:
+
+NAME
+    importmode
+
+FUNCTIONS
+    pstart()
+
+DATA
+    modename = 'hello  world hai'
+
+FILE
+    /var/git/python/PyScript/importmode.py
+
+---------------------------
+
+变量的类型和值在赋值那一刻被初始化
+•  变量赋值通过等号来执行
+>>>	counter	=	0	
+>>>	name	=	'bob'	
+•  python也支持增量赋值
+>>>n+=1	 #等价于n=n + 1
+>>>n*=1	 #等价于n = n * 1
+
+运算符
+•  标准算术运算符
++ - * / // % **
+•  比较运算符
+< <= > >= == != <>
+•  逻辑运算符
+and not or
+
+基本数字类型
+•  int:有符号整数
+•  bool:布尔值
+–  True:1
+–  False:0
+•  float:浮点数
+•  complex:复数
+
+
+
+
+>>> True * 10
+10
+>>> True + 10
+11
+>>> False + 10
+10
+
+
+[root@room9pc01 PyScript]# grep  -n python3   /usr/bin/env
+
+[root@room9pc01 PyScript]# file  /usr/bin/env
+/usr/bin/env: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.32, BuildID[sha1]=274ce64ad724e188f3a5e11a39496562e9273519, stripped
+
+[root@room9pc01 PyScript]# vim  login.py
+[root@room9pc01 PyScript]# cat  login.py
+
+#!/usr/bin/env  python3
+username = input('user: ')     #使用变量user接收用户输入的字符
+print('Welcom ', username)    #输出欢迎信息，
+                 字符串和变量名之间用逗号隔开，   两者之间自动会加上空格
+
+[root@room9pc01 PyScript]# python3  login.py
+user: boybo
+Welcom  boybo
+[root@room9pc01 PyScript]# 
+
+
+数字表示方式
+•  python默认以十进制数显示
+•  数字以0o或0O开头表示为8进制数 (注意数字零,大小写 英文字母 O)
+•  数字以0x或0X开头表示16进制数
+•  数字以0b或0B开头表示2进制数
+
+  0        1       2       3      4     5    6     7
+  1        1        1       1      1     1     1     1
+2097152  262144  32768  4096   512   64    8     1
+
+  0    0    0    0    0    0    0    0
+  1    1    1    1    1    1    1    1
+ 128  64   32   16   8   4    2    1
+ 0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
+
+    1    1    1      1       1      1    1    1         
+           1048576  65536  4096  256  16   1
+
+ (9)16 = (1001)2 =9
+ (A)16=(1010)2=10
+ (B)16=(1011)2=11
+ (C)16=(1100)2=12
+ (D)16=(1101)2=13
+ (E)16=(1110)2=14
+ (F)16=(1111)2=15
+
+[root@V21 ~]# echo  2^0 |bc
+1
+[root@V21 ~]# echo  2^1 |bc
+2
+[root@V21 ~]# echo  2^2 |bc
+4
+[root@V21 ~]# echo  2^3 |bc
+8
+[root@V21 ~]# echo  2^4 |bc
+16
+[root@V21 ~]# echo  2^5 |bc
+32
+[root@V21 ~]# echo  2^6 |bc
+64
+[root@V21 ~]# echo  2^7 |bc
+128
+[root@V21 ~]# echo  2^8-1 |bc
+255
+--------------------------------------------------------
+[root@V21 ~]# echo 8^0 |bc
+1
+[root@V21 ~]# echo 8^1 |bc
+8
+[root@V21 ~]# echo 8^2 |bc
+64
+[root@V21 ~]# echo 8^3 |bc
+512
+[root@V21 ~]# echo 8^4 |bc
+4096
+[root@V21 ~]# echo 8^5 |bc
+32768
+[root@V21 ~]# echo 8^6 |bc
+262144
+[root@V21 ~]# echo 8^7 |bc
+2097152
+[root@V21 ~]# echo 8^8-1 |bc
+16777215
+-------------------
+[root@V21 ~]# echo  16^0 |bc
+1
+[root@V21 ~]# echo  16^1 |bc
+16
+[root@V21 ~]# echo  16^2 |bc
+256
+[root@V21 ~]# echo  16^3 |bc
+4096
+[root@V21 ~]# echo  16^4 |bc
+65536
+[root@V21 ~]# echo  16^5 |bc
+1048576
+[root@V21 ~]# echo  32768*2 |bc
+65536
+
+[root@V21 ~]# echo  256+16+1 |bc
+273
+[root@V21 ~]# echo  64+8+1 |bc
+73
+[root@V21 ~]# echo   4+2+1 |bc
+7
+
+[root@V21 ~]# echo  16*15 |bc
+240
+
+数字表示方式
+•  python默认以十进制数显示
+•  数字以0o或0O开头表示为8进制数(注意数字零,大小写 英文字母 O)
+•  数字以0x或0X开头表示16进制数
+•  数字以0b或0B开头表示2进制数
+>>> 111
+111
+>>> 0b111
+7
+>>> 0B111  #表示2 进制数
+7
+>>> 0o111  #表示 8 进制数
+73
+>>> 0O111  #表示 8 进制数
+73
+>>> 0x111  #表示16 进制数
+273
+>>> 0X111
+273
+>>> 0xF0  #表示16 进制数
+240
+>>> 0xFF
+255
+>>> 0o10  #表示 8 进制数
+8
+>>> 0o70
+56
+>>> 0o77
+63
+>>> oct(63)  # 把十进制 63 转变成 8 进制
+'0o77'
+
+
+字符串切片
+•  使用索引运算符 [ ] 和 切片运算符 [ : ] 可得到 子字符串
+•  第一个字符的索引是0,最后一个字符的索引是  -1 
+•  子字符串 包含切片中的 起始下标, 但 不包含 结束下标
+
+>>> pystring = 'python678'
+>>> pystring[0]  #第一个字符的索引是0
+'p'
+>>> print(pystring[0])
+p
+>>> pystring[1]
+'y'
+
+>>> pystring = "a123efg789"
+>>> pystring[0]
+'a'
+>>> print(pystring[0])   #第一个字符的索引是0
+a
+>>> pystring[9]
+'9'
+>>> pystring[-1]  #最后一个字符的索引 -1
+'9'
+>>> pystring[-2]  #最后 第 2 个字符的索引 -2 
+'8'
+>>> pystring[4]
+'e'
+>>> pystring[0:4]  #从第一个字符的索引0 到 索引是4 的子字符串
+'a123'   #子字符串 包含切片中的 起始下标0, 但 不包含 结束下标4
+>>> pystring[4:3]  #不能按照 从大到小的索引顺序 切 字符串
+''
+>>> pystring[4:9] 
+'efg78'   #子字符串 包含切片中的 起始下标4 , 但 不包含 结束下标9
+>>> pystring[4:10]
+'efg789'
+>>> pystring[4:]  #从第5个字符的索引 4 到 字符串末尾 的子字符串
+'efg789'
+>>> 
+
+字符串连接操作
+•  使用+号可以将多个字符串拼接在一起
+•  使用*号可以将一个字符串重复多次
 
 
 
