@@ -401,11 +401,10 @@ NAME
 MODULE REFERENCE
     https://docs.python.org/3.6/library/random
     
-    The following documentation is automatically generated from the Python
-    source files.  It may be incomplete, incorrect or include features that
-    are considered implementation detail and may vary between Python
-    implementations.  When in doubt, consult the module reference at the
-    location listed above.
+    以下文档是从python源文件自动生成的。
+    它可能是不完整的、不正确的，或者包含被认为是实现细节的特性，
+    并且可能在Python实现之间有所不同。
+    如有疑问，请参考上述位置的模块参考。
 
 DESCRIPTION
         integers
@@ -469,15 +468,12 @@ import _random
 
 class Random(_random.Random):
     """Random number generator base class used by bound module functions.
+    绑定模块函数使用的随机数生成器基类。
 
-    Used to instantiate instances of Random to get generators that don't
-    share state.
-
-    Class Random can also be subclassed if you want to use a different basic
-    generator of your own devising: in that case, override the following
-    methods:  random(), seed(), getstate(), and setstate().
-    Optionally, implement a getrandbits() method so that randrange()
-    can cover arbitrarily large ranges.
+  用于实例化随机实例以获取不共享状态的生成器。
+  如果要使用自己设计的其他基本生成器，也可以对类random进行子类化：
+在这种情况下，重写以下方法：random（）、seed（）、getstate（）和setstate（）。
+或者，实现getRandBits（）方法，以便randRange（）可以覆盖任意大的范围。
 ..............
         istep = _int(step)
         if istep != step:
@@ -768,13 +764,6 @@ a
 字符串连接操作
 •  使用+号可以将多个字符串拼接在一起
 •  使用*号可以将一个字符串重复多次
-
-
-
-
-
-
-
 
 
 
