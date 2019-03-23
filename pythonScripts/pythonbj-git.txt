@@ -1031,8 +1031,74 @@ Swap:          2047           0        2047
 
 
 
+=========================
+--------------------------------------------------------------------------------
+  815  cd   /var/git/pythonScripts/
+  816  ls
+  817  git  --version
+
+下载单个文件时，
+
+找到所需下载的文件，鼠标放到选项Raw上，右键，选择链接另存为即可下载
+                也可以 鼠标放到选项Raw上，右键，选择 复制链接地址后
+            命令行 # wget  +  链接地址
+  818  wget  https://github.com/hiys/PYTHON/raw/master/nsd1807/python1/pythonbj-1.txt
 
 
+https://github.com/hiys/PYTHON/blob/master/nsd1807/python1/pythonbj-git.txt
+
+[root@room9pc01 pythonScripts]# ls
+pythonbj-1.txt
+[root@room9pc01 pythonScripts]# pwd
+/var/git/pythonScripts
+[root@room9pc01 pythonScripts]# wget  https://github.com/hiys/PYTHON/raw/master/nsd1807/python1/pythonbj-git.txt
+
+--2019-03-23 09:02:16--  https://github.com/hiys/PYTHON/raw/master/nsd1807/python1/pythonbj-git.txt
+.....................
+
+100%[======================================>] 37,307      36.5KB/s 用时 1.0s   
+
+2019-03-23 09:02:18 (36.5 KB/s) - 已保存 “pythonbj-git.txt” [37307/37307])
+
+[root@room9pc01 pythonScripts]# ls
+pythonbj-1.txt  pythonbj-git.txt
+
+[root@room9pc01 pythonScripts]# wget  https://github.com/hiys/PYTHON/raw/master/nsd1807/python1/pythonbj.txt  
+..........
+
+（1）clear
+ 
+这个命令将会刷新屏幕，本质上只是让终端显示页向后翻了一页，
+如果向上滚动屏幕还可以看到之前的操作信息。一般都会用这个命令。
+ 
+（2）reset
+ 
+这个命令将完全刷新终端屏幕，之前的终端输入操作信息将都会被清空，
+这样虽然比较清爽，但整个命令过程速度有点慢，使用较少。
+
+
+vim编辑器-多行加注释与去注释
+
+在使用vim编辑器时，有时候需要对多行代码进行加注释或去注释
+方法一：块选择模式
+1. 插入注释
+（1）首先按键盘上的ESC进入命令行模式
+（2）再按Ctrl+V进入VISUAL BLOCK模式
+（3）利用上下左右键调整需要注释多少行以及行的宽度
+（4）再按Shift+i或s进入插入模式
+（5）输入代表注释的符号，比如#
+（6）再次按ESC键，这时就可完成多行注释（可能需要等上一会）
+2. 去注释
+前三步与加注释相同。
+（1）首先按键盘上的ESC进入命令行模式
+（2）再按Ctrl+V进入VISUAL BLOCK模式
+（3）利用上下左右键调整需要去注释多少行以及行的宽度
+（4）再按d即可完成去注释
+方法二：替换命令
+1.插入注释
+（1）首先按键盘上的ESC进入命令行模式
+（2）再在底行输入以下命令
+         :起始行号,结束行号s/^/注释符/g
 
 
 

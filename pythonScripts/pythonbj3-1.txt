@@ -275,9 +275,1072 @@ Player equal Computer
 root@192.168.0.254's password: 
 ...............
 
+========================================
+
+
+[root@V20 PythonScripts]# vim  counter_while.py
+[root@V20 PythonScripts]# cat  counter_while.py
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+result,counter = 0 , 1
+print("result is %s\t counter is %s " % (result,counter))
+
+print(type(result),end=' ---type result')
+print(type(counter),end= ' ---type counter')
+
+while  counter <= 4:
+  result += counter
+  print("new result is %s\t old counter is %s " % (result,counter))
+  print("Result is: %s = %s + %s,\t-------Counter  is: %s" % (result,result - counter,counter,counter))
+  counter += 1
+  print("new  counter is\t"+str(counter),end=' ~~new counter\n')
+  print("-------------------------")
+
+print("Result is: "+str(result))
+
+[root@V20 PythonScripts]# python3   counter_while.py
+
+result is 0	 counter is 1 
+<class 'int'> ---type result<class 'int'> ---type counternew result is 1	 old counter is 1 
+Result is: 1 = 0 + 1,	-------Counter  is: 1
+new  counter is	2 ~~new counter
+-------------------------
+new result is 3	 old counter is 2 
+Result is: 3 = 1 + 2,	-------Counter  is: 2
+new  counter is	3 ~~new counter
+-------------------------
+new result is 6	 old counter is 3 
+Result is: 6 = 3 + 3,	-------Counter  is: 3
+new  counter is	4 ~~new counter
+-------------------------
+new result is 10	 old counter is 4 
+Result is: 10 = 6 + 4,	-------Counter  is: 4
+new  counter is	5 ~~new counter
+-------------------------
+Result is: 10
+[root@V20 PythonScripts]# 
+[root@V20 PythonScripts]# scp   counter_while.py   root@192.168.0.254:/var/git/pythonScripts
+root@192.168.0.254's password: 
+counter_while.py                              100%  590   653.2KB/s   00:00    
+[root@V20 PythonScripts]# 
+
+>>> a, b = 10, 22
+>>> type(a)
+<class 'int'>
+>>> type(b)
+<class 'int'>
+>>> print(a,b)
+10 22
+
+>>> a, b = b, a
+>>> print(a,b)
+22 10
+
+DRY原则   Don't   Rrepeat  Yourself
+
+------------------------------------------------------------------------------
+[root@V20 PythonScripts]# vim  whileyn.py
+
+
+[root@V20 PythonScripts]# python3   whileyn.py
+
+<class 'int'> --num type
+num is	4
+original counter is 0 	 type is  <class 'int'>
+Guess the number: 
+result is  3 Too Smaller
+Do you want to continue(y/n)? y
+continue running!
+New counter is 1
+Guess the number: 
+result is  5 Too Bigger
+Do you want to continue(y/n)? y
+continue running!
+New counter is 2
+Guess the number: 
+Guess Rightly!
+num is	4
+[root@V20 PythonScripts]# python3   whileyn.py
+<class 'int'> --num type
+num is	1
+original counter is 0 	 type is  <class 'int'>
+Guess the number: 
+result is  3 Too Bigger
+Do you want to continue(y/n)? n
+num is	1
+
+
+[root@V20 PythonScripts]# cat   whileyn.py
+
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+num = random.randint(1,4)
+print(type(num),end=' --num type\n')
+print("num is\t" + str(num))
+
+counter = 0
+print("original counter is %s \t type is " % (counter),type(counter))
+
+while  counter < 7:
+  result = int(getpass.getpass('Guess the number: '))  
+  if result > num:
+    print('result is  %s Too Bigger' % (result))
+    yn = input('Do you want to continue(y/n)? ')
+    if yn == 'n':
+      break           #break语句可以结束当前循环 然后跳转到下条语句
+    print("continue running!")
+  elif result < num:
+    print('result is  %s Too Smaller' % (result))
+    yn = input('Do you want to continue(y/n)? ')
+    if yn == 'n':
+      break
+    print("continue running!")
+  else:
+    print("Guess Rightly!")
+    break
+  counter += 1
+  print("New counter is %s" % (counter))
+print("num is\t" + str(num))
+
+[root@V20 PythonScripts]# 
+
+==================================
+[root@V20 PythonScripts]# python3   whileyn.py
+<class 'int'> --num type
+num is	1
+original counter is 0 	 type is  <class 'int'>
+Guess the number: 
+result is  3 Too Bigger
+Do you want to continue(y/n)? n
+num is	1
+
+[root@V20 PythonScripts]# python3   whileyn.py
+
+<class 'int'> --num type
+num is	2
+original counter is 0 	 type is  <class 'int'>
+Guess the number: 
+result is  3 Too Bigger
+Do you want to continue(y/n)? y
+continue running!
+New counter is 2
+Guess the number: 
+result is  1 Too Smaller
+Do you want to continue(y/n)? y
+continue running!
+New counter is 4
+Guess the number: 
+result is  5 Too Bigger
+Do you want to continue(y/n)? y
+continue running!
+New counter is 6
+Guess the number: 
+result is  1 Too Smaller
+Do you want to continue(y/n)? y
+continue running!
+New counter is 8
+Guess the number: 
+Guess Rightly!
+num is	2
+
+[root@V20 PythonScripts]# cat   whileyn.py
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+num = random.randint(1,4)
+print(type(num),end=' --num type\n')
+print("num is\t" + str(num))
+
+counter = 0
+print("original counter is %s \t type is " % (counter),type(counter))
+
+while  counter < 11:
+  counter += 1
+                          # #非零 0 是真 True, 零0 假 False
+  if  counter %2 == 1:   #"counter %2 == 1:" 可以简写成 " counter %2: " 
+
+     continue  #跳过本次循环,循环体内后续代码不再执行,回到判断条件 " counter < 11"
+
+  else:   #此行 "else:" 可以省略不写
+
+    result = int(getpass.getpass('Guess the number: '))  
+    if result > num:
+      print('result is  %s Too Bigger' % (result))
+      yn = input('Do you want to continue(y/n)? ')
+      if yn == 'n':
+        break
+      print("continue running!")
+    elif result < num:
+      print('result is  %s Too Smaller' % (result))
+      yn = input('Do you want to continue(y/n)? ')
+      if yn == 'n':
+        break           #break语句可以结束当前循环然后跳转到下条语句
+      print("continue running!")
+    else:
+      print("Guess Rightly!")
+      break
+  print("New counter is %s" % (counter))
+
+print("num is\t" + str(num))
+
+[root@V20 PythonScripts]# 
+        python中的while语句也支持else子句
+•  else子句只在循环 正常 完成后执行
+•  break语句也会跳过else块
+
+[root@V20 PythonScripts]# vim   while_else.py
+[root@V20 PythonScripts]# cat   while_else.py
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+num = random.randint(1,4)
+print(type(num),end=' --num type\n')
+print("num is\t" + str(num))
+
+counter = 0
+print("original counter is %s \t type is " % (counter),type(counter))
+
+while  counter < 10:
+  counter += 1
+  if  counter %2 == 1:
+     continue
+  else:
+    result = int(getpass.getpass('Guess the number: '))  
+    if result > num:
+      print('result is  %s Too Bigger' % (result))
+      yn = input('Do you want to continue(y/n)? ')
+      if yn == 'n':
+        break
+      print("continue running!")
+    elif result < num:
+      print('result is  %s Too Smaller' % (result))
+      yn = input('Do you want to continue(y/n)? ')
+      if yn == 'n':
+        break       #•  break语句也会跳过else块
+      print("continue running!")
+    else:
+      print("Guess Rightly!")
+      break     #•  break语句也会跳过else块
+  print("New counter is %s" % (counter))
+
+else:   #  else子句只在循环正常完成后执行,( else 会被 break 中断不执行)
+
+  print("End else num is %s,\tend counter is %s" % (num,counter))
+
+
+[root@V20 PythonScripts]# python3  while_else.py
+<class 'int'> --num type
+num is	3
+original counter is 0 	 type is  <class 'int'>
+Guess the number: 
+result is  6 Too Bigger
+Do you want to continue(y/n)? y
+continue running!
+New counter is 2
+Guess the number: 
+result is  2 Too Smaller
+Do you want to continue(y/n)? y
+continue running!
+New counter is 4
+Guess the number: 
+result is  5 Too Bigger
+Do you want to continue(y/n)? y
+continue running!
+New counter is 6
+Guess the number: 
+result is  4 Too Bigger
+Do you want to continue(y/n)? y
+continue running!
+New counter is 8
+Guess the number: 
+result is  1 Too Smaller
+Do you want to continue(y/n)? y
+continue running!
+New counter is 10
+End else num is 3,	end counter is 10
+[root@V20 PythonScripts]# 
+
+
+[root@V20 PythonScripts]# python3  while_else.py
+<class 'int'> --num type
+num is	3
+original counter is 0 	 type is  <class 'int'>
+Guess the number: 
+result is  2 Too Smaller
+Do you want to continue(y/n)? n
+
+
+[root@V20 PythonScripts]# python3  while_else.py
+<class 'int'> --num type
+num is	3
+original counter is 0 	 type is  <class 'int'>
+Guess the number: 
+Guess Rightly!
+[root@V20 PythonScripts]# 
+
+
+pythn print格式化输出。
+
+%r 用来做 debug 比较好，因为它会显示变量的原始数据（raw data），
+而其它的符号则是用来向用户显示输出的
+
+1. 打印字符串    # %s    字符串 (采用str()的显示)
+# print ("His name is %s" % ("Aviad") )
+
+2.打印整数   # %d    十进制整数
+# print ("He is %d years old" % (25) )
+print	("result is %d" % sum )	
+
+# %d   %i  有符号十进制
+
+3.打印浮点数   # %f    浮点数
+# print ("His height is %f  m" % (1.83))
+
+4.打印浮点数（指定保留小数点位数）
+# print ("His height is %.2f m"%(1.83))
+
+5.指定占位符宽度
+# print ("Name: %10s  Age: %8d  Height: %8.2f " % ("Aviad",25,1.83))
+
+6.指定占位符宽度（左对齐）
+# print ("Name: %-10s  Age: %-8d  Height: %-8.2f "% ("Aviad",25,1.83))
+
+flags可以有+,-,' '或0。
+   +   表示右对齐。
+  " - " 表示左对齐。
+   ' '   为一个空格，表示在正数的左侧填充一个空格，从而与负数对齐。
+0表示使用0填充
+
+格式符
+
+格式符为真实值预留位置，并控制显示的格式。格式符可以包含有一个类型码，用以控制显示的类型，如下:
+
+%s    字符串 (采用str()的显示)
+
+%r    字符串 (采用repr()的显示)
+
+%c    单个字符
+
+%b    二进制整数
+
+%d    十进制整数
+
+%i    十进制整数
+
+%o    八进制整数
+
+%x    十六进制整数
+
+%e    指数 (基底写为e)
+
+%E    指数 (基底写为E)
+
+%f    浮点数
+--------------------- 
+
+[root@V20 PythonScripts]#  scp    while_else.py   root@192.168.0.254:/var/git/pythonScripts
+
+
+character   英 [ˈkærəktə(r)]   美 [ˈkærəktɚ]  
+             n.性格;角色;特点;字母
+
+
+[root@V20 PythonScripts]# vim   forcharacter.py
+[root@V20 PythonScripts]# cat   forcharacter.py
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+for  character  in  "abc":
+  print(character)
+  print('-' * 10)
+
+for  tuple  in (10, [-30,'abc',False],'end'):
+  print(tuple)
+  print('$' * 10)
+
+for  list  in ['peri' , 'belle' , 'beauty']:
+  print(list)
+  print('#' * 10)
+
+for  directory  in  {'key': 'value1', 11: 110, 'man': False}:
+  print(directory)    #只会打印出键 "key'
+  print('&' * 10)
+[root@V20 PythonScripts]# python3  forcharacter.py
+a
+----------
+b
+----------
+c
+----------
+10
+$$$$$$$$$$
+[-30, 'abc', False]
+$$$$$$$$$$
+end
+$$$$$$$$$$
+peri
+##########
+belle
+##########
+beauty
+##########
+key
+&&&&&&&&&&
+11
+&&&&&&&&&&
+man
+&&&&&&&&&&
+[root@V20 PythonScripts]# 
+>>> directory =  {'key': 'value1', 11: 110, 'man': False}
+>>> print(type(directory))
+<class 'dict'>
+>>> print(directory)
+{'key': 'value1', 11: 110, 'man': False}
+>>> print(directory[11])
+110
+>>> print(directory['man'])
+False
+>>> print(directory['key'])
+value1
+>>> 
+
+[root@V20 PythonScripts]# vim   forcharacter.py
+[root@V20 PythonScripts]# cat   forcharacter.py
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+for  character  in  "abc":
+  print(character)
+  print('-' * 10)
+
+for  tuple  in (10, [-30,'abc',False],'end'):
+  print(tuple)
+  print('$' * 10)
+
+for  list  in ['peri' , 'belle' , 'beauty']:
+  print(list)
+  print('#' * 10)
+
+directory =  {'key': 'value1', 11: 110, 'man': False}
+for  key  in  directory:
+  print(key)
+  print(key," : ",directory[key])
+  print('&' * 10)
+[root@V20 PythonScripts]# python3  forcharacter.py
+a
+----------
+b
+----------
+c
+----------
+10
+$$$$$$$$$$
+[-30, 'abc', False]
+$$$$$$$$$$
+end
+$$$$$$$$$$
+peri
+##########
+belle
+##########
+beauty
+##########
+key
+key  :  value1
+&&&&&&&&&&
+11
+11  :  110
+&&&&&&&&&&
+man
+man  :  False
+&&&&&&&&&&
+[root@V20 PythonScripts]# 
+
+
+java  遍历数组的传统方式
+ /* 建立一个数组 */
+ int[] integers = {1， 2， 3， 4};
+ /* 开始遍历 */
+ for (int j = 0; j < integers.length; j++) {
+     int i = integers[j];
+     System.out.println(i);
+ } 
+
+java 遍历数组的简单方式
+ /* 建立一个数组 */
+ int[] integers = {1， 2， 3， 4};
+
+ /* 开始遍历 */
+ for (int i : integers) {
+     System.out.println(i); /* 依次输出“1”、“2”、“3”、“4” */
+ }
+
+这里所用的for循环，会在编译期间被看成是这样的形式..........
+
+
+frequency    英 [ˈfri:kwənsi]   美 [ˈfrikwənsi]  
+              n.频繁性;[数][物]频率，次数;频率分布
+
+draw   英 [drɔ:]   美 [drɔ]  
+        vt.& vi.吸引;绘画;拖，拉;招致
+        vt.画;吸引;拉
+        vi.汲取;移动;拔出剑;皱缩
+        n.抽奖;平局
+
+[root@V20 PythonScripts]# python3   rock-clipper-cloth-for.py
+
+All choice  is all_choice =  ['rock', 'clipper', 'cloth']
+win_list  is  ---- [['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']]
+playdirectory is   {'a': 'rock', 'b': 'clipper', 'c': 'cloth'}
+computer is  cloth   <class 'str'> --computer type
+Tip:[a] rock
+[b] clipper
+[c] cloth
+Please input string( a | b | c ):
+key is  u 	 key type  is  <class 'str'>
+u ---- <class 'str'> --key type
+Possible input error!!!
+
+
+[root@V20 PythonScripts]# python3   rock-clipper-cloth-for.py
+
+All choice  is all_choice =  ['rock', 'clipper', 'cloth']
+win_list  is  ---- [['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']]
+playdirectory is   {'a': 'rock', 'b': 'clipper', 'c': 'cloth'}
+computer is  rock   <class 'str'> --computer type
+Tip:[a] rock
+[b] clipper
+[c] cloth
+Please input string( a | b | c ):
+key is  a 	 key type  is  <class 'str'>
+rock ---- <class 'str'> ---player type
+your choice: rock,	computer's choice: rock
+Player equal Computer
+player_frequency : computer_frequency 1 : 1
+computer is  cloth   <class 'str'> --computer type
+Tip:[a] rock
+[b] clipper
+[c] cloth
+Please input string( a | b | c ):
+key is  b 	 key type  is  <class 'str'>
+clipper ---- <class 'str'> ---player type
+your choice: clipper,	computer's choice: cloth
+ You as player WIN !
+player_frequency : computer_frequency 2 : 1
+computer is  rock   <class 'str'> --computer type
+Tip:[a] rock
+[b] clipper
+[c] cloth
+Please input string( a | b | c ):
+key is  c 	 key type  is  <class 'str'>
+cloth ---- <class 'str'> ---player type
+your choice: cloth,	computer's choice: rock
+ You as player WIN !
+player_frequency : computer_frequency 3 : 1
+player win  player_frequency : computer_frequency 2 : 0
+player_frequency : computer_frequency 2 : 0
+
+
+[root@V20 PythonScripts]# cat   rock-clipper-cloth-for.py
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+all_choice = [ 'rock', 'clipper', 'cloth' ]
+print("All choice  is all_choice = ",all_choice)
+
+win_list = [['rock','clipper'],['clipper','cloth'],['cloth','rock']]
+print("win_list  is  ----",win_list)
+
+playdirectory = { 'a': 'rock', 'b': 'clipper', 'c': 'cloth' }
+print("playdirectory is  ",playdirectory)
+
+prompt = "[a] rock\n\
+[b] clipper\n\
+[c] cloth\n\
+Please input string( a | b | c ):"
+
+player_frequency , draw, computer_frequency = 0, 0, 0
+booleanrun = True
+
+while booleanrun:
+  computer = random.choice(all_choice)
+  print("computer is  %s  " % computer , type(computer),end=' --computer type\n')
+  
+  key = getpass.getpass("Tip:"+prompt)
+  print("key is  %s \t key type  is " % key , type(key))
+  
+  if key in 'abc' and len(key) == 1 :
+    player = playdirectory[key]
+    print(player,type(player),sep = ' ---- ',end=' ---player type\n')
+    print("your choice: %s,\tcomputer's choice: %s" % (player,computer))
+  
+    if [ player, computer ] in  win_list:
+      print('\033[32;1m You as player WIN !\033[0m')
+      player_frequency += 1
+    elif [player,computer] not in win_list:
+      if player == computer:
+        print("\033[33;1mPlayer equal Computer\033[0m")
+        draw += 1
+      elif [computer,player] in win_list:
+        print("\033[31;1m Computer win and you lose!\033[0m")
+        computer_frequency += 1
+    print("player_frequency : computer_frequency %s : %s" % (player_frequency + draw , computer_frequency + draw ))
+  else:
+    print(key,type(key),sep = ' ---- ',end=' --key type\n')
+    print('\033[34;1mPossible input error!!!\033[0m')
+    break
+  if  player_frequency + draw == 3 or computer_frequency + draw == 3:
+    if player_frequency > computer_frequency :
+      print("player win  player_frequency : computer_frequency %s : %s" % (player_frequency, computer_frequency))
+      booleanrun = False
+    elif player_frequency < computer_frequency :
+      print("Computer win  player_frequency : computer_frequency %s : %s" % (player_frequency, computer_frequency))
+      booleanrun = False
+    else:
+      print("You tied with the computer  player_frequency : computer_frequency %s : %s" % (player_frequency, computer_frequency))
+      booleanrun = False
+else:
+  print("player_frequency : computer_frequency %s : %s" % (player_frequency, computer_frequency))
+[root@V20 PythonScripts]# 
+
+==================
+
+[root@V20 PythonScripts]# vim    rock-clipper-cloth-while-else.py
+
+
+[root@V20 PythonScripts]# python3  rock-clipper-cloth-while-else.py
+All choice  is all_choice =  ['rock', 'clipper', 'cloth']
+win_list  is  ---- [['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']]
+playdirectory is   {'a': 'rock', 'b': 'clipper', 'c': 'cloth'}
+computer is  rock   <class 'str'> --computer type
+Tip:[a] rock
+[b] clipper
+[c] cloth
+Please input string( a | b | c ):
+key is  2 	 key type  is  <class 'str'>
+2 ---- <class 'str'> --key type
+Possible input error!!!
+
+[root@V20 PythonScripts]# 
+
+[root@V20 PythonScripts]# python3  rock-clipper-cloth-while-else.py
+
+All choice  is all_choice =  ['rock', 'clipper', 'cloth']
+win_list  is  ---- [['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']]
+playdirectory is   {'a': 'rock', 'b': 'clipper', 'c': 'cloth'}
+computer is  cloth   <class 'str'> --computer type
+Tip:[a] rock
+[b] clipper
+[c] cloth
+Please input string( a | b | c ):
+key is  a 	 key type  is  <class 'str'>
+rock ---- <class 'str'> ---player type
+your choice: rock,	computer's choice: cloth
+ Computer win and you lose!
+player_frequency : computer_frequency 0 : 1
+computer is  rock   <class 'str'> --computer type
+Tip:[a] rock
+[b] clipper
+[c] cloth
+Please input string( a | b | c ):
+key is  b 	 key type  is  <class 'str'>
+clipper ---- <class 'str'> ---player type
+your choice: clipper,	computer's choice: rock
+ Computer win and you lose!
+player_frequency : computer_frequency 0 : 2
+computer is  clipper   <class 'str'> --computer type
+Tip:[a] rock
+[b] clipper
+[c] cloth
+Please input string( a | b | c ):
+key is  c 	 key type  is  <class 'str'>
+cloth ---- <class 'str'> ---player type
+your choice: cloth,	computer's choice: clipper
+ Computer win and you lose!
+player_frequency : computer_frequency 0 : 3
+Computer win  player_frequency : computer_frequency 0 : 3
+END player_frequency : computer_frequency 0 : 3
+
+
+[root@V20 PythonScripts]# cat   rock-clipper-cloth-while-else.py
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+all_choice = [ 'rock', 'clipper', 'cloth' ]
+print("All choice  is all_choice = ",all_choice)
+
+win_list = [['rock','clipper'],['clipper','cloth'],['cloth','rock']]
+print("win_list  is  ----",win_list)
+
+playdirectory = { 'a': 'rock', 'b': 'clipper', 'c': 'cloth' }
+print("playdirectory is  ",playdirectory)
+
+prompt = "[a] rock\n\
+[b] clipper\n\
+[c] cloth\n\
+Please input string( a | b | c ):"
+
+player_frequency , draw, computer_frequency = 0, 0, 0
+booleanrun = True
+
+while booleanrun:
+  computer = random.choice(all_choice)
+  print("computer is  %s  " % computer , type(computer),end=' --computer type\n')
+  
+  key = getpass.getpass("Tip:"+prompt)
+  print("key is  %s \t key type  is " % key , type(key))
+  
+  if key in 'abc' and len(key) == 1 :
+
+    player = playdirectory[key]
+    print(player,type(player),sep = ' ---- ',end=' ---player type\n')
+    print("your choice: %s,\tcomputer's choice: %s" % (player,computer))
+  
+    if [ player, computer ] in  win_list:
+      print('\033[32;1m You as player WIN !\033[0m')
+      player_frequency += 1
+
+    elif [player,computer] not in win_list:
+
+      if player == computer:
+        print("\033[33;1mPlayer equal Computer\033[0m")
+        draw += 1
+
+      elif [computer,player] in win_list:
+        print("\033[31;1m Computer win and you lose!\033[0m")
+        computer_frequency += 1
+    print("player_frequency : computer_frequency %s : %s" % (player_frequency + draw , computer_frequency + draw ))
+
+  else:
+    print(key,type(key),sep = ' ---- ',end=' --key type\n')
+    print('\033[34;1mPossible input error!!!\033[0m')
+    break
+
+  if  player_frequency + draw == 3 or computer_frequency + draw == 3:
+
+    if player_frequency > computer_frequency :
+      print("player win  player_frequency : computer_frequency %s : %s" % (player_frequency, computer_frequency))
+      booleanrun = False
+
+    elif player_frequency < computer_frequency :
+      print("Computer win  player_frequency : computer_frequency %s : %s" % (player_frequency, computer_frequency))
+      booleanrun = False
+
+    else:
+      print("You tied with the computer  player_frequency : computer_frequency %s : %s" % (player_frequency, computer_frequency))
+      booleanrun = False
+
+else:
+  print("END player_frequency : computer_frequency %s : %s" % (player_frequency, computer_frequency))
+
+
+[root@V20 PythonScripts]# scp  rock-clipper-cloth-while-else.py    root@192.168.0.254:/var/git/pythonScripts
+...................
+[root@V20 PythonScripts]# ======================
+
+>>> range(5)
+range(0, 5)
+>>> list(range(5))
+[0, 1, 2, 3, 4]
+>>> list()
+[]
+>>> range(7)
+range(0, 7)
+>>> list(range(7))
+[0, 1, 2, 3, 4, 5, 6]
+>>> 
+>>> L = list(range(20))
+>>> print(L)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+
+  # 切片可以截取list的部分数据。
+  # 查找数据更加方便，  相当于java字符串subString()方法。
+
+
+===================================================
+[root@V20 PythonScripts]# vim   rangefor.py
+[root@V20 PythonScripts]# python3  rangefor.py
+a
+----------
+b
+----------
+10
+$$$$$$$$$$
+[-30, 'abc', False]
+$$$$$$$$$$
+belle
+##########
+beauty
+##########
+11
+11  :  110
+&&&&&&&&&&
+man
+man  :  False
+&&&&&&&&&&
+range(0, 3)
+Traceback (most recent call last):
+  File "rangefor.py", line 26, in <module>
+    lx = list(range(3))
+TypeError: 'str' object is not callable
+
+
+先确认一下list变量是否被使用
+
+>>> del list #删除变量
+>>> list   #确认一下结果, 检查list的值
+<class 'list'>   #变量被删除
+>>>   #再次调用list()函数
+           ##可以正常使用了
+简单来说就是list变量和list函数重名
+>>> list()
+[]
+>>> list
+<class 'list'>
+>>> 
+>>> list   #确认一下结果, 检查list的值
+<class 'list'>
+
+>>> print(list)  #确认一下结果
+<class 'list'>
+
+>>> print(type(list())) #确认一下结果
+<class 'list'>  #注意类型 " list "
+
+>>> print(type(list))
+<class 'type'>  #注意类型 " type "
+
+>>> print(list())
+[]
+>>> list()
+[]
+>>> 
+
+[root@V20 PythonScripts]# 
 
 
 
+[root@V20 PythonScripts]# python3  rangefor.py
+a <class 'str'>
+----------
+b <class 'str'>
+----------
+10 <class 'int'>
+$$$$$$$$$$
+[-30, 'abc', False] <class 'list'>
+$$$$$$$$$$
+belle <class 'str'>
+##########
+beauty <class 'str'>
+##########
+11 <class 'int'>
+11  :  110
+&&&&&&&&&&
+man <class 'str'>
+man  :  False
+&&&&&&&&&&
+range(0, 3)
+[0, 1, 2]
+0
+1
+2
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+[0, 1, 2]
+[1, 2]
+[19]
+[18, 19]
+[0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+[0, 3]
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+**list(range(3,6))*****list(range(3,6))***
+[3, 4, 5]
+****list(range(1,10,2))*****list(range(1,10,2))*
+[1, 3, 5, 7, 9]
+********list(range(0,11,-2))**********list(range(0,11,-2))**
+[]
+[root@V20 PythonScripts]# echo $?
+0
+[root@V20 PythonScripts]# cat  rangefor.py
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+for  character  in  "ab":
+  print(character,type(character))
+  print('-' * 10)
+
+for  tuple  in (10, [-30,'abc',False]):
+  print(tuple,type(tuple))
+  print('$' * 10)
+
+for  listx  in ['belle' , 'beauty']:
+  print(listx,type(listx))
+  print('#' * 10)
+
+directory =  { 11: 110, 'man': False}
+for  key  in  directory:
+  print(key,type(key))
+  print(key," : ",directory[key])
+  print('&' * 10)
+
+print(range(3))
+list
+#del list
+lx = list(range(3))
+print(lx)
+for  i  in  lx:
+  print(i)
+
+L = list(range(20))
+print(L)
+#取前三个数据
+print(L[0:3])
+#取下标1-3条数据
+print(L[1:3])
+#取倒数第一条数据
+print(L[-1:])
+#取倒数1-2条数据
+print(L[-2:])
+#每隔两个取一条数据
+print(L[::2])
+#前6个数据，每隔三个去一条
+print(L[:6:3])
+#复制一个list
+print(L[:])
+
+print("**list(range(3,6))***" * 2)
+print(list(range(3,6)))
+
+print("****list(range(1,10,2))*" * 2)
+print(list(range(1,10,2)))
+
+print("********list(range(0,11,-2))**" * 2)
+print(list(range(0,11,-2)))
+
+[root@V20 PythonScripts]# 
+[root@V20 PythonScripts]# python3
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+>>> for  character  in  "ab":
+...   print(character,type(character))
+...   print('-' * 10)
+... 
+a <class 'str'>
+----------
+b <class 'str'>
+----------
+>>> for  tuple  in (10, [-30,'abc',False]):
+...   print(tuple,type(tuple))
+...   print('$' * 10)
+... 
+10 <class 'int'>
+$$$$$$$$$$
+[-30, 'abc', False] <class 'list'>
+$$$$$$$$$$
+>>> for  listx  in ['belle' , 'beauty']:
+...   print(listx,type(listx))
+...   print('#' * 10)
+... 
+belle <class 'str'>
+##########
+beauty <class 'str'>
+##########
+>>> directory =  { 11: 110, 'man': False}
+>>> for  key  in  directory:
+...   print(key,type(key))
+...   print(key," : ",directory[key])
+...   print('&' * 10)
+... 
+11 <class 'int'>
+11  :  110
+&&&&&&&&&&
+man <class 'str'>
+man  :  False
+&&&&&&&&&&
+>>> print(range(3))
+range(0, 3)
+>>> list
+<class 'list'>
+>>> #del list
+... lx = list(range(3))
+>>> print(lx)
+[0, 1, 2]
+>>> for  i  in  lx:
+...   print(i)
+... 
+0
+1
+2
+>>> L = list(range(20))
+>>> print(L)     #不包含 数字20 ,默认从零 ' 0 ' 开始(包含 零' 0 ' )
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+
+
+  # 切片可以截取list的部分数据。
+  # 查找数据更加方便，  相当于java字符串subString()方法。
+
+
+>>> #取前三个数据
+... print(L[0:3])
+[0, 1, 2]
+>>> #取下标1-3条数据
+... print(L[1:3])
+[1, 2]
+>>> #取倒数第一条数据
+... print(L[-1:])
+[19]
+>>> #取倒数1-2条数据
+... print(L[-2:])
+[18, 19]
+>>> #每隔两个取一条数据
+... print(L[::2])
+[0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+>>> #前6个数据，每隔三个去一条
+... print(L[:6:3])
+[0, 3]
+>>> #复制一个list
+... print(L[:])
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+>>> 
+>>> print("**list(range(3,6))***" * 2)
+**list(range(3,6))*****list(range(3,6))***
+>>> print(list(range(3,6)))
+[3, 4, 5]     #不包含结束数字 6
+>>> 
+>>> print("****list(range(1,10,2))*" * 2)
+****list(range(1,10,2))*****list(range(1,10,2))*
+>>> print(list(range(1,10,2)))
+[1, 3, 5, 7, 9]
+>>> 
+>>> print(list(range(0,11,2)))
+[0, 2, 4, 6, 8, 10]
+>>> print(list(range(0,12,2)))
+[0, 2, 4, 6, 8, 10]   #从 0 开始,每加上 2 个数,向右 数打印,不包含最后的数字12
+>>> print(list(range(0,14,2)))
+[0, 2, 4, 6, 8, 10, 12]  #从 0 开始,每加上 2 个数,向右 数打印,不包含最后的数字14
+>>> 
+
+>>> print(list(range(22,1,-2)))  #从 22 开始,每减去 2 个数,向左 数打印,
+[22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2]
+
+>>> print(list(range(11,0,-2)))
+[11, 9, 7, 5, 3, 1]  #从 11 开始,每减去 2 个数,向左 数打印
+>>> 
+>>> print(list(range(1,22,-2)))
+[]                 #从 1 开始,每减去 2 个数,向左 数打印
+>>> 
 
 
 
