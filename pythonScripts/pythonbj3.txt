@@ -1,0 +1,854 @@
+
+
+rock     英 [rɒk]   美 [rɑ:k]  
+         n.摇滚乐;岩石，石头;棒糖;<非正式>宝石（尤指钻石）
+         v.摇晃;摇动;震动
+
+clipper   英 [ˈklɪpə(r)]   美 [ˈklɪpɚ]  
+          n.剪刀，理发剪;剪削者，削取人;
+
+cloth    英 [klɒθ]   美 [klɔ:θ]  
+         n.布，织物;一块布;
+
+stripped   英 [strɪpt]   美 [strɪpt]  
+          v.剥皮（ strip的过去式和过去分词 ）;脱光衣服;（齿轮的齿等）折断;表演脱衣舞
+
+stripper   英 [ˈstrɪpə(r)]   美 [ˈstrɪpɚ]  
+            n.脱衣舞表演者，脱衣舞女;
+
+strip    英 [strɪp]   美 [strɪp]  
+         vi.剥光;表演脱衣舞;剥除
+         vt.除去，剥去;剥夺;删除;清除，拆除
+         n.长条，条板;带状地带（或森林、湖面等）;
+
+win   英 [wɪn]   美 [wɪn]  
+      vt.& vi.（在…中）获胜，赢;战胜（对手）
+     vt.（通过努力等）赢得;说服;达到（目的、要求等）;获得…
+     n.（体育比赛中）胜利，赢;[常用复数]赢得物;收益
+     vi. 顺利到达，成功
+
+lose     英 [lu:z]   美 [luz]  
+         vt.失去;错过;遗失;耽搁
+         vi.损失;输掉;
+
+prompt     英 [prɒmpt]   美 [prɑ:mpt]  
+           adj.迅速的;敏捷的;立刻的;准时的
+           v.提示;促使;导致;鼓励
+           n.提示;提示符;激励;提词
+           adv.准时地
+
+[root@V20 ~]# mkdir  PythonScripts
+[root@V20 ~]# cd  PythonScripts/
+
+[root@V20 PythonScripts]# file   /usr/bin/env
+
+/usr/bin/env: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.32, BuildID[sha1]=4279a25ddbac2a7480923cd05d70e33a73dce721, stripped
+
+
+[root@V20 PythonScripts]# file  /bin/bash
+
+/bin/bash: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.32, BuildID[sha1]=8bd6b05295658d71a9ff4eed7cae55609a703623, stripped
+
+[root@V20 PythonScripts]# which  python3
+/usr/local/bin/python3
+
+[root@V20 PythonScripts]# ll  /usr/local/bin/python3
+lrwxrwxrwx 1 root root 9 3月  19 09:54 /usr/local/bin/python3 -> python3.6
+
+[root@V20 PythonScripts]# ll  /usr/local/bin/python3.6
+-rwxr-xr-x 2 root root 12671720 3月  19 09:54 /usr/local/bin/python3.6
+
+[root@V20 PythonScripts]# file  /usr/local/bin/python3.6
+/usr/local/bin/python3.6: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.32, BuildID[sha1]=3cf1ffee77719617af0949f463b4bbc379013061, not stripped
+
+/*********************
+>>> new_words = '''hello   # # 注意 ''' 3个单引号 ''' 的使用,\t  \n 转义符号
+... greet\tnice
+... welcome'''
+>>> print(new_words)
+hello
+greet	nice
+welcome
+
+>>> words = 'xixixix  \  # 注意 ' 单引号 ' 的使用, 转义符号 \
+... hahaha  haha\
+... hehe'
+>>> print(words *2)
+xixixix  hahaha  hahahehexixixix  hahaha  hahahehe
+
+
+>>> words = 'xixixi' +\   # 注意 '  +\ ' 的使用区别,注意 单 双 引号 的位置
+... "12345"  +\      #符号 " +\" 表示续行
+... "cccc****"
+>>> print(words *2)
+xixixi12345cccc****xixixi12345cccc****
+>>> 
+>>> print(alist)
+[10, 2.22, 'bob', 'alice', True, False, -3.33, [100, -100, -0.8]]
+
+>>> alist[2] * 3   #使用*号可以将一个字符串重复多次
+'bobbobbob'
+>>> alist[2]
+'bob'
+>>> alist[2] *= 3   #列表中的项目可以改变,重新赋值
+>>> print(alist)
+[10, 2.22, 'bobbobbob', 'alice', True, False, -3.33, [100, -100, -0.8]]
+
+>>> print('\033[36;1m平局\033[0m')  淡蓝绿色
+平局
+>>> print('\033[35;1m平局\033[0m')
+平局
+>>> print('\033[34;1m输入错误\033[0m')  灰蓝色
+输入错误
+>>> print('\033[33;1m平局\033[0m')  黄
+平局
+>>> print('\033[32;1m赢\033[0m')  绿
+赢
+>>> print('\033[31;1m输\033[0m')  深红色
+输
+[root@V20 PythonScripts]# echo  -e  "\033[31;1m全部是红红色"
+全部是红红色
+[root@V20 PythonScripts]# echo  -e  "\033[31;1m全部是红红色"
+全部是红红色
+
+[root@V20 PythonScripts]# echo  -e  "\033[32;1m全部是绿绿色"
+全部是绿绿色
+[root@V20 PythonScripts]# echo  -e  "\033[32;1m全部是绿绿色"
+全部是绿绿色
+
+[root@V20 PythonScripts]# echo  -e  "\033[33;1m全部是黄黄色"
+全部是黄黄色
+[root@V20 PythonScripts]# echo  -e  "\033[33;1m全部是黄黄色"
+全部是黄黄色
+------------------------ \033[33;  注意[31,[32,[33等等是前景色
+
+[root@V20 PythonScripts]# echo  -e  "\033[33;1m黄黄色\033[0m"
+黄黄色
+[root@V20 PythonScripts]# echo  -e  "\033[33;1m黄黄色\033[0m"
+黄黄色
+
+[root@V20 PythonScripts]# echo  -e  "\033[32;1m绿绿色\033[0m"
+绿绿色
+[root@V20 PythonScripts]# echo  -e  "\033[32;1m绿绿色\033[0m"
+绿绿色
+
+[root@V20 PythonScripts]# echo  -e  "\033[31;1m红红色\033[0m"
+红红色
+[root@V20 PythonScripts]# echo  -e  "\033[31;1m红红色\033[0m"
+红红色
+[root@V20 PythonScripts]# echo  -e  "\033[30;1m前景色30是灰黑色\033[0m"
+前景色30是灰黑色
+[root@V20 PythonScripts]# echo  -e  "\033[31;1m前景色31是红红色\033[0m"
+前景色31是红红色
+
+[root@V20 PythonScripts]# echo  -e  "\033[30;41;1m前景色30灰黑,后景色41红色\033[0m""
+前景色30灰黑,后景色41红色
+[root@V20 PythonScripts]# echo  -e  "\033[30;42;1m前景色30灰黑,后景色42绿色\033[0m"
+前景色30灰黑,后景色42绿色
+[root@V20 PythonScripts]# echo  -e  "\033[30;43;1m前景色30灰黑,后景色43黄色\033[0m"
+前景色30灰黑,后景色43黄色
+
+------------------------ \033[33;  注意[31,[32,[33等等是前景色
+------------- \033[30;41;1m前景色30灰黑, ;41;42;43等是后景色
+
+***********************/
+
+
+[root@V20 PythonScripts]# vim  rock-clipper-cloth.py
+#!/usr/bin/env  python3     #python3 解释器
+import  random
+import  getpass
+
+[root@V20 PythonScripts]# cat  rock-clipper-cloth.py
+
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+all_choice = [ 'rock', 'clipper', 'cloth' ]
+print(all_choice,end=' --all_choice\n')
+
+win_list = [['rock','clipper'],['clipper','cloth'],['cloth','rock']]
+print(win_list,end=' --win_list\n')
+
+prompt = """[0] rock
+[1] clipper
+[2] cloth
+Please input  number( 0|1|2):"""
+
+computer = random.choice(all_choice)
+print(computer,type(computer),end=' --computer type\n')
+
+index = int(getpass.getpass("Tip:"+prompt))
+print(index,type(index),sep = ' ---- ',end=' --index type\n')
+
+if index > 2 or index < 0:
+  print(index,type(index),sep = ' ---- ',end=' --index type\n')
+                              #[34;1m输入错误\033[0m')  灰蓝色
+  print('\033[34;1mPossible input error!!!\033[0m')
+else:
+  player = all_choice[index]
+  print(player,type(player),sep = ' ---- ',end=' ---player type\n')
+
+/***********
+ # print("your choice: %s,\tcomputer's choice: %s" % (player,computer))
+**********/
+
+  print('your choice:\t',player,",\tcomputer's choice:\t",computer)
+
+  if [ player, computer ] in  win_list:         #[32;1m赢\033[0m')  绿
+    print('\033[32;1m You as player WIN !\033[0m')
+
+  elif [player,computer] not in win_list:
+    if player == computer:                    #平局  黄色
+      print("\033[33;1mPlayer equal Computer\033[0m")
+
+    elif [computer,player] in win_list:       #[31;1m输\033[0m')  深红色
+      print("\033[31;1m Computer win and you lose!\033[0m")
+
+    else:                     #[34;1m其他错误\033[0m')  灰蓝色
+      print('\033[34;1mPossible other errors!!!\033[0m')
+[root@V20 PythonScripts]# 
+
+
+
+
+[root@V20 PythonScripts]# python3  rock-clipper-cloth.py
+['rock', 'clipper', 'cloth'] --all_choice
+[['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']] --win_list
+clipper <class 'str'> --computer type
+Tip:[0] rock
+[1] clipper
+[2] cloth
+Please input  number( 0|1|2):
+3 ---- <class 'int'> --index type
+3 ---- <class 'int'> --index type
+Possible input error!!!
+
+[root@V20 PythonScripts]# python3  rock-clipper-cloth.py
+['rock', 'clipper', 'cloth'] --all_choice
+[['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']] --win_list
+cloth <class 'str'> --computer type
+Tip:[0] rock
+[1] clipper
+[2] cloth
+Please input  number( 0|1|2):
+-1 ---- <class 'int'> --index type
+-1 ---- <class 'int'> --index type
+Possible input error!!!
+
+
+[root@V20 PythonScripts]# python3  rock-clipper-cloth.py
+['rock', 'clipper', 'cloth'] --all_choice
+[['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']] --win_list
+rock <class 'str'> --computer type
+Tip:[0] rock
+[1] clipper
+[2] cloth
+Please input  number( 0|1|2):
+0 ---- <class 'int'> --index type
+rock ---- <class 'str'> ---player type
+your choice:	 rock ,	computer's choice:	 rock
+Player equal Computer
+
+[root@V20 PythonScripts]# python3  rock-clipper-cloth.py
+['rock', 'clipper', 'cloth'] --all_choice
+[['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']] --win_list
+rock <class 'str'> --computer type
+Tip:[0] rock
+[1] clipper
+[2] cloth
+Please input  number( 0|1|2):
+1 ---- <class 'int'> --index type
+clipper ---- <class 'str'> ---player type
+your choice:	 clipper ,	computer's choice:	 rock
+ Computer win and you lose!
+
+
+[root@V20 PythonScripts]# python3  rock-clipper-cloth.py
+['rock', 'clipper', 'cloth'] --all_choice
+[['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']] --win_list
+rock <class 'str'> --computer type
+Tip:[0] rock
+[1] clipper
+[2] cloth
+Please input  number( 0|1|2):
+2 ---- <class 'int'> --index type
+cloth ---- <class 'str'> ---player type
+your choice:	 cloth ,	computer's choice:	 rock
+ You as player WIN !
+[root@V20 PythonScripts]# 
+
+>>> print("your choice: %s,\tcomputer's choice: %s" % (player,computer))
+your choice: cloth,	computer's choice: clipper
+
+>>> a, b, c = 100, 200, 300   # 注意变量占位的使用 "%s...%s...%s" % (a,b,c,d,e,...)
+>>> print("A is %s,\tB is %s,\tC is %s" % (a, b, c))
+A is 100,	B is 200,	C is 300
+>>> # "%s......%s" % (variable1,variable2,variable3...)
+
+-----------------------------------
+tuple   英 [tʌpl]   美 [tʌpl]  
+         n.元组，数组
+
+元组的定义及操作
+•  可以认为元组是“静态”的列表
+•  元组一旦定义,不能改变
+
+>>> tuple_x = (10, True, 2.02, -3, False, [50,-10,True])
+
+>>> print(len(tuple_x))
+6
+>>> print(tuple_x)
+(10, True, 2.02, -3, False, [50, -10, True])
+
+>>> tuple_x[5]
+[50, -10, True]
+
+>>> tuple_x[-1]
+[50, -10, True]
+
+
+>>> if  (type(a)) !=  (type(c)):print("a not equal c")
+... 
+a not equal c
+>>> if  type(a) == type(b):print("a  equal b")
+... 
+a  equal b
+>>> print(type(a),type(b),type(c))
+<class 'int'> <class 'int'> <class 'str'>
+
+>>> if  type(a) !=  type(c):print("a not equal c")
+... 
+a not equal c
+>>> 
+
+
+[root@V20 PythonScripts]# vim  rock-clipper-cloth.py
+[root@V20 PythonScripts]# cat   rock-clipper-cloth.py
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+all_choice = [ 'rock', 'clipper', 'cloth' ]
+print(all_choice,end=' --all_choice\n')
+
+win_list = [['rock','clipper'],['clipper','cloth'],['cloth','rock']]
+print(win_list,end=' --win_list\n')
+
+prompt = """[0] rock
+[1] clipper
+[2] cloth
+Please input  number( 0|1|2):"""
+
+computer = random.choice(all_choice)
+print(computer,type(computer),end=' --computer type\n')
+
+index = int(getpass.getpass("Tip:"+prompt))
+print(index,type(index),sep = ' ---- ',end=' --index type\n')
+
+if index > 2 or index < 0:
+  print(index,type(index),sep = ' ---- ',end=' --index type\n')
+  print('\033[34;1mPossible input error!!!\033[0m')
+else:
+  player = all_choice[index]
+  print(player,type(player),sep = ' ---- ',end=' ---player type\n')
+
+  print("your choice: %s,\tcomputer's choice: %s" % (player,computer))
+
+  if [ player, computer ] in  win_list:
+    print('\033[32;1m You as player WIN !\033[0m')
+  elif [player,computer] not in win_list:
+    if player == computer:
+      print("\033[33;1mPlayer equal Computer\033[0m")
+    elif [computer,player] in win_list:
+      print("\033[31;1m Computer win and you lose!\033[0m")
+    else:
+      print('\033[34;1mPossible other errors!!!\033[0m')
+[root@V20 PythonScripts]# 
+
+>>> key = a
+>>> type(key)
+<class 'int'>
+>>> print(key)
+100
+
+>>> key = b
+>>> type(key)
+<class 'int'>
+>>> print(key)
+200
+
+>>> key = c
+>>> type(key)
+<class 'str'>
+>>> print(key)
+string
+
+>>> key = 'a'
+>>> print(key)
+a
+>>> type(key)
+<class 'str'>
+>>> 
+>>> if key in 'abc' and len(key) == 1 :print(key)
+... 
+a
+>>> key = 'c'
+>>> if key in 'abc' and len(key) == 1 :print(key)
+... 
+c
+>>> key = 'ab'
+>>> if key in 'abc' and len(key) == 2 :print(key)
+... 
+ab
+>>> 
+>>> if key not in 'abc' or len(key) != 1 :print(key)
+... 
+ab
+>>> if key not in 'abc' and len(key) != 1 :print(key)
+... 
+>>> if key in 'abc' and len(key) == 1 :print(key)
+... 
+>>> key
+'ab'
+
+[root@V20 PythonScripts]# vim   rock-clipper-cloth-elif.py
+[root@V20 PythonScripts]# cat   rock-clipper-cloth-elif.py
+
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+all_choice = [ 'rock', 'clipper', 'cloth' ]
+print(all_choice,end=' --all_choice\n')
+
+win_list = [['rock','clipper'],['clipper','cloth'],['cloth','rock']]
+print(win_list,end=' --win_list\n')
+
+playdirectory = { 'a': 'rock', 'b': 'clipper', 'c': 'cloth' }
+print(playdirectory, end= ' ---playdirectory\n')
+
+prompt = "[a] rock\n\
+[b] clipper\n\
+[c] cloth\n\
+Please input string( a | b | c ):"
+
+computer = random.choice(all_choice)
+print(computer,type(computer),end=' --computer type\n')
+
+key = getpass.getpass("Tip:"+prompt)
+print(key , type(key),sep = ' ---- ',end=' --key type\n')
+
+if key in 'abc' and len(key) == 1 :
+  player = playdirectory[key]
+  print(player,type(player),sep = ' ---- ',end=' ---player type\n')
+  print("your choice: %s,\tcomputer's choice: %s" % (player,computer))
+
+  if [ player, computer ] in  win_list:
+    print('\033[32;1m You as player WIN !\033[0m')
+  elif [player,computer] not in win_list:
+    if player == computer:
+      print("\033[33;1mPlayer equal Computer\033[0m")
+    elif [computer,player] in win_list:
+      print("\033[31;1m Computer win and you lose!\033[0m")
+else:
+  print(key,type(key),sep = ' ---- ',end=' --key type\n')
+  print('\033[34;1mPossible input error!!!\033[0m')
+
+[root@V20 PythonScripts]# 
+
+[root@V20 PythonScripts]# python3   rock-clipper-cloth-elif.py
+
+['rock', 'clipper', 'cloth'] --all_choice
+[['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']] --win_list
+{'a': 'rock', 'b': 'clipper', 'c': 'cloth'} ---playdirectory
+rock <class 'str'> --computer type
+Tip:[a] rock
+[b] clipper
+[c] cloth
+Please input string( a | b | c ):
+abc ---- <class 'str'> --key type
+abc ---- <class 'str'> --key type
+Possible input error!!!
+
+
+[root@V20 PythonScripts]# python3   rock-clipper-cloth-elif.py
+
+['rock', 'clipper', 'cloth'] --all_choice
+[['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']] --win_list
+{'a': 'rock', 'b': 'clipper', 'c': 'cloth'} ---playdirectory
+clipper <class 'str'> --computer type
+Tip:[a] rock
+[b] clipper
+[c] cloth
+Please input string( a | b | c ):
+12 ---- <class 'str'> --key type
+12 ---- <class 'str'> --key type
+Possible input error!!!
+
+
+[root@V20 PythonScripts]# python3   rock-clipper-cloth-elif.py
+
+['rock', 'clipper', 'cloth'] --all_choice
+[['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']] --win_list
+{'a': 'rock', 'b': 'clipper', 'c': 'cloth'} ---playdirectory
+cloth <class 'str'> --computer type
+Tip:[a] rock
+[b] clipper
+[c] cloth
+Please input string( a | b | c ):
+a ---- <class 'str'> --key type
+rock ---- <class 'str'> ---player type
+your choice: rock,	computer's choice: cloth
+ Computer win and you lose!
+
+======================================
+
+suite     英 [swi:t]   美 [swit]  
+          n.[计]（软件的）套件;（房间，器具等）一套，一副;[乐]组曲;随从
+
+/var/git/python/PyScript ----- PyCharm IDE 图形软件编辑器
+快捷键   选中要编辑的区域  Tab键  向右边 整体移动空格
+         选中要编辑的区域  Tab键  + Shift键  向左边 整体移动空格
+------------------------------------------
+
+[root@V20 PythonScripts]# python3
+Python 3.6.4 (default, Mar 19 2019, 09:53:24) 
+..........
+>>> result,counter = 0 , 1
+>>> print(result,counter,sep=' --- ')
+0 --- 1
+>>> 
+>>> type(result)
+<class 'int'>
+>>> 
+>>> type(counter)
+<class 'int'>
+>>> 
+>>> while  counter <= 3:
+...   result += counter
+...   print(result,counter,sep= ' --- ',end=' --counter\n')
+...   counter += 1
+...   print(counter,sep= ' ~~~  ',end=' ~~counter\n')
+...   print("Result is: %s,\t-------------Counter  is: %s" % (result,counter))
+...   print("-------------------------")
+... 
+1 --- 1 --counter
+2 ~~counter
+Result is: 1,	-------------Counter  is: 2
+-------------------------
+3 --- 2 --counter
+3 ~~counter
+Result is: 3,	-------------Counter  is: 3
+-------------------------
+6 --- 3 --counter
+4 ~~counter
+Result is: 6,	-------------Counter  is: 4
+-------------------------
+>>> print("Result is: "+str(result))
+Result is: 6
+>>> 
+
+--------------------------------------------------
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+result,counter = 0 , 1
+print(result,counter,sep=' --- ')
+
+type(result)
+
+type(counter)
+
+while  counter <= 3:
+  result += counter
+  print(result,counter,sep= ' --- ',end=' --counter\n')
+  counter += 1
+  print(counter,sep= ' ~~~  ',end=' ~~counter\n')
+  print("Result is: %s,\t-------------Counter  is: %s" % (result,counter))
+  print("-------------------------")
+
+print("Result is: "+str(result))
+-------------------------------------------------
+
+-------------------
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+num = random.randint(1,4)
+runboolean = True
+
+print(type(num),end=' --num type\n')
+print("num is\t" + str(num))
+
+while runboolean:
+  result = int(getpass.getpass('Guess the number: '))
+
+  if result > num:
+    print('Too Bigger')
+  elif result < num:
+    print('Too Smaller')
+  else:
+    print("Guess Rightly!")
+    runboolean = False
+    print(runboolean,type(runboolean))
+
+print("num is\t" + str(num))
+
+[root@V20 PythonScripts]# cat    guess-while.py
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+num = random.randint(1,4)
+runboolean = True
+
+print(type(num),end=' --num type\n')
+print("num is\t" + str(num))
+
+while runboolean:
+  result = int(getpass.getpass('Guess the number: '))
+
+  if result > num:
+    print('Too Bigger')
+  elif result < num:
+    print('Too Smaller')
+  else:
+    print("Guess Rightly!")
+    runboolean = False
+    print(runboolean,type(runboolean))
+
+print("num is\t" + str(num))
+[root@V20 PythonScripts]# 
+
+ -------------  #注意如果作为模块文件,命名有严格规范,带有短横杠 " - " 的文件名会有语法错误
+
+[root@V20 PythonScripts]# python3  guess-while.py  
+<class 'int'> --num type
+num is	4
+Guess the number: 
+Too Smaller
+Guess the number: 
+Guess Rightly!
+False <class 'bool'>
+num is	4
+[root@V20 PythonScripts]# 
+
+==============================================
+
+[root@V21 PythonScripts]# pwd
+/root/PythonScripts
+[root@V21 PythonScripts]# ls  -a  /root/PythonScripts/
+.  ..
+[root@V21 PythonScripts]# python3  --version
+Python 3.6.4
+
+[root@V21 PythonScripts]# vim  guess_while.py
+[root@V21 PythonScripts]# vim   whiletest.py 
+
+[root@V21 PythonScripts]# cat    whiletest.py
+#!/usr/bin/env  python3
+import  guess_while    ## 引入自定义的模块(注意把文件名的后缀名 .py 去除)
+                              #注意文件名不能带有短横杠 " - "
+guess_while.guess()     
+
+----------------------------------------------- #注意这时候没有文件夹__pycache__/ 
+
+[root@V21 PythonScripts]# ls  -a  /root/PythonScripts/  
+.  ..  guess_while.py  whiletest.py
+
+[root@V21 PythonScripts]# cat    /root/PythonScripts/guess_while.py 
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+def  guess():    #定义自定义模块的方法
+  num = random.randint(1,4)
+  runboolean = True
+  print(type(num),end=' --num type\n')
+  print("num is\t" + str(num))
+
+  while runboolean:
+    result = int(getpass.getpass('Guess the number: '))
+    if result > num:
+      print('Too Bigger')
+    elif result < num:
+      print('Too Smaller')
+    else:
+      print("Guess Rightly!")
+      runboolean = False
+      print(runboolean,type(runboolean))
+
+  print("num is\t" + str(num))
+[root@V21 PythonScripts]# 
+
+quote   英 [kwəʊt]   美 [kwoʊt]  
+        vt.& vi.引述，引用
+        vt. 报价;引述
+        vi.引用
+        n.报价;引用;引号
+
+--------------------------------------------- #注意这时候没有文件夹__pycache__/ 
+
+[root@V21 PythonScripts]# ls  -a
+.  ..  guess_while.py  whiletest.py
+
+[root@V21 PythonScripts]# python3  whiletest.py  #运行脚本
+
+<class 'int'> --num type
+num is	2
+Guess the number: 
+Too Smaller
+Guess the number: 
+Too Bigger
+Guess the number: 
+Guess Rightly!
+False <class 'bool'>
+num is	2
+
+[root@V21 PythonScripts]# cat    whiletest.py
+#!/usr/bin/env  python3
+import  guess_while
+guess_while.guess()
+
+---------------------------- #注意 运行脚本 之后 自动新生成了 文件夹__pycache__/ 
+
+[root@V21 PythonScripts]# ls  -a
+.  ..  guess_while.py  __pycache__  whiletest.py
+
+[root@V21 PythonScripts]# ls  -a   __pycache__/
+.  ..  guess_while.cpython-36.pyc
+
+[root@V21 PythonScripts]# file   __pycache__/guess_while.cpython-36.pyc 
+__pycache__/guess_while.cpython-36.pyc: data
+
+[root@V21 PythonScripts]# ll    __pycache__/guess_while.cpython-36.pyc
+-rw-r--r-- 1 root root 590 3月  22 20:27 __pycache__/guess_while.cpython-36.pyc
+
+================================
+
+>>> a, b = 10, 22
+>>> type(a)
+<class 'int'>
+>>> type(b)
+<class 'int'>
+>>> print(a,b)
+10 22
+
+>>> a, b = b, a
+>>> print(a,b)
+22 10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[root@V21 ~]# vim  guessnm.py
+[root@V21 ~]# cat   guessnm.py
+
+#!/usr/local/bin/python3    #python3 解释器
+import  random
+num = random.randint(1,10)
+result = int(input("guess the number: "))  #把 字符串类型转换成 整数类型
+
+print("result is input\t",result,"\tresult")
+print("result is",type(result),sep='~~---~~~')
+
+print("num is  random\t"+ str(num) +"\tnum")
+
+--------------------------  #sep间隔符号,用end来自定义结束符号
+
+print("num is ",type(num),sep="-----&",end='End\n')
+
+if  result > num:
+  print("bigger")
+elif result == num:
+  print('equal--ok')
+elif result < num:
+  print('smaller')
+else:
+  print("Input Error!")
+
+[root@V21 ~]# python3  guessnm.py
+
+guess the number: 5
+result is input	 5 	result
+result is~~---~~~<class 'int'>
+num is  random	4	num
+num is -----&<class 'int'>End
+bigger
+
+[root@V21 ~]# vim   loginpython.py
+[root@V21 ~]# cat  loginpython.py
+
+#!/usr/local/bin/python3    #python3 解释器
+import  getpass
+x = '';y = ''
+def  loginffa(user,passwd):
+  user = input('username: ')
+  passwd = getpass.getpass('password: ')
+  if user ==  'peri' and  passwd == '123':
+    print("Successfully","username:",user,"password:",passwd,sep='---')
+  else:
+    print("Login incorrectly")
+loginffa(x,y)
+
+[root@V21 ~]# python3  loginpython.py
+username: peri
+password: 
+Successfully---username:---peri---password:---123
+
+[root@V21 ~]# mkdir  PythonScripts
+[root@V21 ~]# cd  PythonScripts/
+[root@V21 PythonScripts]# 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[root@room9pc01 ~]# cd  /var/git/python/PyScript/
+[root@room9pc01 PyScript]# ls
+hello.py  importmode.py  login.py  __pycache__  venv
+[root@room9pc01 PyScript]# ls   -a
+.  ..  .git  hello.py  .idea  importmode.py  login.py  __pycache__  venv
+
+
+
+

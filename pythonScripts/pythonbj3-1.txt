@@ -1,0 +1,306 @@
+
+
+[root@V20 PythonScripts]# head  -4  guess_while.py 
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+[root@V20 PythonScripts]# cat   whiletest.py 
+#!/usr/bin/env  python3
+import  guess_while
+guess_while.guess()
+[root@V20 PythonScripts]# pwd
+/root/PythonScripts
+
+[root@V20 PythonScripts]# python3  whiletest.py
+<class 'int'> --num type
+num is	4
+Guess the number: 
+Too Smaller
+Guess the number: 
+Too Bigger
+Guess the number: 
+Guess Rightly!
+False <class 'bool'>
+num is	4
+
+[root@V20 PythonScripts]# cat  guess_while.py 
+
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+def  guess():
+  num = random.randint(1,4)
+  runboolean = True
+  print(type(num),end=' --num type\n')
+  print("num is\t" + str(num))
+
+  while runboolean:
+    result = int(getpass.getpass('Guess the number: '))
+    if result > num:
+      print('Too Bigger')
+    elif result < num:
+      print('Too Smaller')
+    else:
+      print("Guess Rightly!")
+      runboolean = False
+      print(runboolean,type(runboolean))
+
+  print("num is\t" + str(num))
+
+[root@V20 PythonScripts]# scp  guess_while.py  whiletest.py  root@192.168.0.254:/var/git/pythonScripts
+root@192.168.0.254's password: 
+guess_while.py                                100%  500   576.7KB/s   00:00    
+whiletest.py                                  100%   64    63.6KB/s   00:00 
+--------------------------------------------------------------------
+
+
+
+[root@V20 PythonScripts]# vim  rock-clipper-cloth.py 
+[root@V20 PythonScripts]# cat   rock-clipper-cloth.py
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+all_choice = [ 'rock', 'clipper', 'cloth' ]
+print(all_choice,end=' --all_choice\n')
+
+win_list = [['rock','clipper'],['clipper','cloth'],['cloth','rock']]
+print(win_list,end=' --win_list\n')
+
+prompt = """[0] rock
+[1] clipper
+[2] cloth
+Please input  number( 0|1|2):"""
+
+computer = random.choice(all_choice)
+print(computer,type(computer),end=' --computer type\n')
+
+index = int(getpass.getpass("Tip:"+prompt))
+print(index,type(index),sep = ' ---- ',end=' --index type\n')
+
+if index > 2 or index < 0:
+  print(index,type(index),sep = ' ---- ',end=' --index type\n')
+  print('\033[34;1mPossible input error!!!\033[0m')
+else:
+  player = all_choice[index]
+  print(player,type(player),sep = ' ---- ',end=' ---player type\n')
+  print("your choice: %s,\tcomputer's choice: %s" % (player,computer))
+
+  if [ player, computer ] in  win_list:
+    print('\033[32;1m You as player WIN !\033[0m')
+  elif [player,computer] not in win_list:
+    if player == computer:
+      print("\033[33;1mPlayer equal Computer\033[0m")
+    elif [computer,player] in win_list:
+      print("\033[31;1m Computer win and you lose!\033[0m")
+    else:
+      print('\033[34;1mPossible other errors!!!\033[0m')
+
+
+[root@V20 PythonScripts]# python3  rock-clipper-cloth.py
+
+['rock', 'clipper', 'cloth'] --all_choice
+[['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']] --win_list
+clipper <class 'str'> --computer type
+Tip:[0] rock
+[1] clipper
+[2] cloth
+Please input  number( 0|1|2):
+-3 ---- <class 'int'> --index type
+-3 ---- <class 'int'> --index type
+Possible input error!!!
+
+[root@V20 PythonScripts]# python3  rock-clipper-cloth.py
+
+['rock', 'clipper', 'cloth'] --all_choice
+[['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']] --win_list
+clipper <class 'str'> --computer type
+Tip:[0] rock
+[1] clipper
+[2] cloth
+Please input  number( 0|1|2):
+3 ---- <class 'int'> --index type
+3 ---- <class 'int'> --index type
+Possible input error!!!
+
+
+[root@V20 PythonScripts]# python3  rock-clipper-cloth.py
+
+['rock', 'clipper', 'cloth'] --all_choice
+[['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']] --win_list
+cloth <class 'str'> --computer type
+Tip:[0] rock
+[1] clipper
+[2] cloth
+Please input  number( 0|1|2):
+1 ---- <class 'int'> --index type
+clipper ---- <class 'str'> ---player type
+your choice: clipper,	computer's choice: cloth
+ You as player WIN !
+
+[root@V20 PythonScripts]# python3  rock-clipper-cloth.py
+['rock', 'clipper', 'cloth'] --all_choice
+[['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']] --win_list
+cloth <class 'str'> --computer type
+Tip:[0] rock
+[1] clipper
+[2] cloth
+Please input  number( 0|1|2):
+2 ---- <class 'int'> --index type
+cloth ---- <class 'str'> ---player type
+your choice: cloth,	computer's choice: cloth
+Player equal Computer
+
+
+[root@V20 PythonScripts]# python3  rock-clipper-cloth.py
+
+['rock', 'clipper', 'cloth'] --all_choice
+[['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']] --win_list
+clipper <class 'str'> --computer type
+Tip:[0] rock
+[1] clipper
+[2] cloth
+Please input  number( 0|1|2):
+2 ---- <class 'int'> --index type
+cloth ---- <class 'str'> ---player type
+your choice: cloth,	computer's choice: clipper
+ Computer win and you lose!
+
+[root@V20 PythonScripts]# ==================================
+
+[root@V20 PythonScripts]# vim   rock-clipper-cloth-elif.py 
+[root@V20 PythonScripts]# cat   rock-clipper-cloth-elif.py
+#!/usr/bin/env  python3
+import  random
+import  getpass
+
+all_choice = [ 'rock', 'clipper', 'cloth' ]
+print(all_choice,end=' --all_choice\n')
+
+win_list = [['rock','clipper'],['clipper','cloth'],['cloth','rock']]
+print(win_list,end=' --win_list\n')
+
+playdirectory = { 'a': 'rock', 'b': 'clipper', 'c': 'cloth' }
+print(playdirectory, end= ' ---playdirectory\n')
+
+prompt = "[a] rock\n\
+[b] clipper\n\
+[c] cloth\n\
+Please input string( a | b | c ):"
+
+computer = random.choice(all_choice)
+print(computer,type(computer),end=' --computer type\n')
+
+key = getpass.getpass("Tip:"+prompt)
+print(key , type(key),sep = ' ---- ',end=' --key type\n')
+
+if key in 'abc' and len(key) == 1 :
+  player = playdirectory[key]
+  print(player,type(player),sep = ' ---- ',end=' ---player type\n')
+  print("your choice: %s,\tcomputer's choice: %s" % (player,computer))
+
+  if [ player, computer ] in  win_list:
+    print('\033[32;1m You as player WIN !\033[0m')
+  elif [player,computer] not in win_list:
+    if player == computer:
+      print("\033[33;1mPlayer equal Computer\033[0m")
+    elif [computer,player] in win_list:
+      print("\033[31;1m Computer win and you lose!\033[0m")
+else:
+  print(key,type(key),sep = ' ---- ',end=' --key type\n')
+  print('\033[34;1mPossible input error!!!\033[0m')
+
+[root@V20 PythonScripts]# ======================================
+
+[root@V20 PythonScripts]# python3   rock-clipper-cloth-elif.py
+
+['rock', 'clipper', 'cloth'] --all_choice
+[['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']] --win_list
+{'a': 'rock', 'b': 'clipper', 'c': 'cloth'} ---playdirectory
+rock <class 'str'> --computer type
+Tip:[a] rock
+[b] clipper
+[c] cloth
+Please input string( a | b | c ):
+1 ---- <class 'str'> --key type
+1 ---- <class 'str'> --key type
+Possible input error!!!
+
+[root@V20 PythonScripts]# python3   rock-clipper-cloth-elif.py
+['rock', 'clipper', 'cloth'] --all_choice
+[['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']] --win_list
+{'a': 'rock', 'b': 'clipper', 'c': 'cloth'} ---playdirectory
+cloth <class 'str'> --computer type
+Tip:[a] rock
+[b] clipper
+[c] cloth
+Please input string( a | b | c ):
+a ---- <class 'str'> --key type
+rock ---- <class 'str'> ---player type
+your choice: rock,	computer's choice: cloth
+ Computer win and you lose!
+
+[root@V20 PythonScripts]# python3   rock-clipper-cloth-elif.py
+['rock', 'clipper', 'cloth'] --all_choice
+[['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']] --win_list
+{'a': 'rock', 'b': 'clipper', 'c': 'cloth'} ---playdirectory
+cloth <class 'str'> --computer type
+Tip:[a] rock
+[b] clipper
+[c] cloth
+Please input string( a | b | c ):
+b ---- <class 'str'> --key type
+clipper ---- <class 'str'> ---player type
+your choice: clipper,	computer's choice: cloth
+ You as player WIN !
+
+[root@V20 PythonScripts]# python3   rock-clipper-cloth-elif.py
+['rock', 'clipper', 'cloth'] --all_choice
+[['rock', 'clipper'], ['clipper', 'cloth'], ['cloth', 'rock']] --win_list
+{'a': 'rock', 'b': 'clipper', 'c': 'cloth'} ---playdirectory
+cloth <class 'str'> --computer type
+Tip:[a] rock
+[b] clipper
+[c] cloth
+Please input string( a | b | c ):
+c ---- <class 'str'> --key type
+cloth ---- <class 'str'> ---player type
+your choice: cloth,	computer's choice: cloth
+Player equal Computer
+
+[root@V20 PythonScripts]# 
+[root@V20 PythonScripts]# scp  rock-clipper-cloth.py   rock-clipper-cloth-elif.py   root@192.168.0.254:/var/git/pythonScripts
+root@192.168.0.254's password: 
+...............
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

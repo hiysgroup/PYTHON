@@ -1,0 +1,1300 @@
+
+
+
+echo  "NAME=\"eth2\"
+DEVICE=\"eth2\"
+ONBOOT=yes
+NM_CONTROLLED=\"no\"
+TYPE=Ethernet
+IPV6INIT=no
+IPV4_FAILURE_FATAL=\"no\"
+BOOTPROTO=\"static\"
+IPADDR=\"192.168.2.${ip}\"
+NETMASK=\"255.255.255.0\"
+GATEWAY=\"192.168.0.254\""  > /etc/sysconfig/network-scripts/ifcfg-eth2
+
+sed  -i  "7c SELINUX=disabled"  /etc/selinux/config
+systemctl   restart  network
+
+
+[root@room9pc01 ~]# ssh  -X 192.168.0.20
+root@192.168.0.20's password: 
+Last login: Wed Mar 20 17:16:00 2019 from 192.168.0.254
+[root@V20 ~]# free  -m
+              total        used        free      shared  buff/cache   available
+Mem:           1444         237         900           9         306        1037
+Swap:          2047           0        2047
+[root@V20 ~]# python3
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+>>> print('tom  said: "hello world ! !"')  # 注意单 双引号的使用
+tom  said: "hello world ! !"
+
+>>> print("Tom's  pet  is  a  cat")    # 注意单 双引号的使用
+Tom's  pet  is  a  cat
+
+>>> words = "hello\tgreet\nnice"   # # 注意 \t  \n 转义符号
+>>> print(words)
+hello	greet
+nice
+>>> new_words = '''hello  # # 注意 ''' 3个单引号 ''' 的使用,\t  \n 转义符号
+... greet
+... welcome   nice'''
+>>> print(new_words)
+hello
+greet
+welcome   nice
+>>> new_words = '''hello   # # 注意 ''' 3个单引号 ''' 的使用,\t  \n 转义符号
+... greet\tnice
+... welcome'''
+>>> print(new_words)
+hello
+greet	nice
+welcome
+>>> 
+字符串切片
+•  使用索引运算符 [ ] 和 切片运算符 [ : ] 可得到 子字符串
+•  第一个字符的索引是0,最后一个字符的索引是  -1 
+•  子字符串 包含切片中的 起始下标, 但 不包含 结束下标
+
+>>> pystring = 'python678'
+>>> pystring[0]  #第一个字符的索引是0
+'p'
+>>> print(pystring[0])
+p
+>>> pystring[1]
+'y'
+
+>>> pystring = "a123efg789"
+>>> pystring[0]
+'a'
+>>> print(pystring[0])   #第一个字符的索引是0
+a
+>>> pystring[9]
+'9'
+>>> pystring[-1]  #最后一个字符的索引 -1
+'9'
+>>> pystring[-2]  #最后 第 2 个字符的索引 -2 
+'8'
+>>> pystring[4]
+'e'
+>>> pystring[0:4]  #从第一个字符的索引0 到 索引是4 的子字符串
+'a123'   #子字符串 包含切片中的 起始下标0, 但 不包含 结束下标4
+>>> pystring[4:3]  #不能按照 从大到小的索引顺序 切 字符串
+''
+>>> pystring[4:9] 
+'efg78'   #子字符串 包含切片中的 起始下标4 , 但 不包含 结束下标9
+>>> pystring[4:10]
+'efg789'
+>>> pystring[4:]  #从第5个字符的索引 4 到 字符串末尾 的子字符串
+'efg789'
+>>> 
+
+字符串连接操作
+•  使用+号可以将多个字符串拼接在一起
+•  使用*号可以将一个字符串重复多次
+
+>>> words =  "nice\tgreet***\n"
+>>> print(words)
+nice	greet***
+
+>>> print(words * 3)
+nice	greet***
+nice	greet***
+nice	greet***
+
+>>> 
+>>> words = 'xixixix +\    # 注意 '  +\ ' 的使用区别
+... hehehe +\
+... haha***'
+>>> print(words *2)
+xixixix +hehehe +haha***xixixix +hehehe +haha***
+
+>>> words = 'xixixix  \  # 注意 ' 单引号 ' 的使用, 转义符号 \
+... hahaha  haha\
+... hehe'
+>>> print(words *2)
+xixixix  hahaha  hahahehexixixix  hahaha  hahahehe
+
+
+>>> words = 'xixixi' +\   # 注意 '  +\ ' 的使用区别,注意 单 双 引号 的位置
+... "12345"  +\      #符号 " +\" 表示续行
+... "cccc****"
+>>> print(words *2)
+xixixi12345cccc****xixixi12345cccc****
+
+>>> words = 'a123efg78jk'
+>>> print(words[0])
+a
+>>> print(words[-1])
+k
+>>> print(len(words))   #len()方法取出字符串的长度
+11
+>>> print(words[10])
+k
+>>> print(words[3:7])
+3efg
+>>> print(words[4:])
+efg78jk
+>>> print(words[4:6])
+ef            #子字符串 包含切片中的 起始下标4 , 但 不包含 结束下标6
+>>> print(words[4:5])
+e
+
+>>> print(words[:3])  #不写起始下标,默认从索引 0 开始
+a12
+>>> print(words[:])  #从开头至结尾全部打印
+a123efg78jk
+>>> print(words[::2]) #从开头至结尾全部按照 布长值 打印,步长是 2 个字符长度
+a2eg8k
+
+>>> print(words[::-2]) # 从字符串的最右边向左 开始切取 步长是 2 个字符长度的子字符串
+k8ge2a
+>>> print(words[::-1])  # 从字符串的最右边向左 开始切取 步长是 1 个字符长度的子字符串
+kj87gfe321a
+>>> print(words)
+a123efg78jk
+
+>>> "a" in words  #使用in或not in判断成员关系
+True
+>>> print("a" in words) 
+True
+>>> print(True + 20)
+21
+>>> print(True * 20)
+20
+>>> print(False * 20)
+0
+>>> print(False)
+False
+>>> False
+False
+>>> False + 20
+20
+
+>>> print(words)
+a123efg78jk
+>>> 'efg' in  words
+True
+>>> 'bc'  in  words  #使用in或not in判断成员关系
+False
+>>> 'bc' not  in  words
+True
+
+>>> 'eg'  in  words  #字符串必须是连续出现的才会输出结果True
+False
+>>> "eg" not in words
+True
+
+>>> a = input('number: ')
+number: 100      #手动输入 数字 100
+>>> print(a)     #打印变量 a
+100
+
+>>> print(int(a) + 12)  # 将a转成整数后和12相加，再打印出出结果
+112
+                        # 字符串可以使用 " + " 进行拼接
+>>> print(a + str(12))   # 将12 转成字符串后和a拼接，再打印出出结果
+10012
+>>> print('Hello', 'World')
+Hello World       # # print语句各项之间默认用空格分隔
+
+>>> print('Hello', 'world', sep='***')
+Hello***world   # print语句各项之间也可以自定义分隔符(例如 '***' )
+
+    # print语句默认最后会加入一个回车\n，可以用end来自定义结束(例如 ' AAA ' )
+>>> print('Hello World', end='AAA')
+Hello WorldAAA>>> 
+
+>>> print('Hello World', end='AAA\n')
+Hello WorldAAA
+>>> 
+
+>>> print('Hello World', end='\n')  # print语句默认最后会加入一个回车\n
+Hello World
+
+>>> type(10)   # Python 是动态类型的语言,变量类型由它 的值 决定
+<class 'int'>  # 值 10 是 整数类型
+>>> type('abc') 
+<class 'str'>   # 值 abc 是 字符串类型
+
+>>> alist = [ 10, 2.22, 'bob', "alice", True, False, -3.33, [100, -100, -0.8] ]
+>>> print(alist)
+[10, 2.22, 'bob', 'alice', True, False, -3.33, [100, -100, -0.8]]
+>>> print(len(alist))
+8
+>>> print(10  in alist)
+True
+>>> print(100  in alist)
+False
+>>> print(100 not  in alist)
+True
+>>> print(100  in alist[7])
+True
+>>> print(alist[7])
+[100, -100, -0.8]
+>>> 
+可以将列表当成普通的“数组”,它能保存任意数量
+任意类型的python对象
+•  像字符串一样,列表也支持下标和切片操作
+•  列表中的项目可以改变
+
+>>> print(alist)
+[10, 2.22, 'bob', 'alice', True, False, -3.33, [100, -100, -0.8]]
+
+>>> alist[2] * 3   #使用*号可以将一个字符串重复多次
+'bobbobbob'
+>>> alist[2]
+'bob'
+>>> alist[2] *= 3   #列表中的项目可以改变,重新赋值
+>>> print(alist)
+[10, 2.22, 'bobbobbob', 'alice', True, False, -3.33, [100, -100, -0.8]]
+
+>>> alist[1] += 100  #列表中的项目可以改变,重新赋值
+>>> print(alist)
+[10, 102.22, 'bobbobbob', 'alice', True, False, -3.33, [100, -100, -0.8]]
+>>> alist[1] /= 100
+>>> print(alist)
+[10, 1.0222, 'bobbobbob', 'alice', True, False, -3.33, [100, -100, -0.8]]
+>>> alist[1] *= 100  #列表中的项目可以改变,重新赋值
+>>> print(alist)
+[10, 102.22, 'bobbobbob', 'alice', True, False, -3.33, [100, -100, -0.8]]
+>>> 
+>>> print(alist[-1])
+[100, -100, -0.8]
+>>> print(alist[1])
+102.22
+>>> print(alist[0])
+10
+>>> print(alist[7])
+[100, -100, -0.8]
+>>> print(alist[7][1:])
+[-100, -0.8]
+
+>>> alist
+[10, 102.22, 'bobbobbob', 'alice', True, False, -3.33, [100, -100, -0.8]]
+
+使用append方法向列表中追加元素
+>>> alist.append(2)  #向列表中最后的元素位置之后 追加元素 数字 2
+>>> alist
+[10, 102.22, 'bobbobbob', 'alice', True, False, -3.33, [100, -100, -0.8], 2]
+
+>>> type(alist)
+<class 'list'>
+
+>>> type(alist[0])
+<class 'int'>
+
+>>> type(alist[1])
+<class 'float'>
+
+>>> print(type(alist[-1]))
+<class 'int'>
+
+>>> print(alist[-1])
+2
+
+>>> print(len(alist))
+9
+
+>>> print(alist[8])
+2
+
+>>> print(alist)
+[10, 102.22, 'bobbobbob', 'alice', True, False, -3.33, [100, -100, -0.8], 2]
+>>> print(type(alist[-2][0]))
+<class 'int'>
+>>> print(alist[-2][0])
+100
+
+>>> print(alist[-3])
+-3.33
+>>> print(type(alist[-3]))
+<class 'float'>
+
+>>> print(alist[-2][1])
+-100
+>>> print(type(alist[-2][1]))
+<class 'int'>
+
+>>> print(alist + [1000])  #必须是同一类型的列表类型,才能列表拼加
+[10, 102.22, 'bobbobbob', 'alice', True, False, -3.33, [100, -100, -0.8], 2, 1000]
+
+>>> print(alist)
+[10, 102.22, 'bobbobbob', 'alice', True, False, -3.33, [100, -100, -0.8], 2]
+
+>>> alist + [1000]
+[10, 102.22, 'bobbobbob', 'alice', True, False, -3.33, [100, -100, -0.8], 2, 1000]
+>>> print(alist)
+[10, 102.22, 'bobbobbob', 'alice', True, False, -3.33, [100, -100, -0.8], 2]
+
+>>> alist.
+alist.append(   alist.count(    alist.insert(   alist.reverse(  
+alist.clear(    alist.extend(   alist.pop(      alist.sort(     
+alist.copy(     alist.index(    alist.remove(  
+
+>>> alist
+[10, 102.22, 'bobbobbob', 'alice', True, False, -3.33, [100, -100, -0.8], 2]
+
+>>> print(type(alist[-2]))
+<class 'list'>     # 列表类型
+
+>>> print(alist[-2])
+[100, -100, -0.8]
+
+>>> print(type(alist))
+<class 'list'>       # 列表类型
+
+>>> print(alist[4])
+True
+>>> print(type(alist[4]))
+<class 'bool'>    #布尔值的类型
+>>> alist[4] =  1    #改变为 整数类型的数字
+>>> print(type(alist[4]))
+<class 'int'>    #整数类型
+
+>>> alist
+[10, 102.22, 'bobbobbob', 'alice', 1, False, -3.33, [100, -100, -0.8], 2]
+
+>>> len(alist)
+9
+>>> alist.remove(2)  #删除 整数类型的数字是 2 的元素
+>>> len(alist)
+8
+>>> alist.remove(alist[2]) #删除 列表数组 下标 是 2  的元素
+>>> len(alist)
+7
+>>> alist
+[10, 102.22, 'alice', 1, False, -3.33, [100, -100, -0.8]]
+
+>>> alist[-1]
+[100, -100, -0.8]
+>>> alist[-1] = 1000  #列表中的项目可以改变,重新赋值
+>>> alist
+[10, 102.22, 'alice', 1, False, -3.33, 1000]
+
+-----------------------------------
+tuple   英 [tʌpl]   美 [tʌpl]  
+         n.元组，数组
+
+元组的定义及操作
+•  可以认为元组是“静态”的列表
+•  元组一旦定义,不能改变
+
+>>> tuple_x = (10, True, 2.02, -3, False, [50,-10,True])
+
+>>> print(len(tuple_x))
+6
+>>> print(tuple_x)
+(10, True, 2.02, -3, False, [50, -10, True])
+
+>>> print(False  in  tuple_x)
+True
+>>> print(False  in  tuple_x[-1])
+False
+>>> print(False  not  in  tuple_x[-1])
+True
+
+>>> tuple_x[5]
+[50, -10, True]
+
+>>> tuple_x[-1]
+[50, -10, True]
+
+可以认为元组是“静态”的列表
+•  元组一旦定义,不能改变
+
+>>> tuple_x[-1] = [5000]   # 元组不支持元素的改变
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'tuple' object does not support item assignment
+   类型错误：“tuple”对象不支持项分配
+
+>>> if not ():
+...   print('可以认为元组是"静态"的列表,空元组也是 False')
+... 
+可以认为元组是"静态"的列表,空元组也是 False
+>>> 
+
+>>> if not {}:
+...   print("字典没有顺序的说法,空字典 也是 False")
+... 
+字典没有顺序的说法,空字典 也是 False
+>>> 
+
+directory   英 [dəˈrektəri]  美 [dɪˈrɛktəri, daɪ-]  
+             n. 人名地址录，（电话）号码簿;（计算机文件或程序的）目录
+             adj. 指导的，指挥的;咨询的;管理的
+
+字典的定义及操作
+•  字典是由键-值(key-value)对构成的映射数据类型
+   字典没有顺序的说法
+•  通过键取值,不支持下标操作
+
+>>> directory = { 'name': 'lucy', "age": 18, "man": False }
+>>> print(directory)
+{'name': 'lucy', 'age': 18, 'man': False}
+
+>>> print(len(directory))
+3
+>>> print(directory[2])   #通过键取值,不支持下标操作
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 2
+
+>>> print(directory['man'])  #通过键取值
+False
+>>> print(type(directory['man']))
+<class 'bool'>
+>>> 
+>>> print(type(directory['age']))
+<class 'int'>
+>>> print(directory['age'])   #通过键取值
+18
+
+>>> print( 'lucy' in  directory)  #注意只能通过键 的名字'name'来判断是否存在这个键名
+False
+>>> print( 'name' in  directory)
+True
+>>> directory['age']= 38   #赋值 (若存在原有的键,则给旧的键 age 赋予新值 38)
+>>> print(directory)
+{'name': 'lucy', 'age': 38, 'man': False}
+
+>>> directory["hobby"] =  98.8  #赋值 (若 不存在同名的键,等于新增加新键hobby并赋予新值98.8)
+                                 # 字典没有顺序的说法
+>>> print(directory)
+{'name': 'lucy', 'age': 38, 'man': False, 'hobby': 98.8}
+
+>>> type(directory['hobby'])
+<class 'float'>
+
+>>> id(directory) # 证明 : 字典是 可变类型(因为内存id值 没有 随着 元素值的改变而改变)
+139734845247776      # 内存id值 没有 改变,保持不变
+
+>>> directory["hobby"] =  'girl'  #改变成字符串类型的值 
+
+>>> print(type(directory["hobby"]))
+<class 'str'>
+>>> directory
+{'name': 'lucy', 'age': 38, 'man': False, 'hobby': 'girl'}
+
+>>> id(directory)  # 证明 : 字典是 可变类型(因为内存id值 没有 随着 元素值的改变而改变)
+139734845247776          # 内存id值 没有 改变,保持不变
+
+
+>>> string = 'zifu'
+>>> id(string)  # 证明 : 字符串是 不 可变类型(因为内存id值 随着 元素值的改变而改变)
+139734716156256
+
+>>> string = 'zifucn'
+
+>>> id(string)
+139734716156480   # 内存id值 发生改变
+
+define    英 [dɪˈfaɪn]   美 [dɪˈfaɪn]  
+          vt.规定;使明确;精确地解释;画出…的线条
+          vi.（给词、短语等）下定义，构成释义
+
+[root@room9pc01 PyScript]# cat  importmode.py  && echo  #自定义的模块文件
+modename = "hello  world hai"   #左边是 全局变量名 modename ,右边是 值
+def  pstart():
+    print('*' * 10)  # 使用*号 将一个字符串 '*" 重复 10 次
+
+/********
+字符串连接操作
+•  使用+号可以将多个字符串拼接在一起
+•  使用*号可以将一个字符串重复多次
+*******/
+------------------------------------------------------
+>>> import   importmode  # #引入自定义的模块(注意把文件名的后缀名 .py 去除)
+
+>>> importmode.
+importmode.modename  importmode.pstart(   
+
+>>> importmode.modename   #执行
+'hello  world hai'
+>>> importmode.pstart()
+**********
+
+---------------------------------
+# 证明 : 列表 是 可变类型(因为内存id值 没有 随着 元素值的改变而改变)
+   # 内存id值 没有 改变,保持不变
+
+>>> alist = [ 'aa', True, 22, 0.33 ]
+>>> alist
+['aa', True, 22, 0.33]
+>>> id(alist)
+139734716178504
+>>> blist = alist
+>>> id(blist)
+139734716178504  # 内存id值 没有 改变,保持不变
+>>> blist
+['aa', True, 22, 0.33]
+>>> blist[0] = "bb" 
+>>> blist
+['bb', True, 22, 0.33]
+>>> id(blist)  # 证明 : 列表 是 可变类型(因为内存id值 没有 随着 元素值的改变而改变)
+139734716178504  # 内存id值 没有 改变,保持不变
+>>> alist
+['bb', True, 22, 0.33]
+>>> id(alist)
+139734716178504   # 内存id值 没有 改变,保持不变
+>>> de
+def       del       delattr( 
+ 
+>>> del   blist[-1]   #删除 del 列表的最后一个元素
+
+>>> blist
+['bb', True, 22]
+
+>>> id(blist)  #id 值相同,表示指向同一内存地址
+139734716178504  # 内存id值 没有 改变,保持不变
+
+>>> id(alist)  # 证明 : 列表 是 可变类型(因为内存id值 没有 随着 元素值的改变而改变)
+139734716178504   # 内存id值 没有 改变,保持不变
+
+>>> alist     #id 值相同,表示指向同一内存地址
+['bb', True, 22]
+>>> 
+>>> clist = alist[:]  #从开头至结尾全部打印
+
+>>> id(clist)   #id 值 不 同,表示 分别 指向 不同的 内存地址
+139734845882824
+
+>>> clist
+['bb', True, 22]
+
+>>> clist[0] = 'ccc'
+
+>>> print(clist)
+['ccc', True, 22]
+
+>>> id(clist)
+139734845882824  #id 值 不 同,表示 分别 指向 不同的 内存地址
+
+>>> id(alist)
+139734716178504  #id 值相同,表示指向同一内存地址
+>>> id(blist)
+139734716178504
+>>> 
+       
+
+>>> print(clist)
+['ccc', True, 22]
+>>> def  fangfa():   #自定义方法 fangfa()
+...   print(clist * 2)  #注意层级关系,缩进 2个以上的空格
+... 
+>>> fangfa()
+['ccc', True, 22, 'ccc', True, 22]
+
+>>> def  fangfa(list):   #自己定义的方法 fangfa(list)
+...   print((list + [4444]) *2) #注意层级关系,缩进 2个以上的空格
+... 
+>>> fangfa(clist)     #调用方法 fangfa(list)
+['ccc', True, 22, 4444, 'ccc', True, 22, 4444]
+
+>>> clist
+['ccc', True, 22]
+
+>>> clist += 4444  #必须是同一类型的列表类型,才能列表拼加
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'int' object is not iterable
+
+>>> clist += [4444]  #必须是同一类型的列表类型,才能列表拼加
+>>> clist
+['ccc', True, 22, 4444]
+>>> 
+
+数据类型比较
+•  按存储模型分类
+–  标量类型:数值、字符串
+–  容器类型:列表、元组、字典
+
+•  按更新模型分类:
+–  可变类型:列表、字典
+–  不可变类型:数字、字符串、元组
+
+•  按访问模型分类
+–  直接访问:数字
+–  顺序访问:字符串、列表、元组
+–  映射访问:字典    # 字典没有顺序的说法
+
+
+>>> a = 10
+>>> b = 10
+>>> id(a)
+9327040     #id 值相同,表示指向同一内存地址
+>>> id(b)
+9327040     #id 值相同,表示指向同一内存地址
+>>> b = 20
+>>> id(b)
+9327360     ###id 值 不 同,表示 分别 指向 不同的 内存地址
+>>> c = 10
+>>> id(c)
+9327040     #id 值相同,表示指向同一内存地址
+>>> c is a
+True
+>>> id(a)
+9327040     #id 值相同,表示指向同一内存地址
+>>> a is b
+False
+>>> a is not b
+True
+>>> print(a  is not b)
+True
+>>> print(a  is not c)
+False
+>>> 
+
+>>> a = 10
+>>> b = 7
+>>> id(a)
+9327040
+>>> id(b)
+9326944
+>>> if a > b:
+...   a *= 10
+...   id(a)
+...   print(a)
+... else:
+...   print(b)
+... 
+9329920    ###id 值 发生改变,表示指向 不同的 内存地址
+100       #输出结果 10 * 10 =100
+>>> 
+
+>>> def  bijiao(x1,x2):
+...   if x1 > x2:
+...     print(x1)
+...   else:
+...     print(x2)
+... 
+>>> a
+100
+>>> b
+7
+>>> bijiao(a,b)
+100
+>>> bijiao(b,a)
+100
+>>> 
+>>> b = 202
+>>> print(a)
+100
+>>> print(b)
+202
+>>> bijiao(a,b)
+202
+>>> 
+---------------------------------------------------------
+>>> a
+100
+>>> b
+0
+>>> c
+10
+
+>>> max_value = (a>c and a or c)  #如果 变量a 大于变量c 则输出 变量a,否则输出变量c
+>>> print(max_value)
+100
+>>> min_value = a if a < c  else  c #如果 变量a 小于变量c 则输出 变量a,否则输出变量c
+>>> print(min_value)
+10
+
+>>> if 0:print('yes')  #任何值是 零 的数字都是 False
+... 
+>>> if 1:print('yes')   #任何值 不是 零 的数字都是 True
+... 
+yes
+>>> if ' ':print('kong')  #有空格代表不是空字符串,True,任何非空对象都是True
+... 
+kong
+>>> if -0:print('yes')  #任何值是 零 的数字都是 False
+... 
+>>> if -0.0:print('yes')  #任何值是 零 的数字都是 False
+... 
+
+>>> if '':print('kong')  #空字符 都是 False
+... 
+>>> 
+>>> if not None:
+...    print('None也是False，表示空')
+... 
+None也是False，表示空
+>>> 
+>>> if not []:
+...    print('空列表也是False')
+... 
+空列表也是False
+
+>>> if not ():
+...   print('可以认为元组是"静态"的列表,空元组也是 False')
+... 
+可以认为元组是"静态"的列表,空元组也是 False
+>>> if not {}:
+...   print("字典没有顺序的说法,空字典 也是 False")
+... 
+字典没有顺序的说法,空字典 也是 False
+>>> 
+
+
+>>> def  loginffa(user,password):
+...   user = input("username: ")
+...   password = input("password: ")
+...   if user ==  'peri' and  password == '123':
+...     print("Login Successfully --user\n\tpassword")
+...   else:
+...     print("Login incorrectly")
+... 
+>>> user = 'peri'
+>>> password = '123'
+>>> loginffa(user,password)
+username: peri
+password: 123
+Login Successfully --user
+	password
+>>> 
+
+>>> user = 'peri'
+>>> passwd = 123
+>>> type(user)
+<class 'str'>
+>>> type(passwd)
+<class 'int'>   
+   #注意数据类型不一样,登陆 不成功(input 输入的是字符类型,自动把数字转换成字符串类型)
+
+>>> def  loginffa(user,passwd):
+...    user =  input('username: ')
+...    passwd = input('password: ')
+...    if user ==  'peri' and  password == 123:  #注意这里是整数类型
+...      print("Successfully","username:",user,"password:",passwd,sep='---')
+...    else:
+...      print("Login incorrectly")
+... 
+>>> loginffa(user,passwd)
+username: peri
+password: 123
+Login incorrectly
+>>> 
+
+>>> def  loginffa(user,passwd):
+...    user =  input('username: ')
+...    passwd = input('password: ')
+...    if user ==  'peri' and  password == '123':
+...      print("Successfully","username:",user,"password:",passwd,sep='---')
+...    else:
+...      print("Login incorrectly")
+... 
+>>> x1 = 'peri';y2 = '123'  #给变量 x1 y2先后 赋值,必须先定义变量
+>>> print(x1,y2)
+peri 123
+>>> loginffa(x1,y2)
+username: peri
+password: 123
+Successfully---username:---peri---password:---123
+
+---------------------------------------------------------------------------------------------------
+>>> x1, y2 =  '', '' #给变量 x1 y2同时赋予空值,必须先定义变量
+
+>>> type(x1)
+<class 'str'>
+>>> type(y2)
+<class 'str'>
+>>> loginffa(x1,y2)
+username: peri
+password: 123
+Successfully---username:---peri---password:---123
+>>> 
+
+>>> def  loginffa(user,passwd):
+...   import  getpass      #引入模块
+...   user = input('username: ')    #使用变量user接收用户输入的字符
+...   passwd = getpass.getpass('password: ')   #在终端输入密码不会显示字符
+...   if user ==  'peri' and  passwd == '123':
+...     print("Successfully","username:",user,"password:",passwd,sep='---')
+...   else:
+...     print("Login incorrectly")
+... 
+>>> loginffa(x1,y2)
+username: peri
+password: 
+Successfully---username:---peri---password:---123
+>>> 
+
+
+def  loginffa(user,passwd):
+  import  getpass
+  user = input('username: ')
+  passwd = getpass.getpass('password: ')
+  if user ==  'peri' and  passwd == '123':
+    print("Successfully","username:",user,"password:",passwd,sep='---')
+  else:
+    print("Login incorrectly")
+
+
+if not []:
+   print('空列表也是False')
+
+if not None:
+   print('None也是False，表示空')
+
+
+
+>>> if not []:
+...    print('空列表也是False')
+... 
+空列表也是False
+>>> if not None:
+...    print('None也是False，表示空')
+... 
+None也是False，表示空
+>>> 
+
+[root@V20 ~]# vim   scoreges.py
+[root@V20 ~]# cat   scoreges.py
+
+#!/usr/bin/env  python3
+import  getpass
+import  random
+
+print("Lucky number is",random.randint(1,3),end=" ***\n")
+
+score = int(getpass.getpass('请输入数字: '))
+
+print("score  input is", score, type(score),sep='--*-^')
+
+if score >= 60 and score <70:
+  print('D---D',end="--End$\n")
+elif 70<= score < 80:
+  print('C--C',end="--cend$\n")
+elif 80 <= score < 90:
+  print('B-B')
+elif 90 <= score < 100:
+  print("A",end="---Aend\n")
+elif score == 100:
+  print("Very Good!",100,sep="--$$$--")
+else:
+  print("You have a little problem !")
+
+
+[root@V20 ~]# python3   scoreges.py
+
+Lucky number is 3 ***
+请输入数字: 
+score  input is--*-^60--*-^<class 'int'>
+D---D--End$
+
+[root@V20 ~]# python3   scoreges.py
+
+Lucky number is 3 ***
+请输入数字: 
+score  input is--*-^70--*-^<class 'int'>
+C--C--cend$
+
+[root@V20 ~]# python3   scoreges.py
+
+Lucky number is 2 ***
+请输入数字: 
+score  input is--*-^80--*-^<class 'int'>
+B-B
+
+[root@V20 ~]# python3   scoreges.py
+
+Lucky number is 2 ***
+请输入数字: 
+score  input is--*-^90--*-^<class 'int'>
+A---Aend
+
+[root@V20 ~]# python3   scoreges.py
+
+Lucky number is 3 ***
+请输入数字: 
+score  input is--*-^10--*-^<class 'int'>
+You have a little problem !
+
+[root@V20 ~]# python3   scoreges.py
+Lucky number is 1 ***
+请输入数字: 
+score  input is--*-^100--*-^<class 'int'>
+Very Good!--$$$--100
+
+[root@V20 ~]# 
+
+
+>>> a
+100
+>>> c
+10
+
+>>> max_value = (a>c and a or c)  #如果 变量a 大于变量c 则输出 变量a,否则输出变量c
+>>> print(max_value)
+100
+>>> min_value = a if a < c  else  c #如果 变量a 小于变量c 则输出 变量a,否则输出变量c
+>>> print(min_value)
+10     #c=10,结果 输出变量c
+
+>>> import  random
+>>> random.randint(1,3)
+1
+>>> random.randint(1,3)
+3
+>>> random.randint(1,3)
+3
+>>> random.randint(1,3)
+1
+>>> random.randint(1,3)
+2
+>>> random.random()
+0.3359718378413301
+>>> random.random()
+0.6201303661349702
+>>> random.random()
+0.8990645310237385
+>>> random.randrange(1,3)
+1
+>>> random.randrange(1,3)
+1
+>>> random.randrange(1,3)
+2
+>>> random.randrange(1,3)
+1
+
+[root@V21 ~]# vim   sanyuan.py
+[root@V21 ~]# cat    sanyuan.py
+#!/usr/bin/env   python3
+import  getpass
+import  random
+
+a = int(getpass.getpass("Please input number: "))
+b = random.randint(2,4)
+
+print("Variable  a  input is\t"+str(a),type(a),sep='  -^- ',end=' Va\n')
+
+print("Variable  b  random.randint(2,4) is\n", b, type(b),sep=' -^$^-')
+
+max_value = (a > b and a  or b)    #三元运算
+
+print("max_value is\t" + str(max_value))
+
+min_value = a if a < b else b    #三元运算
+
+print('min_value is', min_value, sep = "----")
+
+[root@V21 ~]# 
+Python中的三元运算符编辑
+
+  Python的三元运算符 和java 以及 C# 有所区别，
+语法格式为：
+ 表达式1  if 条件表达式  else  表达式2
+当表达式返回True时，返回结果表达式1，否则返回结果表达式2。示例：
+c = a   if   a < b   else   b
+
+[root@V21 ~]# python3  sanyuan.py
+Please input number: 
+Variable  a  input is	3  -^- <class 'int'> Va
+Variable  b  random.randint(2,4) is
+ -^$^-3 -^$^-<class 'int'>
+max_value is	3
+min_value is----3
+
+
+[root@V21 ~]# python3  sanyuan.py
+Please input number: 
+Variable  a  input is	2  -^- <class 'int'> Va
+Variable  b  random.randint(2,4) is
+ -^$^-4 -^$^-<class 'int'>
+max_value is	4
+min_value is----2
+[root@V21 ~]# 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[root@room9pc01 ~]# ssh  -X 192.168.0.21
+root@192.168.0.21's password: 
+Last login: Wed Mar 20 17:16:30 2019 from 192.168.0.254
+[root@V21 ~]# free  -m
+              total        used        free      shared  buff/cache   available
+Mem:           1436         235         895           9         305        1029
+Swap:          2047           0        2047
+[root@V21 ~]# python  --version
+Python 2.7.5
+[root@V21 ~]# python3  --version
+Python 3.6.4
+
+
+[root@V21 ~]# cat /etc/shells 
+/bin/sh
+/bin/bash   # 常用shell 解释器
+/sbin/nologin
+/usr/bin/sh
+/usr/bin/bash
+/usr/sbin/nologin
+/bin/tcsh
+/bin/csh
+[root@V21 ~]# echo $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin
+
+[root@V21 ~]# which  python3
+/usr/local/bin/python3
+
+[root@V21 ~]# vim   loginpython.py
+[root@V21 ~]# cat  loginpython.py
+
+#!/usr/local/bin/python3    #python3 解释器
+import  getpass
+x = '';y = ''
+def  loginffa(user,passwd):
+  user = input('username: ')
+  passwd = getpass.getpass('password: ')
+  if user ==  'peri' and  passwd == '123':
+    print("Successfully","username:",user,"password:",passwd,sep='---')
+  else:
+    print("Login incorrectly")
+loginffa(x,y)
+[root@V21 ~]# python3  loginpython.py
+username: peri
+password: 
+Successfully---username:---peri---password:---123
+[root@V21 ~]# 
+
+
+[root@V21 ~]# file  /bin/bash
+/bin/bash: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.32, BuildID[sha1]=8bd6b05295658d71a9ff4eed7cae55609a703623, stripped
+
+[root@V20 ~]# file  /usr/local/bin/python3
+/usr/local/bin/python3: symbolic link to `python3.6'
+
+[root@V20 ~]# which  python3
+/usr/local/bin/python3
+
+[root@V20 ~]# ll  /usr/local/bin/python3
+lrwxrwxrwx 1 root root 9 3月  19 09:54 /usr/local/bin/python3 -> python3.6
+
+[root@V20 ~]# ll  /usr/local/bin/python3.6
+-rwxr-xr-x 2 root root 12671720 3月  19 09:54 /usr/local/bin/python3.6
+
+
+[root@V21 ~]# file  /usr/bin/env
+/usr/bin/env: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.32, BuildID[sha1]=4279a25ddbac2a7480923cd05d70e33a73dce721, stripped
+
+[root@V21 ~]# head  -3  ip.sh 
+#!/bin/bash    # 常用shell 解释器
+x=$1
+ip=$2
+[root@V21 ~]#
+
+[root@V21 ~]# vim  loginxy.py
+[root@V21 ~]# cat  loginxy.py
+#!/usr/bin/env   python3     # 常用python 解释器/usr/bin/env  python3 
+import  getpass
+x = '';y = ''
+def  loginffa(user,passwd):
+  user = input('username: ')
+  passwd = getpass.getpass('password: ')
+  if user ==  'peri' and  passwd == '123':   #sep间隔符号,用end来自定义结束符号
+    print("Successfully","username:",user,"password:",passwd,sep='---')
+  else:
+    print("Login incorrectly")
+loginffa(x,y)
+
+[root@V21 ~]# python3  loginxy.py
+username: peri
+password: 
+Successfully---username:---peri---password:---123
+
+[root@V21 ~]# python3  loginxy.py
+username: bob 
+password: 
+Login incorrectly
+[root@V21 ~]# echo $?
+0
+[root@V21 ~]# 
+
+>>> a=100
+>>> type(a)
+<class 'int'>
+>>> b=0
+>>> type(b)
+<class 'int'>
+>>> print(a + "----" + b)  # 未 把整数类型转换成字符串类型,报错
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+
+>>> print(str(a) + "----" + str(b)) #把整数类型转换成字符串类型
+100----0
+>>> type(b)
+<class 'int'>
+>>> type(a)
+<class 'int'>
+>>> print("a is ", type(a))
+a is  <class 'int'>
+
+
+[root@V21 ~]# vim  guessnm.py 
+[root@V21 ~]# cat  guessnm.py
+
+#!/usr/local/bin/python3
+import  random
+
+num = random.randint(1,10)   #随机生成一个数字(包含10 )
+
+result = input("guess the number: ")
+
+print("result is input\t"+ result +"\tresult")
+
+print("result is",type(result),sep='~~~~~')  #sep间隔符号,用end来自定义结束符号
+
+print("num is  random\t"+ str(num) +"\tnum") #把整数类型转换成字符串类型 str(xx)
+
+print("num is ",type(num),sep="$$$&&&&",end='End\n')
+
+if  int(result) > num:  #把 字符串类型转换成 整数类型int(xx)
+  print("bigger")
+
+elif int(result) == num:   #把 字符串类型转换成 整数类型
+  print('equal--ok')
+
+elif int(result) < num:   #把 字符串类型转换成 整数类型
+  print('smaller')
+
+else:
+  print("Input Error!")
+
+
+[root@V21 ~]# python3  guessnm.py
+guess the number: 3
+result is input	3	result
+result is~~~~~<class 'str'>
+num is  random	10	num
+num is $$$&&&&<class 'int'>End  #sep间隔符号,用end来自定义结束符号
+smaller
+
+
+[root@V21 ~]# vim  guessnm.py
+[root@V21 ~]# cat   guessnm.py
+
+#!/usr/local/bin/python3
+import  random
+num = random.randint(1,10)
+result = int(input("guess the number: "))  #把 字符串类型转换成 整数类型
+
+print("result is input\t",result,"\tresult")
+print("result is",type(result),sep='~~---~~~')
+
+print("num is  random\t"+ str(num) +"\tnum")
+
+--------------------------  #sep间隔符号,用end来自定义结束符号
+
+print("num is ",type(num),sep="-----&",end='End\n')
+
+if  result > num:
+  print("bigger")
+elif result == num:
+  print('equal--ok')
+elif result < num:
+  print('smaller')
+else:
+  print("Input Error!")
+
+[root@V21 ~]# python3  guessnm.py
+
+guess the number: 5
+result is input	 5 	result
+result is~~---~~~<class 'int'>
+num is  random	4	num
+num is -----&<class 'int'>End
+bigger
+
+[root@V21 ~]# 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[root@room9pc01 ~]# watch  -n 2   -d  free  -k
+[root@room9pc01 ~]# free  -m
+              total        used        free      shared  buff/cache   available
+Mem:          15781        3805        9351         568        2623       11049
+Swap:             0           0           0
+
+[root@room9pc01 ~]# ls   /var/git/python/PyScript/
+hello.py  importmode.py  login.py  __pycache__  venv
+
+[root@room9pc01 ~]# ls  -a   /var/git/python/PyScript/
+.  ..  .git  hello.py  .idea  importmode.py  login.py  __pycache__  venv
+
+[root@room9pc01 ~]# ls  -a   /var/git/python/PyScript/venv/
+.  ..  bin  include  lib  pip-selfcheck.json
+
+[root@room9pc01 ~]# ls  -a   /var/git/python/PyScript/venv/bin/
+.         activate.csh      easy_install      pip3    python3        wheel
+..        activate.fish     easy_install-3.6  pip3.6  python3.6
+activate  activate_this.py  pip               python  python-config
+
+[root@room9pc01 ~]# cd   /var/git/python/PyScript/
+[root@room9pc01 PyScript]# 
+
+
+------------------------- 按下键盘上的F12，在弹出来的开发人员工具页面的右上角，搜索password
+
+ ----------------  Ctrl + Shift +  i 打开 检查元素框  选择  Elements 菜单
+<div class="form-inp-area">
+ <input id="js_password" class="form-input" value="" type="password" placeholder="密码">
+ <span class="form-tips">包含数字、字母、下划线的6-18位</span>
+</div>
+ <input id="js_password" class="form-input" value="" type="text" placeholder="密码">
+
+ 找到  字段 元素 type="password" 在这里鼠标右键打开Edit  Attribute 单击后
+把type="password" 改成  type="text" 就可以查看网页上保存的密码了
+ 找到  字段 元素 type="password" 在这里鼠标右键打开 单击 Copy --> Copy outerHTML
+          就可以复制 选择的源码了
+
+
+
+
+
+
