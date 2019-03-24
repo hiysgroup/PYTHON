@@ -1,0 +1,1209 @@
+
+
+OBS (Open Broadcaster Software)
+OBS 是一个免费、开源和跨平台的视频记录和流媒体应用程序,
+它可以工作在Linux、Windows和Mac OS X。
+它有几个强大的功能和显著的功能包括:
+支持使用H264和AAC编码
+支持英特尔QSV和NVENC
+支持无限数量的场景和输入源
+输出文件使用MP4 或FLV 格式
+允许在记录会话中访问网络摄像头，采集卡等
+高度可扩展的插件,开发人员可以使用api编写自己的插件
+官网地址: https://obsproject.com
+https://obsproject.com/
+
+OBS工作室
+最新发布23.0.223.0.123.0.2
+Windows 支持Windows 7，Windows 8，Windows 8.1和Windows 10 macOS 10.11+  Linux
+用于视频录制和直播的免费和开源软件。
+
+在Windows，Mac或Linux上快速轻松地下载并开始流式传输。
+
+https://obsproject.com/wiki/install-instructions#linux
+
+
+[root@room9pc01 PyScript]# cat  /etc/redhat-release 
+CentOS Linux release 7.4.1708 (Core) 
+[root@room9pc01 PyScript]# ll  /etc/redhat-release
+lrwxrwxrwx. 1 root root 14 3月  19 2018 /etc/redhat-release -> centos-release
+[root@room9pc01 PyScript]# cat   /etc/centos-release
+CentOS Linux release 7.4.1708 (Core) 
+
+[root@room9pc01 PyScript]# uname  -r
+3.10.0-693.el7.x86_64
+[root@room9pc01 PyScript]# uname  -a
+Linux room9pc01.tedu.cn 3.10.0-693.el7.x86_64 #1 SMP Tue Aug 22 21:09:27 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux
+
+
+访问 网站 https://rpmfusion.org/Configuration/
+
+安装免费和非自由存储库
+
+使用rpm命令行设置
+要启用对free和nonfree存储库的访问，请使用以下命令：
+
+访问 网站  https://download1.rpmfusion.org/free/el
+Index of /free/el
+
+[ICO]	Name	Last modified	Size	Description
+[DIR]	Parent Directory	 	-	 
+[DIR]	releases/	05-Mar-2018 23:44	-	 
+[   ]	rpmfusion-free-release-5-1.noarch.rpm	20-Jun-2012 09:33	4.7K	 
+[   ]	rpmfusion-free-release-5.noarch.rpm	20-Jun-2012 09:33	4.7K	 
+[   ]	rpmfusion-free-release-6.noarch.rpm	19-Jun-2018 21:56	6.2K	 
+[   ]	rpmfusion-free-release-7.noarch.rpm	19-Jun-2018 21:56	6.3K	 
+[DIR]	tainted/	11-Jun-2018 08:27	-	 
+[DIR]	updates/	05-Mar-2018 23:42	-	 
+Apache/2.2.15 (CentOS) Server at download1.rpmfusion.org Port 443
+
+访问 网站  https://download1.rpmfusion.org/nonfree/el/
+Index of /nonfree/el
+
+[ICO]	Name	Last modified	Size	Description
+[DIR]	Parent Directory	 	-	 
+[DIR]	releases/	05-Mar-2018 23:41	-	 
+[   ]	rpmfusion-nonfree-release-5-1.noarch.rpm	20-Jun-2012 09:34	4.8K	 
+[   ]	rpmfusion-nonfree-release-5.noarch.rpm	20-Jun-2012 09:34	4.8K	 
+[   ]	rpmfusion-nonfree-release-6.noarch.rpm	19-Jun-2018 21:56	6.3K	 
+[   ]	rpmfusion-nonfree-release-7.noarch.rpm	19-Jun-2018 21:56	6.4K	 
+[DIR]	tainted/	11-Jun-2018 08:29	-	 
+[DIR]	updates/	05-Mar-2018 23:41	-	 
+Apache/2.2.15 (CentOS) Server at download1.rpmfusion.org Port 443
+
+RHEL 7或兼容CentOS：
+sudo yum localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm      https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release -7.noarch.rpm
+
+https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
+
+https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm 
+
+http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/
+
+设置ffmpeg的rmp包机器依赖关系
+[root@room9pc01 ~]# echo  ${HOME} 
+/root
+
+[root@room9pc01 ~]# yum  -y localinstall  \
+ https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
+
+错误：软件包：rpmfusion-free-release-7-4.noarch (/rpmfusion-free-release-7.noarch)
+          需要：epel-release >= 7
+ 您可以尝试添加 --skip-broken 选项来解决该问题
+ 您可以尝试执行：rpm -Va --nofiles --nodigest
+
+[root@room9pc01 ~]# yum  -y localinstall --nogpgcheck  https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
+
+错误：软件包：rpmfusion-free-release-7-4.noarch (/rpmfusion-free-release-7.noarch)  
+需要：epel-release >= 7
+http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm
+
+
+[root@room9pc01 ~]# yum  -y localinstall --nogpgcheck  https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
+
+
+[root@room9pc01 yum.repos.d]# ls
+Centos-7.repo  epel-7.repo  NSD-2018-1-12.tar.gz  repo  rhel7.repo
+[root@room9pc01 yum.repos.d]# rpm  -q  rpmfusion-free-release
+rpmfusion-free-release-7-4.noarch
+
+[root@room9pc01 ~]# cat  /etc/yum.repos.d/rhel7.repo 
+[rhel7]
+name=rhel7.4
+baseurl=ftp://127.0.0.1/rhel7
+enabled=1
+gpgcheck=0
+[root@room9pc01 ~]# yum  clean all >/dev/null && yum repolist 
+已加载插件：fastestmirror, langpacks
+rhel7                                                    | 4.1 kB     00:00     
+(1/2): rhel7/group_gz                                      | 137 kB   00:00     
+(2/2): rhel7/primary_db                                    | 4.0 MB   00:00     
+Determining fastest mirrors
+源标识                               源名称                                状态
+rhel7                                rhel7.4                               4,986
+repolist: 4,986
+
+
+一、配置阿里云源为主源
+# mv  /etc/yum.repos.d/CentOS-Base.repo    /etc/yum.repos.d/CentOS-Base.repo.bak
+
+# wget -O /etc/yum.repos.d/CentOS-Base.repo   http://mirrors.aliyun.com/repo/Centos-7.repo
+阿里云官方教程：http://mirrors.aliyun.com/help/centos
+
+[root@room9pc01 yum.repos.d]# wget   http://mirrors.aliyun.com/repo/Centos-7.repo
+
+--2019-03-24 14:17:53--  http://mirrors.aliyun.com/repo/Centos-7.repo
+正在解析主机 mirrors.aliyun.com (mirrors.aliyun.com)... 124.225.195.233, 124.225.163.226, 124.225.195.227, ...
+正在连接 mirrors.aliyun.com (mirrors.aliyun.com)|124.225.195.233|:80... 已连接。
+已发出 HTTP 请求，正在等待回应... 200 OK
+长度：2523 (2.5K) [application/octet-stream]
+正在保存至: “Centos-7.repo”
+
+100%[===============================================>] 2,523       --.-K/s 用时 0s      
+
+2019-03-24 14:17:53 (180 MB/s) - 已保存 “Centos-7.repo” [2523/2523])
+
+[root@room9pc01 yum.repos.d]# ls
+Centos-7.repo  NSD-2018-1-12.tar.gz  repo  rhel7.repo
+[root@room9pc01 yum.repos.d]# 
+-----------  EPEL 即 Extra Packages for Enterprise Linux (企业Linux的额外包)， 
+为 CentOS 提供了额外的 10000 多个软件包
+
+
+[base]
+name=CentOS-$releasever - Base - mirrors.aliyun.com
+failovermethod=priority
+baseurl=http://mirrors.aliyun.com/centos/$releasever/os/$basearch/
+        http://mirrors.aliyuncs.com/centos/$releasever/os/$basearch/
+        http://mirrors.cloud.aliyuncs.com/centos/$releasever/os/$basearch/
+gpgcheck=0
+gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[extras]
+name=CentOS-$releasever - Extras - mirrors.aliyun.com
+failovermethod=priority
+baseurl=http://mirrors.aliyun.com/centos/$releasever/extras/$basearch/
+        http://mirrors.aliyuncs.com/centos/$releasever/extras/$basearch/
+        http://mirrors.cloud.aliyuncs.com/centos/$releasever/extras/$basearch/
+gpgcheck=0
+gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+
+[root@room9pc01 yum.repos.d]# vim  Centos-7.repo 
+[root@room9pc01 yum.repos.d]# yum clean  all >/dev/null && yum repolist 
+已加载插件：fastestmirror, langpacks
+base                                                              | 3.6 kB  00:00:00     
+centosplus                                                        | 3.4 kB  00:00:00     
+extras                                                            | 3.4 kB  00:00:00     
+rhel7                                                             | 4.1 kB  00:00:00     
+updates                                                           | 3.4 kB  00:00:00     
+(1/7): rhel7/group_gz                                             | 137 kB  00:00:00     
+(2/7): rhel7/primary_db                                           | 4.0 MB  00:00:00     
+(3/7): base/7/x86_64/group_gz                                     | 166 kB  00:00:00     
+(4/7): extras/7/x86_64/primary_db                                 | 187 kB  00:00:00     
+(5/7): centosplus/7/x86_64/primary_db                             | 1.6 MB  00:00:00     
+(6/7): updates/7/x86_64/primary_db                                | 3.3 MB  00:00:00     
+(7/7): base/7/x86_64/primary_db                                   | 6.0 MB  00:00:01     
+Determining fastest mirrors
+ * base: mirrors.aliyun.com
+ * centosplus: mirrors.aliyun.com
+ * extras: mirrors.aliyun.com
+ * updates: mirrors.aliyun.com
+源标识                         源名称                                              状态
+base/7/x86_64                  CentOS-7 - Base - mirrors.aliyun.com                10,019
+centosplus/7/x86_64            CentOS-7 - Plus - mirrors.aliyun.com                    48
+extras/7/x86_64                CentOS-7 - Extras - mirrors.aliyun.com                 382
+rhel7                          rhel7.4                                              4,986
+updates/7/x86_64               CentOS-7 - Updates - mirrors.aliyun.com              1,459
+repolist: 16,894
+[root@room9pc01 yum.repos.d]# cat    Centos-7.repo
+# CentOS-Base.repo
+......................
+[base]
+name=CentOS-$releasever - Base - mirrors.aliyun.com
+failovermethod=priority
+baseurl=http://mirrors.aliyun.com/centos/$releasever/os/$basearch/
+        http://mirrors.aliyuncs.com/centos/$releasever/os/$basearch/
+        http://mirrors.cloud.aliyuncs.com/centos/$releasever/os/$basearch/
+gpgcheck=0
+gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+enabled=1
+ 
+#released updates 
+[updates]
+name=CentOS-$releasever - Updates - mirrors.aliyun.com
+failovermethod=priority
+baseurl=http://mirrors.aliyun.com/centos/$releasever/updates/$basearch/
+        http://mirrors.aliyuncs.com/centos/$releasever/updates/$basearch/
+        http://mirrors.cloud.aliyuncs.com/centos/$releasever/updates/$basearch/
+gpgcheck=0
+gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+#additional packages that may be useful
+[extras]
+name=CentOS-$releasever - Extras - mirrors.aliyun.com
+failovermethod=priority
+baseurl=http://mirrors.aliyun.com/centos/$releasever/extras/$basearch/
+        http://mirrors.aliyuncs.com/centos/$releasever/extras/$basearch/
+        http://mirrors.cloud.aliyuncs.com/centos/$releasever/extras/$basearch/
+gpgcheck=0
+gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+enabled=1 
+
+#additional packages that extend functionality of existing packages
+[centosplus]
+name=CentOS-$releasever - Plus - mirrors.aliyun.com
+failovermethod=priority
+baseurl=http://mirrors.aliyun.com/centos/$releasever/centosplus/$basearch/
+        http://mirrors.aliyuncs.com/centos/$releasever/centosplus/$basearch/
+        http://mirrors.cloud.aliyuncs.com/centos/$releasever/centosplus/$basearch/
+gpgcheck=0
+enabled=1
+gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+ 
+#contrib - packages by Centos Users
+[contrib]     ------------ #####注意不启用本仓库
+name=CentOS-$releasever - Contrib - mirrors.aliyun.com
+failovermethod=priority
+baseurl=http://mirrors.aliyun.com/centos/$releasever/contrib/$basearch/
+        http://mirrors.aliyuncs.com/centos/$releasever/contrib/$basearch/
+        http://mirrors.cloud.aliyuncs.com/centos/$releasever/contrib/$basearch/
+gpgcheck=0
+enabled=0 ------------ #####注意不启用本仓库
+gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+[root@room9pc01 yum.repos.d]# 
+
+
+二、添加第三方源
+CentOS 由于很追求稳定性，所以官方源中自带的软件不多，因而需要一些第三方源
+
+#sudo rpm -Uvh   http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm
+#sudo yum install epel-release
+执行完该命令后，在 /etc/yum.repos.d 目录下会多一个 epel.repo 文件
+
+http://mirrors.aliyun.com/repo/
+http://mirrors.aliyun.com/repo/epel-7.repo
+Index of /repo/
+../
+Centos-5.repo                                      15-Jun-2018 22:20                2960
+Centos-6.repo                                      15-Jun-2018 22:21                2523
+Centos-7.repo                                      15-Jun-2018 22:22                2523
+Centos-altarch-7.repo                              15-Mar-2018 07:52                1345
+Centos-openstack.repo     
+epel-7-cloud.repo                                  11-May-2018 03:32                1084
+epel-7.repo   
+
+[root@room9pc01 yum.repos.d]# pwd
+/etc/yum.repos.d
+[root@room9pc01 yum.repos.d]# ls
+Centos-7.repo  NSD-2018-1-12.tar.gz  repo  rhel7.repo
+
+[root@room9pc01 yum.repos.d]# wget   http://mirrors.aliyun.com/repo/epel-7.repo
+
+--2019-03-24 14:33:07--  http://mirrors.aliyun.com/repo/epel-7.repo
+正在解析主机 mirrors.aliyun.com (mirrors.aliyun.com)... 111.123.51.250, 182.106.155.229, 175.6.237.248, ...
+正在连接 mirrors.aliyun.com (mirrors.aliyun.com)|111.123.51.250|:80... 已连接。
+已发出 HTTP 请求，正在等待回应... 200 OK
+长度：664 [application/octet-stream]
+正在保存至: “epel-7.repo”
+
+100%[===============================================>] 664         --.-K/s 用时 0s      
+
+2019-03-24 14:33:07 (59.8 MB/s) - 已保存 “epel-7.repo” [664/664])
+
+[root@room9pc01 yum.repos.d]# ls
+Centos-7.repo  epel-7.repo  NSD-2018-1-12.tar.gz  repo  rhel7.repo
+
+[root@room9pc01 yum.repos.d]# pwd
+/etc/yum.repos.d
+
+updates/7/x86_64        CentOS-7 - Updates - mirrors.aliyun.com                     1,459
+repolist: 32,782
+[root@room9pc01 yum.repos.d]# vim  epel-7.repo 
+[root@room9pc01 yum.repos.d]# cat  epel-7.repo
+[epel]
+name=Extra Packages for Enterprise Linux 7 - $basearch
+baseurl=http://mirrors.aliyun.com/epel/7/$basearch
+failovermethod=priority
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+ 
+[epel-debuginfo]
+name=Extra Packages for Enterprise Linux 7 - $basearch - Debug
+baseurl=http://mirrors.aliyun.com/epel/7/$basearch/debug
+failovermethod=priority
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+gpgcheck=0
+ 
+[epel-source]
+name=Extra Packages for Enterprise Linux 7 - $basearch - Source
+baseurl=http://mirrors.aliyun.com/epel/7/SRPMS
+failovermethod=priority
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+gpgcheck=0
+[root@room9pc01 yum.repos.d]# 
+
+
+
+[root@room9pc01 ~]# ls  /etc/pki/rpm-gpg/
+RPM-GPG-KEY-CentOS-7  RPM-GPG-KEY-CentOS-Debug-7  RPM-GPG-KEY-CentOS-Testing-7
+[root@room9pc01 ~]# ll  /etc/pki/rpm-gpg/
+总用量 12
+-rw-r--r--. 1 root root 1690 8月  30 2017 RPM-GPG-KEY-CentOS-7
+-rw-r--r--. 1 root root 1004 8月  30 2017 RPM-GPG-KEY-CentOS-Debug-7
+-rw-r--r--. 1 root root 1690 8月  30 2017 RPM-GPG-KEY-CentOS-Testing-7
+
+[root@room9pc01 yum.repos.d]# ll  /etc/pki/rpm-gpg/
+总用量 20
+-rw-r--r--. 1 root root 1690 8月  30 2017 RPM-GPG-KEY-CentOS-7
+-rw-r--r--. 1 root root 1004 8月  30 2017 RPM-GPG-KEY-CentOS-Debug-7
+-rw-r--r--. 1 root root 1690 8月  30 2017 RPM-GPG-KEY-CentOS-Testing-7
+-rw-r--r--  1 root root 1662 10月  3 2017 RPM-GPG-KEY-EPEL-7
+-rw-r--r--  1 root root 1668 6月  19 2018 RPM-GPG-KEY-rpmfusion-free-el-7
+
+[root@room9pc01 yum.repos.d]# 
+[root@room9pc01 ~]# vim  /etc/yum.conf 
+[root@room9pc01 ~]# grep  -n "gpgcheck"  /etc/yum.conf
+8:gpgcheck=0
+
+[root@room9pc01 yum.repos.d]# yum  clean all >/dev/null && yum repolist
+已加载插件：fastestmirror, langpacks
+base                                                              | 3.6 kB  00:00:00     
+centosplus                                                        | 3.4 kB  00:00:00     
+epel                                                              | 4.7 kB  00:00:00     
+epel-debuginfo                                                    | 3.0 kB  00:00:00     
+epel-source                                                       | 3.5 kB  00:00:00     
+extras                                                            | 3.4 kB  00:00:00     
+rhel7                                                             | 4.1 kB  00:00:00     
+updates                                                           | 3.4 kB  00:00:00     
+(1/13): epel/x86_64/group_gz                                      |  88 kB  00:00:00     
+(2/13): base/7/x86_64/group_gz                                    | 166 kB  00:00:00     
+(3/13): epel/x86_64/updateinfo                                    | 1.0 MB  00:00:00     
+(4/13): epel-debuginfo/x86_64/primary_db                          | 888 kB  00:00:00     
+(5/13): centosplus/7/x86_64/primary_db                            | 1.6 MB  00:00:01     
+(6/13): epel-source/updateinfo                                    | 1.0 MB  00:00:00     
+(7/13): rhel7/group_gz                                            | 137 kB  00:00:00     
+(8/13): extras/7/x86_64/primary_db                                | 187 kB  00:00:00     
+(9/13): rhel7/primary_db                                          | 4.0 MB  00:00:00     
+(10/13): epel-source/primary_db                                   | 2.3 MB  00:00:01     
+(11/13): epel/x86_64/primary_db                                   | 6.6 MB  00:00:02     
+(12/13): updates/7/x86_64/primary_db                              | 3.3 MB  00:00:01     
+(13/13): base/7/x86_64/primary_db                                 | 6.0 MB  00:00:02     
+Determining fastest mirrors
+ * base: mirrors.aliyun.com
+ * centosplus: mirrors.aliyun.com
+ * extras: mirrors.aliyun.com
+ * updates: mirrors.aliyun.com
+源标识                  源名称                                                     状态
+base/7/x86_64           CentOS-7 - Base - mirrors.aliyun.com                       10,019
+centosplus/7/x86_64     CentOS-7 - Plus - mirrors.aliyun.com                           48
+epel/x86_64             Extra Packages for Enterprise Linux 7 - x86_64             13,015
+epel-debuginfo/x86_64   Extra Packages for Enterprise Linux 7 - x86_64 - Debug      2,873
+
+epel-source             Extra Packages for Enterprise Linux 7 - x86_64 - Source         0
+
+extras/7/x86_64         CentOS-7 - Extras - mirrors.aliyun.com                        382
+rhel7                   rhel7.4                                                     4,986
+updates/7/x86_64        CentOS-7 - Updates - mirrors.aliyun.com                     1,459
+repolist: 32,782
+[root@room9pc01 yum.repos.d]# yum   makecache 
+已加载插件：fastestmirror, langpacks
+base                                                              | 3.6 kB  00:00:00     
+centosplus                                                        | 3.4 kB  00:00:00     
+epel                                                              | 4.7 kB  00:00:00     
+epel-debuginfo                                                    | 3.0 kB  00:00:00     
+epel-source                                                       | 3.5 kB  00:00:00     
+extras                                                            | 3.4 kB  00:00:00     
+rhel7                                                             | 4.1 kB  00:00:00     
+updates                                                           | 3.4 kB  00:00:00     
+(1/20): centosplus/7/x86_64/prestodelta                           |  18 kB  00:00:00     
+(2/20): centosplus/7/x86_64/other_db                              |  28 kB  00:00:00     
+(3/20): centosplus/7/x86_64/filelists_db                          | 751 kB  00:00:00     
+(4/20): epel/x86_64/prestodelta                                   | 2.5 kB  00:00:00     
+(5/20): epel/x86_64/other_db                                      | 3.2 MB  00:00:01     
+(6/20): base/7/x86_64/filelists_db                                | 7.1 MB  00:00:02     
+(7/20): epel-debuginfo/x86_64/other_db                            | 931 kB  00:00:00     
+(8/20): epel-source/filelists_db                                  | 772 kB  00:00:00     
+(9/20): extras/7/x86_64/filelists_db                              | 235 kB  00:00:00     
+(10/20): epel-debuginfo/x86_64/filelists_db                       | 4.9 MB  00:00:02     
+(11/20): extras/7/x86_64/prestodelta                              |  52 kB  00:00:00     
+(12/20): extras/7/x86_64/other_db                                 | 120 kB  00:00:00     
+(13/20): rhel7/filelists_db                                       | 3.4 MB  00:00:00     
+(14/20): rhel7/other_db                                           | 1.5 MB  00:00:00     
+(15/20): epel-source/other_db                                     | 1.9 MB  00:00:00     
+(16/20): updates/7/x86_64/prestodelta                             | 471 kB  00:00:00     
+(17/20): updates/7/x86_64/filelists_db                            | 2.6 MB  00:00:00     
+(18/20): updates/7/x86_64/other_db                                | 451 kB  00:00:00     
+(19/20): epel/x86_64/filelists_db                                 |  11 MB  00:00:04     
+(20/20): base/7/x86_64/other_db                                   | 2.6 MB  00:00:04     
+Loading mirror speeds from cached hostfile
+ * base: mirrors.aliyun.com
+ * centosplus: mirrors.aliyun.com
+ * extras: mirrors.aliyun.com
+ * updates: mirrors.aliyun.com
+元数据缓存已建立
+[root@room9pc01 yum.repos.d]# 
+
+
+
+http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/
+Index of /pub/epel/7/x86_64/Packages/e
+
+Icon  Name            Last modified      Size  Description
+[PARENTDIR] Parent Directory        -   
+[   ] e3-2.81-1.el7.x86_64.rpm       2016-02-29 16:58   47K  
+ epel源：
+http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm
+
+阿里源： epel源：
+https://mirrors.aliyun.com/epel/7/x86_64/Packages/e/
+https://mirrors.aliyun.com/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm
+
+http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm
+
+ 直接安装epel-yum源
+[root@room9pc01 ~]# rpm  -ivh  https://mirrors.aliyun.com/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm
+
+获取https://mirrors.aliyun.com/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm
+警告：/var/tmp/rpm-tmp.Jwqh4T: 头V3 RSA/SHA256 Signature, 密钥 ID 352c64e5: NOKEY
+准备中...                          ################################# [100%]
+正在升级/安装...
+   1:epel-release-7-11                ################################# [100%]
+[root@room9pc01 ~]# 
+
+
+[root@room9pc01 ~]# yum  -y localinstall --nogpgcheck  https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
+
+.............
+警告：RPM 数据库已被非 yum 程序修改。
+  正在安装    : rpmfusion-free-release-7-4.noarch                           1/1 
+  验证中      : rpmfusion-free-release-7-4.noarch                           1/1 
+
+已安装:
+  rpmfusion-free-release.noarch 0:7-4                                           
+
+完毕！
+[root@room9pc01 ~]# rpm  -qa |grep rpmfusion-free-release
+rpmfusion-free-release-7-4.noarch
+[root@room9pc01 ~]# rpm  -q  rpmfusion-free-release
+rpmfusion-free-release-7-4.noarch
+
+
+/*** ====================================
+
+enterprise    英 [ˈentəpraɪz]   美 [ˈentərpraɪz]  
+              n.企（事）业单位;
+EPEL 即 Extra Packages for Enterprise Linux (企业Linux的额外包)， 
+为 CentOS 提供了额外的 10000 多个软件包
+
+rpm  常用命令组合：
+－ivh：安装显示安装进度--install--verbose--hash
+－Uvh：升级软件包--Update；
+－qpl： 列出RPM软件包内的文件信息[Query Package list]；
+－qpi：列出RPM软件包的描述信息[Query Package install package(s)]；
+－qf：查找指定文件属于哪个RPM软件包[Query File]；
+－Va：校验所有的 RPM软件包，查找丢失的文件[View Lost]；
+－e：删除包
+
+--nodeps    忽略软件包的依赖关系强行安装
+--force    忽略软件包及文件的冲突
+
+yum install 全部安装
+yum install package1 安装指定的安装包package1
+yum groupinsall group1 安装程序组group1
+ ~]# man  yum
+yum  localinstall  #本地安装。
+
+用于安装一组本地RPM文件。
+如果需要，启用的存储库将用于解析依赖关系。
+请注意，如果给定了文件名，install命令将执行本地安装。
+此命令仅因遗留原因而维护。
+
+2 更新和升级
+yum update 全部更新
+yum update package1 更新指定程序包package1
+yum check-update 检查可更新的程序
+yum upgrade package1 升级指定程序包package1
+yum groupupdate group1 升级程序组group1
+
+3 查找和显示
+yum info package1 显示安装包信息package1
+yum list 显示所有已经安装和可以安装的程序包
+yum list package1 显示指定程序包安装情况package1
+yum groupinfo group1 显示程序组group1信息yum search string 根据关键字string查找安装包
+
+yum有很多源，大多是网络上的。
+yum  makecache 建立一个缓存，以后用install时就在缓存中搜索，提高了速度
+
+5 清除缓存
+yum clean packages 清除缓存目录下的软件包
+yum clean headers 清除缓存目录下的 headers
+yum clean oldheaders 清除缓存目录下旧的 headers
+yum clean, yum clean all (= yum clean packages; yum clean oldheaders) 清除缓存目录下的软件包及旧的headers
+
+
+Linux下gcc/g++、make和cmake的区别
+
+文本程序到可执行文件生成无论在什么平台大致分为以下几个部分： 
+　　1.用编辑器编写源代码，如.c文件。 --- gcc编译c文件，而g++编译cpp文件
+
+　　2.用编译器编译代码生成目标文件，如.o。 --- make依据它来批处理编译源文件
+　　3.用链接器连接目标代码生成可执行文件，如.exe。
+
+编译和链接阶段是靠g++和gcc编辑器来完成，
+这两个编译阶段是相同的，
+但是链接阶段g++默认链接c++库，
+所以一般情况下用gcc编译c文件，而g++编译cpp文件。
+当然g++也可以编译c文件，
+而gcc编译cpp文件则需要在后面加上参数
+ -lstdc++ ， 作用就是链接c++库。
+
+一种类似批处理的程序，来批处理编译源文件 make工具，
+它是一个自动化编译工具，可以使用一条命令实现完全编译。
+但是需要编写一个规则文件，
+make依据它来批处理编译，
+这个文件就是makefile
+
+ cmake工具，能够读入所有源文件之后，自动生成makefile ，
+它能够输出各种各样的makefile或者project文件,从而帮助程序员减轻负担。
+但是随之而来也就是编写cmakelist文件，它是cmake所依据的规则。
+
+　　原文件—cmakelist —cmake —makefile —make —生成可执行文件
+（make中则包含了多条链接以及gcc/g++编译语句）。 
+
+============== **********/
+
+[root@room9pc01 ~]# yum  list |egrep   "gcc|gcc-c++|gcc-objc|cmake|git"
+Repository epel is listed more than once in the configuration
+Repository epel-debuginfo is listed more than once in the configuration
+Repository epel-source is listed more than once in the configuration
+在配置中多次列出存储库EPEL
+在配置中多次列出存储库epel debuginfo
+在配置中多次列出存储库EPEL源
+crontabs.noarch                        1.11-6.20121102git.el7          @anaconda
+gcc.x86_64                             4.8.5-16.el7                    @CentOS7 
+gcc-c++.x86_64                         4.8.5-16.el7                    @CentOS7 
+git.x86_64                             1.8.3.1-11.el7                  @rhel7  
+............
+
+yum-axelget.noarch                     1.0.5.1-1.20140522gitad6fb3e.el7
+[root@room9pc01 ~]# echo $?
+0
+------------------------------------- 设置构建环境： 需要的编译工具 ------------------
+$ sudo dnf install gcc gcc-c++ gcc-objc cmake git
+
+[root@room9pc01 ~]# yum  -y install  gcc  gcc-c++  gcc-objc  cmake  git
+..................
+
+更新完毕:
+  gcc.x86_64 0:4.8.5-36.el7_6.1               gcc-c++.x86_64 0:4.8.5-36.el7_6.1         
+  gcc-objc.x86_64 0:4.8.5-36.el7_6.1          git.x86_64 0:1.8.3.1-20.el7               
+
+作为依赖被升级:
+  cpp.x86_64 0:4.8.5-36.el7_6.1            libgcc.i686 0:4.8.5-36.el7_6.1                
+  libgcc.x86_64 0:4.8.5-36.el7_6.1         libgomp.x86_64 0:4.8.5-36.el7_6.1             
+  libobjc.x86_64 0:4.8.5-36.el7_6.1        libstdc++.i686 0:4.8.5-36.el7_6.1             
+  libstdc++.x86_64 0:4.8.5-36.el7_6.1      libstdc++-devel.x86_64 0:4.8.5-36.el7_6.1     
+  perl-Git.noarch 0:1.8.3.1-20.el7        
+
+完毕！
+[root@room9pc01 yum.repos.d]# ls
+Centos-7.repo  epel-7.repo  NSD-2018-1-12.tar.gz  repo  rhel7.repo
+[root@room9pc01 yum.repos.d]# vim  epel-7.repo 
+[root@room9pc01 yum.repos.d]# cat  epel-7.repo
+[epel]
+name=Extra Packages for Enterprise Linux 7 - $basearch
+baseurl=http://mirrors.aliyun.com/epel/7/$basearch
+failovermethod=priority
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+ 
+[epel-debuginfo]
+name=Extra Packages for Enterprise Linux 7 - $basearch - Debug
+baseurl=http://mirrors.aliyun.com/epel/7/$basearch/debug
+failovermethod=priority
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+gpgcheck=0
+ 
+[epel-source]
+name=Extra Packages for Enterprise Linux 7 - $basearch - Source
+baseurl=http://mirrors.aliyun.com/epel/7/SRPMS
+failovermethod=priority
+enabled=0         #注意关闭仓库 enabled=0 
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+gpgcheck=0
+[root@room9pc01 yum.repos.d]#  
+
+[root@room9pc01 ~]# rpm  -q   gcc  gcc-c++  gcc-objc  cmake  git
+gcc-4.8.5-16.el7.x86_64
+gcc-c++-4.8.5-16.el7.x86_64
+gcc-objc-4.8.5-16.el7.x86_64
+cmake-2.8.12.2-2.el7.x86_64
+git-1.8.3.1-11.el7.x86_64
+
+
+[root@room9pc01 ~]# yum  list  |egrep  "libX11-devel|mesa-libGL-devel|libv4l-devel|pulseaudio-libs-devel|x264-devel|freetype-devel|fontconfig-devel|libXcomposite-devel|libXinerama-devel|qt5-qtbase-devel|qt5-qtx11extras-devel|libcurl-devel|systemd-devel|ffmpeg|luajit-devel|swig|python3-devel|ffmpeg-devel"
+Repository epel is listed more than once in the configuration
+Repository epel-debuginfo is listed more than once in the configuration
+Repository epel-source is listed more than once in the configuration
+boost169-mpich-python3-devel.x86_64    1.69.0-1.el7                    epel     
+boost169-openmpi-python3-devel.x86_64  1.69.0-1.el7                    epel     
+boost169-python3-devel.x86_64          1.69.0-1.el7                    epel     
+compat-ffmpeg28.x86_64                 2.8.15-2.el7                    rpmfusion-free-updates
+compat-ffmpeg28-devel.x86_64           2.8.15-2.el7                    rpmfusion-free-updates
+ffmpeg.x86_64                          3.4.5-3.el7                     rpmfusion-free-updates
+ffmpeg-compat.x86_64                   0.6.7-4.el7                     rpmfusion-free-updates
+ffmpeg-compat-devel.x86_64             0.6.7-4.el7                     rpmfusion-free-updates
+ffmpeg-devel.x86_64                    3.4.5-3.el7                     rpmfusion-free-updates
+ffmpeg-libs.x86_64                     3.4.5-3.el7                     rpmfusion-free-updates
+ffmpegthumbnailer.x86_64               2.2.0-7.el7                     rpmfusion-free-updates
+ffmpegthumbnailer-devel.x86_64         2.2.0-7.el7                     rpmfusion-free-updates
+fontconfig-devel.i686                  2.10.95-11.el7                  rhel7    
+fontconfig-devel.x86_64                2.10.95-11.el7                  rhel7    
+freetype-devel.i686                    2.4.11-15.el7                   rhel7    
+freetype-devel.x86_64                  2.4.11-15.el7                   rhel7    
+golang-github-openshift-go-systemd-devel.noarch
+gstreamer-ffmpeg.x86_64                0.10.13-16.el7                  rpmfusion-free-updates
+libX11-devel.i686                      1.6.5-1.el7                     rhel7    
+libX11-devel.x86_64                    1.6.5-1.el7                     rhel7    
+libXcomposite-devel.i686               0.4.4-4.1.el7                   rhel7    
+libXcomposite-devel.x86_64             0.4.4-4.1.el7                   rhel7    
+libXinerama-devel.i686                 1.1.3-2.1.el7                   rhel7    
+libXinerama-devel.x86_64               1.1.3-2.1.el7                   rhel7    
+libcurl-devel.i686                     7.29.0-42.el7                   rhel7    
+libcurl-devel.x86_64                   7.29.0-42.el7                   rhel7    
+luajit-devel.x86_64                    2.0.4-3.el7                     epel     
+mesa-libGL-devel.i686                  17.0.1-6.20170307.el7           rhel7    
+mesa-libGL-devel.x86_64                17.0.1-6.20170307.el7           rhel7    
+mingw32-qt5-qtbase-devel.x86_64        5.6.0-3.el7                     epel     
+mingw64-qt5-qtbase-devel.x86_64        5.6.0-3.el7                     epel     
+mythffmpeg.x86_64                      29.1-30.53.20181105git9f0acf372d.el7
+pulseaudio-libs-devel.i686             10.0-3.el7                      rhel7    
+pulseaudio-libs-devel.x86_64           10.0-3.el7                      rhel7    
+qt5-qtbase-devel.i686                  5.6.2-1.el7                     rhel7    
+qt5-qtbase-devel.x86_64                5.6.2-1.el7                     rhel7    
+qt5-qtx11extras-devel.i686             5.6.2-1.el7                     rhel7    
+qt5-qtx11extras-devel.x86_64           5.6.2-1.el7                     rhel7    
+swig.x86_64                            2.0.10-5.el7                    rhel7    
+systemd-devel.i686                     219-42.el7                      rhel7    
+systemd-devel.x86_64                   219-42.el7                      rhel7    
+x264-devel.x86_64                      0.148-23.20170521gitaaa9aa8.el7 rpmfusion-free-updates
+[root@room9pc01 ~]# 
+
+[root@room9pc01 ~]# 
+获取所需的包：
+sudo yum install  libX11-devel   mesa-libGL-devel   libv4l-devel \
+        pulseaudio-libs-devel   x264-devel        freetype-devel \
+  fontconfig-devel     libXcomposite-devel     libXinerama-devel \
+  qt5-qtbase-devel   qt5-qtx11extras-devel         libcurl-devel \
+  systemd-devel     ffmpeg     luajit-devel   swig    python3-devel
+（注意：您可能还需要安装ffmpeg-devel）
+[root@room9pc01 ~]# yum  -y  install  --nogpgcheck   libX11-devel     mesa-libGL-devel   
+         libv4l-devel      pulseaudio-libs-devel     x264-devel         freetype-devel
+     fontconfig-devel      libXcomposite-devel       libXinerama-devel  qt5-qtbase-devel
+     qt5-qtx11extras-devel       libcurl-devel       systemd-devel      ffmpeg 
+     luajit-devel       swig      python3-devel      ffmpeg-devel
+.....................
+
+https://mirrors.aliyun.com/rpmfusion/free/el/updates/7/x86_64/f/
+
+没有可用软件包 x264-devel。
+没有可用软件包 ffmpeg。
+没有可用软件包 python3-devel。
+没有可用软件包 ffmpeg-devel。
+正在解决依赖关系
+
+https://mirrors.aliyun.com/rpmfusion/free/el/updates/7/x86_64/x/x264-devel-0.148-23.20170521gitaaa9aa8.el7.x86_64.rpm
+
+https://mirrors.aliyun.com/rpmfusion/free/el/updates/7/x86_64/f/ffmpeg-3.4.5-3.el7.x86_64.rpm
+
+https://mirrors.aliyun.com/rpmfusion/free/el/updates/7/x86_64/f/ffmpeg-devel-3.4.5-3.el7.x86_64.rpm
+
+
+/*********
+错误：软件包：libass-0.13.4-6.el7.x86_64 (epel)
+          需要：libfribidi.so.0()(64bit)
+ 您可以尝试添加 --skip-broken 选项来解决该问题
+ 您可以尝试执行：rpm -Va --nofiles --nodigest
+*********/
+RPMFusion
+
+如果您现在正在使用Fedora 15，对RPMFusion一定不陌生吧，各种音频软件如MPlayer在标准源中是没有的，一般先安装RPMFusion源，之后就可以放便地yum install各种需要的软件啦。
+
+添加阿里云的RPMFusion源
+$ sudo rpm -Uvh http://mirrors.aliyun.com/rpmfusion/free/el/updates/6/x86_64/rpmfusion-free-release-6-1.noarch.rpm
+$ sudo rpm -Uvh http://mirrors.aliyun.com/rpmfusion/nonfree/el/updates/6/x86_64/rpmfusion-nonfree-release-6-1.noarch.rpm
+
+
+[root@room9pc01 ~]# ls  /etc/yum.repos.d/
+epel-7.repo        NSD-2018-1-12.tar.gz   rhel7.repo
+epel.repo          packagekit-media.repo  rpmfusion-free-updates.repo
+epel-testing.repo  repo                   rpmfusion-free-updates-testing.repo
+
+[root@room9pc01 ~]# yum  makecache 
+已加载插件：fastestmirror, langpacks
+Repository epel is listed more than once in the configuration
+Repository epel-debuginfo is listed more than once in the configuration
+Repository epel-source is listed more than once in the configuration
+epel                                                     | 4.7 kB     00:00     
+epel-debuginfo                                           | 3.0 kB     00:00     
+epel-source                                              | 3.5 kB     00:00  
+...............
+ * rpmfusion-free-updates-testing-source: mirror.lzu.edu.cn
+元数据缓存已建立
+[root@room9pc01 ~]# yum  -y  install  --nogpgcheck   libX11-devel      mesa-libGL-devel     libv4l-devel      pulseaudio-libs-devel     x264-devel     freetype-devel     fontconfig-devel    libXcomposite-devel      libXinerama-devel     qt5-qtbase-devel     qt5-qtx11extras-devel      libcurl-devel       systemd-devel    ffmpeg     luajit-devel     swig    python3-devel   ffmpeg-devel
+
+没有可用软件包 x264-devel。
+没有可用软件包 ffmpeg。
+没有可用软件包 python3-devel。
+没有可用软件包 ffmpeg-devel。
+正在解决依赖关系
+
+............
+          需要：libva-x11.so.1()(64bit)
+错误：软件包：libass-0.13.4-6.el7.x86_64 (epel)
+          需要：libfribidi.so.0()(64bit)
+ 您可以尝试添加 --skip-broken 选项来解决该问题
+ 您可以尝试执行：rpm -Va --nofiles --nodigest
+
+
+安装EPEL：
+[root@room9pc01 yum.repos.d]# rpm  -q  epel-release
+epel-release-7-11.noarch
+
+
+[root@room9pc01 yum.repos.d]# ls
+Centos-7.repo         repo                         rpmfusion-free-updates-testing.repo
+epel-7.repo           rhel7.repo
+NSD-2018-1-12.tar.gz  rpmfusion-free-updates.repo
+
+
+rhel7                                           rhel7.4                                  4,986
+rpmfusion-free-updates/x86_64                   RPM Fusion for EL 7 - Free - Updates       239
+rpmfusion-free-updates-debuginfo/x86_64         RPM Fusion for EL 7 - Free - Updates De     86
+
+rpmfusion-free-updates-source/x86_64            RPM Fusion for EL 7 - Free - Updates So      0
+
+rpmfusion-free-updates-testing/x86_64           RPM Fusion for EL 7 - Free - Test Updat      0
+
+rpmfusion-free-updates-testing-debuginfo/x86_64 RPM Fusion for EL 7 - Free - Test Updat      0
+
+rpmfusion-free-updates-testing-source/x86_64    RPM Fusion for EL 7 - Free - Test Updat      0
+
+updates/7/x86_64                                CentOS-7 - Updates - mirrors.aliyun.com  1,459
+repolist: 33,107
+
+[root@room9pc01 yum.repos.d]# cat   rpmfusion-free-updates.repo 
+[rpmfusion-free-updates]
+name=RPM Fusion for EL 7 - Free - Updates
+#baseurl=http://download1.rpmfusion.org/free/el/updates/7/$basearch/
+mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-el-updates-released-7&arch=$basearch
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-el-7
+
+[rpmfusion-free-updates-debuginfo]
+name=RPM Fusion for EL 7 - Free - Updates Debug
+#baseurl=http://download1.rpmfusion.org/free/el/updates/7/$basearch/debug/
+mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-el-updates-released-debug-7&arch=$basearch
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-el-7
+
+[rpmfusion-free-updates-source]
+name=RPM Fusion for EL 7 - Free - Updates Source
+#baseurl=http://download1.rpmfusion.org/free/el/updates/7/SRPMS/
+mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-el-updates-released-source-7&arch=$basearch
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-el-7
+
+[root@room9pc01 yum.repos.d]# 
+[root@room9pc01 yum.repos.d]# ls
+Centos-7.repo         repo                         rpmfusion-free-updates-testing.repo
+epel-7.repo           rhel7.repo
+NSD-2018-1-12.tar.gz  rpmfusion-free-updates.repo
+[root@room9pc01 yum.repos.d]# vim  rpmfusion-free-updates.repo 
+[root@room9pc01 yum.repos.d]# cat  rpmfusion-free-updates.repo
+[rpmfusion-free-updates]
+name=RPM Fusion for EL 7 - Free - Updates
+#baseurl=http://download1.rpmfusion.org/free/el/updates/7/$basearch/
+mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-el-updates-released-7&arch=$basearch
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-el-7
+
+[rpmfusion-free-updates-debuginfo]
+name=RPM Fusion for EL 7 - Free - Updates Debug
+#baseurl=http://download1.rpmfusion.org/free/el/updates/7/$basearch/debug/
+mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-el-updates-released-debug-7&arch=$basearch
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-el-7
+
+[rpmfusion-free-updates-source]
+name=RPM Fusion for EL 7 - Free - Updates Source
+#baseurl=http://download1.rpmfusion.org/free/el/updates/7/SRPMS/
+mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-el-updates-released-source-7&arch=$basearch
+enabled=0
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-el-7
+
+[root@room9pc01 yum.repos.d]# vim   rpmfusion-free-updates
+rpmfusion-free-updates.repo          rpmfusion-free-updates-testing.repo
+[root@room9pc01 yum.repos.d]# vim   rpmfusion-free-updates-testing.repo 
+[root@room9pc01 yum.repos.d]# cat   rpmfusion-free-updates-testing.repo
+[rpmfusion-free-updates-testing]
+name=RPM Fusion for EL 7 - Free - Test Updates
+#baseurl=http://download1.rpmfusion.org/free/el/updates/testing/7/$basearch/
+mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-el-updates-testing-7&arch=$basearch
+enabled=0
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-el-7
+
+[rpmfusion-free-updates-testing-debuginfo]
+name=RPM Fusion for EL 7 - Free - Test Updates Debug
+#baseurl=http://download1.rpmfusion.org/free/el/updates/testing/7/$basearch/debug/
+mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-el-updates-testing-debug-7&arch=$basearch
+enabled=0
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-el-7
+
+[rpmfusion-free-updates-testing-source]
+name=RPM Fusion for EL 7 - Free - Test Updates Source
+#baseurl=http://download1.rpmfusion.org/free/el/updates/testing/7/SRPMS/
+mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-el-updates-testing-source-7&arch=$basearch
+enabled=0
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-el-7
+
+[root@room9pc01 yum.repos.d]# 
+[root@room9pc01 yum.repos.d]# yum  clean  all >/dev/null  && yum repolist 
+.........
+ * updates: mirrors.aliyun.com
+源标识                                  源名称                                          状态
+base/7/x86_64                           CentOS-7 - Base - mirrors.aliyun.com            10,019
+centosplus/7/x86_64                     CentOS-7 - Plus - mirrors.aliyun.com                48
+epel/x86_64                             Extra Packages for Enterprise Linux 7 - x86_64  13,015
+epel-debuginfo/x86_64                   Extra Packages for Enterprise Linux 7 - x86_64   2,873
+extras/7/x86_64                         CentOS-7 - Extras - mirrors.aliyun.com             382
+rhel7                                   rhel7.4                                          4,986
+rpmfusion-free-updates/x86_64           RPM Fusion for EL 7 - Free - Updates               239
+rpmfusion-free-updates-debuginfo/x86_64 RPM Fusion for EL 7 - Free - Updates Debug          86
+updates/7/x86_64                        CentOS-7 - Updates - mirrors.aliyun.com          1,459
+repolist: 33,107
+[root@room9pc01 yum.repos.d]# yum  makecache 
+...........
+Loading mirror speeds from cached hostfile
+ * base: mirrors.aliyun.com
+ * centosplus: mirrors.aliyun.com
+ * extras: mirrors.aliyun.com
+ * rpmfusion-free-updates: mirrors.ustc.edu.cn
+ * rpmfusion-free-updates-debuginfo: mirrors.ustc.edu.cn
+ * updates: mirrors.aliyun.com
+元数据缓存已建立
+[root@room9pc01 yum.repos.d]# yum  -y install  x264  ffmpeg   ffmpeg-devel
+.............
+
+已安装:
+  ffmpeg.x86_64 0:3.4.5-3.el7                         ffmpeg-devel.x86_64 0:3.4.5-3.el7      
+  x264.x86_64 0:0.148-23.20170521gitaaa9aa8.el7      
+
+作为依赖被安装:
+  SDL2.x86_64 0:2.0.9-1.el7             ffmpeg-libs.x86_64 0:3.4.5-3.el7                      
+  fribidi.x86_64 0:1.0.2-1.el7          jack-audio-connection-kit.x86_64 0:1.9.9.5-6.el7      
+  lame-libs.x86_64 0:3.100-1.el7        libass.x86_64 0:0.13.4-6.el7                          
+  libavdevice.x86_64 0:3.4.5-3.el7      libffado.x86_64 0:2.1.0-4.el7                         
+  libmfx.x86_64 0:1.21-2.el7            libva.x86_64 0:1.8.3-1.el7                            
+  libvdpau.x86_64 0:1.1.1-3.el7         libxml++.x86_64 0:2.37.1-1.el7                        
+  ocl-icd.x86_64 0:2.2.12-1.el7         openal-soft.x86_64 0:1.16.0-3.el7                     
+  opencore-amr.x86_64 0:0.1.5-6.el7     openjpeg2.x86_64 0:2.3.0-6.el7                        
+  soxr.x86_64 0:0.1.2-1.el7             vid.stab.x86_64 0:1.1-4.20170830gitafc8ea9.el7        
+  vo-amrwbenc.x86_64 0:0.1.3-1.el7      x264-libs.x86_64 0:0.148-23.20170521gitaaa9aa8.el7    
+  x265-libs.x86_64 0:2.9-3.el7          xvidcore.x86_64 0:1.3.4-2.el7                         
+  zvbi.x86_64 0:0.2.35-1.el7           
+
+完毕！
+[root@room9pc01 yum.repos.d]#  
+[root@room9pc01 yum.repos.d]# yum  -y install  python-devel
+
+
+[root@room9pc01 ~]# yum  -y  install  --nogpgcheck   libX11-devel      mesa-libGL-devel     libv4l-devel      pulseaudio-libs-devel     x264-devel     freetype-devel     fontconfig-devel    libXcomposite-devel      libXinerama-devel     qt5-qtbase-devel     qt5-qtx11extras-devel      libcurl-devel       systemd-devel    ffmpeg     luajit-devel     swig    python3-devel   ffmpeg-devel
+
+没有可用软件包 x264-devel。
+没有可用软件包 ffmpeg。
+没有可用软件包 python3-devel。
+没有可用软件包 ffmpeg-devel。
+正在解决依赖关系
+
+已安装:
+  x264-devel.x86_64 0:0.148-23.20170521gitaaa9aa8.el7                                         
+
+完毕！
+[root@room9pc01 yum.repos.d]# rpm  -q  libX11-devel      mesa-libGL-devel     libv4l-devel      pulseaudio-libs-devel     x264-devel     freetype-devel     fontconfig-devel    libXcomposite-devel      libXinerama-devel     qt5-qtbase-devel     qt5-qtx11extras-devel      libcurl-devel       systemd-devel    ffmpeg     luajit-devel     swig    python-devel   ffmpeg-devel
+libX11-devel-1.6.5-2.el7.x86_64
+mesa-libGL-devel-18.0.5-4.el7_6.x86_64
+libv4l-devel-0.9.5-4.el7.x86_64
+pulseaudio-libs-devel-10.0-5.el7.x86_64
+x264-devel-0.148-23.20170521gitaaa9aa8.el7.x86_64
+freetype-devel-2.8-12.el7_6.1.x86_64
+fontconfig-devel-2.13.0-4.3.el7.x86_64
+libXcomposite-devel-0.4.4-4.1.el7.x86_64
+libXinerama-devel-1.1.3-2.1.el7.x86_64
+qt5-qtbase-devel-5.9.2-3.el7.x86_64
+qt5-qtx11extras-devel-5.9.2-1.el7.x86_64
+libcurl-devel-7.29.0-51.el7.x86_64
+systemd-devel-219-62.el7_6.5.x86_64
+ffmpeg-3.4.5-3.el7.x86_64
+luajit-devel-2.0.4-3.el7.x86_64
+swig-2.0.10-5.el7.x86_64
+python-devel-2.7.5-76.el7.x86_64
+ffmpeg-devel-3.4.5-3.el7.x86_64
+[root@room9pc01 yum.repos.d]# 
+
+
+[root@room9pc01 yum.repos.d]# rpm  -q  libX11-devel      mesa-libGL-devel     libv4l-devel      pulseaudio-libs-devel     x264-devel     freetype-devel     fontconfig-devel    libXcomposite-devel      libXinerama-devel     qt5-qtbase-devel     qt5-qtx11extras-devel      libcurl-devel       systemd-devel    ffmpeg     luajit-devel     swig    python-devel   ffmpeg-devel
+
+
+
+/*****安装IUS软件源：
+[root@room9pc01 yum.repos.d]# yum  -y  install  https://centos7.iuscommunity.org/ius-release.rpm
+........
+已安装:
+  ius-release.noarch 0:1.0-15.ius.centos7                                                     
+
+完毕！
+[root@room9pc01 yum.repos.d]#  rpm  -q  ius-release
+ius-release-1.0-15.ius.centos7.noarch
+*********/
+
+
+
+[root@room9pc01 ~]# cd  /etc/yum.repos.d/
+[root@room9pc01 yum.repos.d]# ls
+epel-7.repo        NSD-2018-1-12.tar.gz   rhel7.repo
+epel.repo          packagekit-media.repo  rpmfusion-free-updates.repo
+epel-testing.repo  repo                   rpmfusion-free-updates-testing.repo
+[root@room9pc01 yum.repos.d]# wget   http://mirrors.aliyun.com/repo/Centos-7.repo
+--2019-03-24 14:00:01--  http://mirrors.aliyun.com/repo/Centos-7.repo
+正在解析主机 mirrors.aliyun.com (mirrors.aliyun.com)... 124.225.195.229, 124.225.195.230, 124.225.195.232, ...
+正在连接 mirrors.aliyun.com (mirrors.aliyun.com)|124.225.195.229|:80... 已连接。
+已发出 HTTP 请求，正在等待回应... 200 OK
+长度：2523 (2.5K) [application/octet-stream]
+正在保存至: “Centos-7.repo”
+
+100%[======================================>] 2,523       --.-K/s 用时 0s      
+
+2019-03-24 14:00:01 (199 MB/s) - 已保存 “Centos-7.repo” [2523/2523])
+
+[root@room9pc01 yum.repos.d]# rpm  -q  libX11-devel      mesa-libGL-devel     libv4l-devel      pulseaudio-libs-devel     x264-devel     freetype-devel     fontconfig-devel    libXcomposite-devel      libXinerama-devel     qt5-qtbase-devel     qt5-qtx11extras-devel      libcurl-devel       systemd-devel    ffmpeg     luajit-devel     swig    python-devel   ffmpeg-devel
+libX11-devel-1.6.5-2.el7.x86_64
+mesa-libGL-devel-18.0.5-4.el7_6.x86_64
+libv4l-devel-0.9.5-4.el7.x86_64
+pulseaudio-libs-devel-10.0-5.el7.x86_64
+x264-devel-0.148-23.20170521gitaaa9aa8.el7.x86_64
+freetype-devel-2.8-12.el7_6.1.x86_64
+fontconfig-devel-2.13.0-4.3.el7.x86_64
+libXcomposite-devel-0.4.4-4.1.el7.x86_64
+libXinerama-devel-1.1.3-2.1.el7.x86_64
+qt5-qtbase-devel-5.9.2-3.el7.x86_64
+qt5-qtx11extras-devel-5.9.2-1.el7.x86_64
+libcurl-devel-7.29.0-51.el7.x86_64
+systemd-devel-219-62.el7_6.5.x86_64
+ffmpeg-3.4.5-3.el7.x86_64
+luajit-devel-2.0.4-3.el7.x86_64
+swig-2.0.10-5.el7.x86_64
+python-devel-2.7.5-76.el7.x86_64
+ffmpeg-devel-3.4.5-3.el7.x86_64
+[root@room9pc01 yum.repos.d]#  ls
+Centos-7.repo         repo                         rpmfusion-free-updates-testing.repo
+epel-7.repo           rhel7.repo
+NSD-2018-1-12.tar.gz  rpmfusion-free-updates.repo
+
+[root@room9pc01 yum.repos.d]# pwd
+/etc/yum.repos.d
+[root@room9pc01 yum.repos.d]# 
+
+
+https://github.com/obsproject/
+https://github.com/obsproject/obs-studio
+
+构建和安装OBS：
+/******# git clone --recursive https://github.com/jp9000/obs-studio.git
+
+git clone --recursive https://github.com/obsproject/obs-studio.git
+cd obs-studio
+mkdir build && cd build
+cmake -DUNIX_STRUCTURE=1 ..
+make -j4
+sudo make install
+
+[root@room9pc01 ~]# mkdir  /obs
+[root@room9pc01 ~]# cd  /obs/
+[root@room9pc01 obs]# ls  -a
+.  ..
+
+构建和安装OBS：
+/******# git clone --recursive https://github.com/jp9000/obs-studio.git
+----------------------------  克隆源代码进行编译：
+[root@room9pc01 obs]# git clone --recursive https://github.com/obsproject/obs-studio.git
+正克隆到 'obs-studio'...
+remote: Enumerating objects: 2, done.
+remote: Counting objects: 100% (2/2), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 48761 (delta 0), reused 1 (delta 0), pack-reused 48759
+接收对象中: 100% (48761/48761), 27.78 MiB | 139.00 KiB/s, done.
+处理 delta 中: 100% (31861/31861), done.
+......................
+子模组 'plugins/obs-vst' (https://github.com/obsproject/obs-vst.git) 已为路径 'plugins/obs-vst' 注册
+子模组 'plugins/win-dshow/libdshowcapture' (https://github.com/obsproject/libdshowcapture.git) 已为路径 'plugins/win-dshow/libdshowcapture' 注册
+正克隆到 'plugins/enc-amf'...
+remote: Enumerating objects: 7826, done.
+remote: Total 7826 (delta 0), reused 0 (delta 0), pack-reused 7826
+接收对象中: 100% (7826/7826), 14.20 MiB | 92.00 KiB/s, done.
+处理 delta 中: 100% (5490/5490), done.
+.................
+子模组路径 'plugins/mac-syphon/syphon-framework'：检出 '01b144811f6f7080b70b2d7cc729da071f86f9d7'
+正克隆到 'plugins/obs-browser'...
+remote: Enumerating objects: 7, done.
+remote: Counting objects: 100% (7/7), done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 1590 (delta 1), reused 3 (delta 1), pack-reused 1583
+接收对象中: 100% (1590/1590), 480.74 KiB | 240.00 KiB/s, done.
+处理 delta 中: 100% (1074/1074), done.
+子模组路径 'plugins/obs-browser'：检出 'f94f909690b2acc57d71ed767bd527d86321dad3'
+正克隆到 'plugins/obs-outputs/ftl-sdk'...
+remote: Enumerating objects: 2688, done.
+remote: Total 2688 (delta 0), reused 0 (delta 0), pack-reused 2688
+接收对象中: 100% (2688/2688), 894.23 KiB | 75.00 KiB/s, done.
+处理 delta 中: 100% (1918/1918), done.
+..................
+处理 delta 中: 100% (3478/3478), done.
+子模组路径 'plugins/obs-outputs/ftl-sdk/libjansson'：检出 'bc5741fb1ac730ead24e9bd08977fc6c248e04b0'
+正克隆到 'plugins/obs-vst'...
+remote: Enumerating objects: 28, done.
+remote: Counting objects: 100% (28/28), done.
+remote: Compressing objects: 100% (22/22), done.
+remote: Total 562 (delta 6), reused 20 (delta 5), pack-reused 534
+接收对象中: 100% (562/562), 594.96 KiB | 350.00 KiB/s, done.
+处理 delta 中: 100% (322/322), done.
+子模组路径 'plugins/obs-vst'：检出 'fde438f7a8afdf41a7ab386a0aa1a61175fc8427'
+正克隆到 'plugins/win-dshow/libdshowcapture'...
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 691 (delta 0), reused 1 (delta 0), pack-reused 687
+接收对象中: 100% (691/691), 211.46 KiB | 204.00 KiB/s, done.
+处理 delta 中: 100% (472/472), done.
+子模组路径 'plugins/win-dshow/libdshowcapture'：检出 'cba07c63810f51a58f6fb7f2e3b0fb162b5a6313'
+[root@room9pc01 obs]# ls  -a
+.  ..  obs-studio
+'
+[root@room9pc01 obs]# ls  -a
+.  ..  obs-studio
+[root@room9pc01 obs]# cd  obs-studio/
+[root@room9pc01 obs-studio]# ls  -a
+.                         CI                COPYING        .gitattributes  libobs-opengl  UI
+..                        cmake             deps           .gitignore      .mailmap
+additional_install_files  CMakeLists.txt    docs           .gitmodules     plugins
+appveyor.yml              COMMITMENT        Doxyfile       INSTALL         README.rst
+AUTHORS                   config            .editorconfig  libobs          test
+azure-pipelines.yml       CONTRIBUTING.rst  .git           libobs-d3d11    .travis.yml
+
+[root@room9pc01 obs-studio]# mkdir   build   &&  cd  build
+
+
+ cmake工具，能够读入所有源文件之后，自动生成makefile ，
+它能够输出各种各样的makefile或者project文件,从而帮助程序员减轻负担。
+但是随之而来也就是编写cmakelist文件，它是cmake所依据的规则。
+
+　　原文件—cmakelist —cmake —makefile —make —生成可执行文件
+（make中则包含了多条链接以及gcc/g++编译语句）。 
+
+[root@room9pc01 build]# cmake -DUNIX_STRUCTURE=1 ..   #注意 2个 英文标点 ".."
+-- The C compiler identification is GNU 4.8.5
+-- The CXX compiler identification is GNU 4.8.5
+-- Check for working C compiler: /usr/bin/cc
+...............
+-- SpeexDSP support not found
+CMake Error at UI/CMakeLists.txt:49 (find_package):
+  By not providing "FindQt5Svg.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "Qt5Svg", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "Qt5Svg" with any
+  of the following names:
+
+    Qt5SvgConfig.cmake
+    qt5svg-config.cmake
+
+  Add the installation prefix of "Qt5Svg" to CMAKE_PREFIX_PATH or set
+  "Qt5Svg_DIR" to a directory containing one of the above files.  If "Qt5Svg"
+  provides a separate development package or SDK, be sure it has been
+  installed.
+
+
+-- Configuring incomplete, errors occurred!
+See also "/obs/obs-studio/build/CMakeFiles/CMakeOutput.log".
+See also "/obs/obs-studio/build/CMakeFiles/CMakeError.log".
+[root@room9pc01 build]#  ls  -a
+.   CMakeCache.txt  config             CPackSourceConfig.cmake  libobs         plugins
+..  CMakeFiles      CPackConfig.cmake  deps                     libobs-opengl  UI
+[root@room9pc01 build]# 
+[root@room9pc01 build]# make
+make          makedb        makedeltarpm  makedumpfile  
+[root@room9pc01 build]# make    -j4
+make: *** 没有指明目标并且找不到 makefile。 停止。
+[root@room9pc01 build]#  make -j4
+make: *** 没有指明目标并且找不到 makefile。 停止。
+[root@room9pc01 build]# echo  $?
+2
+
+构建和安装OBS：
+/******# git clone --recursive https://github.com/jp9000/obs-studio.git
+----------------------------  克隆源代码进行编译：
+
+[root@room9pc01 ~]# mkdir   /OBSPROJECT
+[root@room9pc01 ~]# CD  /OBSPROJECT/
+bash: CD: 未找到命令...
+相似命令是： 'cd'
+[root@room9pc01 ~]# cd  /OBSPROJECT/
+[root@room9pc01 OBSPROJECT]# git  init 
+初始化空的 Git 版本库于 /OBSPROJECT/.git/
+[root@room9pc01 OBSPROJECT]#  git clone --recursive https://github.com/jp9000/obs-studio.git
+正克隆到 'obs-studio'...
+remote: Enumerating objects: 2, done.
+...............
+子模组路径 'plugins/win-dshow/libdshowcapture'：检出 'cba07c63810f51a58f6fb7f2e3b0fb162b5a6313'
+[root@room9pc01 OBSPROJECT]# ls  -a
+.  ..  .git  obs-studio
+[root@room9pc01 OBSPROJECT]# cd  obs-studio/
+[root@room9pc01 obs-studio]# ls  -a
+.                         CI                COPYING        .gitattributes  libobs-opengl  UI
+..                        cmake             deps           .gitignore      .mailmap
+additional_install_files  CMakeLists.txt    docs           .gitmodules     plugins
+appveyor.yml              COMMITMENT        Doxyfile       INSTALL         README.rst
+AUTHORS                   config            .editorconfig  libobs          test
+azure-pipelines.yml       CONTRIBUTING.rst  .git           libobs-d3d11    .travis.yml
+[root@room9pc01 obs-studio]# mkdir   build   &&  cd  build
+
+[root@room9pc01 build]# cmake -DUNIX_STRUCTURE=1  ..
+
+-- The C compiler identification is GNU 4.8.5
+..............
+
+
+#make -j4
+
+这几部分开执行比较好：
+  make -j4
+  sudo make install
+
+
+默认情况下，obs在/ usr / local / lib中安装库。
+要确保加载程序可以在那里找到它们，
+请使用单行创建文件/etc/ld.so.conf.d/local.conf
+/usr/local/lib  
+
+然后跑
+sudo ldconfig
+
+
+
+
+
+
+
+
+
+
+
+
