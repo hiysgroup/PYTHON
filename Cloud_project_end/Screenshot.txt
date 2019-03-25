@@ -208,7 +208,7 @@ linux   centos7  截图 PrintScreenSysRq
 [root@room9pc01 ~]# echo  "scale = 4; 18.40 * 11 " |bc
 202.40
 
-
+https://activity.huaweicloud.com/promotion/
 
 
 
