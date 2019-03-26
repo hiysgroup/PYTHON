@@ -142,24 +142,1232 @@ for i  in  range(4):
   print("i  is %d  \t apd  is " % i,apd)
 print(apd)
 [root@V20 PythonScripts]# 
+>>> fib = [ 0, 1 ]
+>>> l = int(input("input: "))
+input: 6
+>>> for i in range(l-2):
+...   fib.append(fib[-1] + fib[-2])
+... 
+>>> print(fib)
+[0, 1, 1, 2, 3, 5]
+>>> 
+
+[root@V20 PythonScripts]# vim  forange.py 
+[root@V20 PythonScripts]# python3  forange.py
+ apdrg is  [0, 1]
+i  is 0  	 apdrg is  [0, 1, 1]
+i  is 1  	 apdrg is  [0, 1, 1, 2]
+i  is 2  	 apdrg is  [0, 1, 1, 2, 3]
+i  is 3  	 apdrg is  [0, 1, 1, 2, 3, 5]
+[0, 1, 1, 2, 3, 5]
+*#*#*#*#*#*#*#*#*#*#
+--- apd is  [0]
+i  is 0  	 apd  is  [0, 1]
+i  is 1  	 apd  is  [0, 1, 1]
+i  is 2  	 apd  is  [0, 1, 1, 2]
+i  is 3  	 apd  is  [0, 1, 1, 2, 3]
+[0, 1, 1, 2, 3]
+##########
+input: 6
+[0, 1, 1, 2, 3, 5]
+[root@V20 PythonScripts]# cat   forange.py
+#!/usr/bin/env   python3
+
+apdrg = [ 0, 1]
+print(" apdrg is ",apdrg)
+for  i  in range(4):
+  apdrg.append(apdrg[-1] + apdrg[-2])
+  print("i  is %d  \t apdrg is " % i,apdrg)
+print(apdrg)
+print("*#" * 10)
+a, b = 0, 1
+apd = [0]
+print("--- apd is ",apd)
+for i  in  range(4):
+  a, b = b, a + b
+  apd.append(a)
+  print("i  is %d  \t apd  is " % i,apd)
+print(apd)
+
+print("#" * 10)
+fib = [ 0, 1 ]
+l = int(input("input: "))
+
+for i in range(l-2):
+   fib.append(fib[-1] + fib[-2])
+print(fib)
+
+[root@V20 PythonScripts]# 
+[root@V20 PythonScripts]# scp   forange.py   root@192.168.0.254:'/var/git/pythonScripts' 
+
+python print格式化输出。
+
+1. 打印字符串    # %s    字符串 (采用str()的显示)
+# print ("His name is %s" % ("Aviad") )
+
+2.打印整数   # %d    十进制整数
+# print ("He is %d years old" % (25) )
+print	("result is %d" % sum )	
+
+# %d   %i  有符号十进制
+
+3.打印浮点数   # %f    浮点数
+# print ("His height is %f  m" % (1.83))
+
+4.打印浮点数（指定保留小数点位数）
+# print ("His height is %.2f m"%(1.83))
+
+%s    字符串 (采用str()的显示)
+
+%c    单个字符
+
+%b    二进制整数
+
+%d    十进制整数
+
+%o    八进制整数
+
+%x    十六进制整数
+
+%f    浮点数
+--------------------- 
+
+multiplication   英 [ˌmʌltɪplɪˈkeɪʃn]  美 [ˌmʌltəplɪˈkeʃən]  
+                n.增加，增殖，倍增;[数]乘法，乘法运算
+
+[root@V20 PythonScripts]# vim  formultip.py
+[root@V20 PythonScripts]# python3  formultip.py
+ apdrg is  [0, 1]
+i  is 0  	 apdrg is  [0, 1, 1]
+i  is 1  	 apdrg is  [0, 1, 1, 2]
+i  is 2  	 apdrg is  [0, 1, 1, 2, 3]
+i  is 3  	 apdrg is  [0, 1, 1, 2, 3, 5]
+[0, 1, 1, 2, 3, 5]
+*#*#*#*#*#*#*#*#*#*#
+I=1 J=1- 1 X 1= 1	
+I=2 J=1- 1 X 2= 2	I=2 J=2- 2 X 2= 4	
+I=3 J=1- 1 X 3= 3	I=3 J=2- 2 X 3= 6	I=3 J=3- 3 X 3= 9	
+I=4 J=1- 1 X 4= 4	I=4 J=2- 2 X 4= 8	I=4 J=3- 3 X 4= 12	I=4 J=4- 4 X 4= 16	
+I=5 J=1- 1 X 5= 5	I=5 J=2- 2 X 5= 10	I=5 J=3- 3 X 5= 15	I=5 J=4- 4 X 5= 20	I=5 J=5- 5 X 5= 25	
+********************
+1 X 1= 1	
+1 X 2= 2	2 X 2= 4	
+1 X 3= 3	2 X 3= 6	3 X 3= 9	
+1 X 4= 4	2 X 4= 8	3 X 4= 12	4 X 4= 16	
+1 X 5= 5	2 X 5= 10	3 X 5= 15	4 X 5= 20	5 X 5= 25	
+1 X 6= 6	2 X 6= 12	3 X 6= 18	4 X 6= 24	5 X 6= 30	6 X 6= 36	
+1 X 7= 7	2 X 7= 14	3 X 7= 21	4 X 7= 28	5 X 7= 35	6 X 7= 42	7 X 7= 49	
+1 X 8= 8	2 X 8= 16	3 X 8= 24	4 X 8= 32	5 X 8= 40	6 X 8= 48	7 X 8= 56	8 X 8= 64	
+1 X 9= 9	2 X 9= 18	3 X 9= 27	4 X 9= 36	5 X 9= 45	6 X 9= 54	7 X 9= 63	8 X 9= 72	9 X 9= 81	
+[root@V20 PythonScripts]# cat    formultip.py
+#!/usr/bin/env   python3
+
+apdrg = [ 0, 1]
+print(" apdrg is ",apdrg)
+for  i  in range(4):
+  apdrg.append(apdrg[-1] + apdrg[-2])
+  print("i  is %d  \t apdrg is " % i,apdrg)
+print(apdrg)
+print("*#" * 10)
+
+for i in range(1, 6):    # [1, 2, 3,...]
+  for j in range(1, i+1):   # i->1:[1], i->2: [1, 2], i->3: [ 1, 2, 3],...
+    print("I=%d J=%d" % (i, j), end = '- ')
+    print('%s X %s= %s' % (j, i, i*j), end='\t')
+  print()
+print("**" * 10)
+for i in range(1, 10):    # [1, 2, 3,...]
+  for j in range(1, i+1):   # i->1:[1], i->2: [1, 2], i->3: [ 1, 2, 3],...
+    print('%s X %s= %s' % (j, i, i*j), end='\t')
+  print()
+[root@V20 PythonScripts]# 
+
+>>> help(print())
+Help on NoneType object:
+
+class NoneType(object)
+ |  Methods defined here:
+ |  
+ |  __bool__(self, /)
+ |      self != 0
+ |  
+ |  __new__(*args, **kwargs) from builtins.type
+ |      Create and return a new object.  See help(type) for accurate signature.
+ |  
+ |  __repr__(self, /)
+ |      Return repr(self).
+
+按 q 退出
+>>> 
+>>> help(print)
+
+Help on built-in function print in module builtins:
+关于内置函数打印模块内置的帮助
+print(...)
+    print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
+    
+    Prints the values to a stream, or to sys.stdout by default.
+默认情况下，将值打印到流或sys.stdout。
+    Optional keyword arguments:
+可选关键字参数：
+    file:  a file-like object (stream); defaults to the current sys.stdout.
+文件：类似于文件的对象（流）；默认为当前的sys.stdout。
+    sep:   string inserted between values, default a space.
+sep：在值之间插入的字符串，默认为空格。
+    end:   string appended after the last value, default a newline.
+结束：在最后一个值后追加的字符串，默认为换行符。
+    flush: whether to forcibly flush the stream.
+冲洗：是否强制冲洗水流。
+
+[root@V20 PythonScripts]# scp   formultip.py   root@192.168.0.254:'/var/git/pythonScripts' 
+
+open及file内建函数
+•  作为打开文件之门的“钥匙”,
+ 内建函数open()以及file()提供了
+ 初始化输入/输出(I/O)操作的通用接口
+•  成功打开文件后时候会返回一个文件对象,否则引发一个错误
+
+•  open()方法和file()方法可以完全相互替换
+•  基本语法:
+file_object = open(file_name, access_mode='r', buffering=-1)	
+
+文件对象访问模式
+
+r 以读方式打开(文件不存在则报错)
+w 以写方式打开(文件存在则清空,不存在则创建)
+a 以追加模式打开(必要时创建新文件)
+r+ 以读写模式打开(参见r)
+w+ 以读写模式打开(参见w)
+a+ 以读写模式打开(参见a)
+b 以二进制模式打开
 
 
+root@linux ~]# cat [-AEnTv] 文件路径
+参数：
+-A ：相当于 -vET 的整合参数，可列出一些特殊字符～ 
+-E ：将结尾的断行字符 $ 显示出来； 
+-n ：打印出行号； 
+-T ：将 [tab] 按键以 ^I 显示出来； 
+-v ：列出一些看不出来的特殊字符
+--------------------- 
+[root@V20 PythonScripts]# echo -e "aa\taa1234\nbb\tb222\ncc33" > filex.txt[root@V20 PythonScripts]# cat  -E  filex.txt
+aa	aa1234$
+bb	b222$
+cc33$
+[root@V20 PythonScripts]# cat  -T  filex.txt
+aa^Iaa1234
+bb^Ib222
+cc33
+[root@V20 PythonScripts]# cat  -v  filex.txt
+aa	aa1234
+bb	b222
+cc33
+[root@V20 PythonScripts]# cat  -A  filex.txt
+aa^Iaa1234$
+bb^Ib222$
+cc33$
+[root@V20 PythonScripts]# sed  -i 's/\t//g'  filex.txt
+[root@V20 PythonScripts]# echo  $?
+0
+[root@V20 PythonScripts]# cat  -A  filex.txt
+aaaa1234$
+bbb222$
+cc33$
+
+非文本文件读取——od
+
+[root@linux ~]# od [-t TYPE] 文件路径 
+参数：
+-t ：后面可以接各种『类型 (TYPE)』的输出，
+例如：
+a ：利用预设的字符来输出； 
+c ：使用 ASCII 字符来输出 
+d[size]：利用十进制(decimal)来输出数据，每个整数占用size bytes ； 
+f[size]：利用浮点数值(floating)来输出数据，每个数占用 size bytes ； 
+o[size]：利用八进位(octal)来输出数据，每个整数占用 size bytes ； 
+x[size]：利用十六进制(hexadecimal)来输出数据，每个整数占用 size bytes ；
+[root@V20 PythonScripts]# type  od
+od 是 /usr/bin/od
+[root@V20 PythonScripts]# which  od
+/usr/bin/od
+[root@V20 PythonScripts]# od  -t   a   filex.txt  #利用预设的字符来输出
+0000000   a   a   a   a   1   2   3   4  nl   b   b   b   2   2   2  nl
+0000020   c   c   3   3  nl
+0000025
+[root@V20 PythonScripts]# od  -t   c   filex.txt  # 使用ASCII 字符来输出
+0000000   a   a   a   a   1   2   3   4  \n   b   b   b   2   2   2  \n
+0000020   c   c   3   3  \n
+0000025
+[root@V20 PythonScripts]# od  -t   d   filex.txt 
+0000000  1633771873   875770417  1650614794   171061810
+0000020   859005795          10
+0000025
+[root@V20 PythonScripts]# od  -t   x   filex.txt 
+0000000 61616161 34333231 6262620a 0a323232
+0000020 33336363 0000000a
+0000025
+[root@V20 PythonScripts]# cat   filex.txt
+aaaa1234
+bbb222
+cc33
+[root@V20 PythonScripts]# vim  filex.py
+
+[root@V20 PythonScripts]# cat  filex.py
+#!/usr/bin/env  python3
+
+fileobj = open('filex.txt') # 使用open函数，可以打开一个已经存在的文件，
+                                   或者如果该文件不存在，则会创建一个新文件。
+data = fileobj.read()  # 读数据：
+           使用read(num)可以从文件中读取数据，
+         num 表示要从文件中读取的数据的长度（字符个数），
+   如果没有传入num或者为负，那么就表示读取文件中所有的数据,
+  read()将读取的数据以字符串的形式返回。
+注意：
+  如果open是打开一个文件，那么可以不用写打开的模式，即只写 open('filex.txt')
+  如果使用read读了多次，那么后面继续使用read读取的数据是从上次读完后的位置开始的
+
+fileobj.close()   # 因为文件的读取是流式的，像一个水管的阀门一样.
+                    每次读取操作的文件的时候，要先打开阀门open()，
+                    所以用完也要关闭这个文件,文件操作完毕要将流给关闭
+print(data)
+
+[root@V20 PythonScripts]# python3  filex.py
+aaaa1234
+bbb222
+cc33
+
+[root@V20 PythonScripts]# 
+>>> fileobj = open('filex.txt')
+>>> data = fileobj.read()
+>>> fileobj.close()
+>>> print(data)
+aaaa1234
+bbb222
+cc33
+
+>>> 
+[root@V20 PythonScripts]# python3
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+  # 读数据：
+           使用read(num)可以从文件中读取数据，
+         num 表示要从文件中读取的数据的长度（字符个数），
+   如果没有传入num或者为负，那么就表示读取文件中所有的数据,
+  read()将读取的数据以字符串的形式返回。
+注意：
+  如果open是打开一个文件，那么可以不用写打开的模式，即只写 open('filex.txt')
+  如果使用read读了多次，那么后面继续使用read读取的数据是从上次读完后的位置开始的
+如果没有给定size参数(默认值为-1)
+或者size值为负,文件将被读取直至末尾
+
+>>> fileobj = open('filex.txt')
+
+>>> data = fileobj.read(6)  # 6 表示要从文件中读取的数据的长度（字符个数是 6 个）
+>>> print(data)
+aaaa12
+>>> data = fileobj.read(6)
+>>> print(data)  #注意结尾 符号" $ " 也算 一个字符长度
+34
+bbb
+>>> data = fileobj.read(5) ## 5 表示要从文件中读取的数据的长度（字符个数是 5 个）
+>>> print(data)  #注意结尾 符号" $ "(\n 或 \r) 也算 一个字符长度
+222
+c
+>>> data = fileobj.read()  #没有传入num或者为负，表示读取文件中所有剩余的数据
+>>> print(data)
+c33
+
+>>> fileobj.close() #文件操作完毕要将流给关闭
+>>> print(data)
+c33
+
+>>> 
+>>> fileobj = open('filex.txt')
+
+关于内置函数打印模块内置的帮助
+print(...)
+    print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
+    
+    Prints the values to a stream, or to sys.stdout by default.
+默认情况下，将值打印到流或sys.stdout。
+
+>>> print(fileobj.readline())
+aaaa1234   #注意多出来的空行是 打印模块内置函数print()默认的结尾符号 '\n' 的作用
+
+>>> print(fileobj.readline())
+bbb222  ##注意多出来的空行是 打印模块内置函数print()默认的结尾符号 '\n' 的作用
+
+>>> fileobj.close()
+>>> print(fileobj.readline())
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: I/O operation on closed file.
+>>> 
+>>> fileobj = open('filex.txt')
+>>> fileobj.readline()
+'aaaa1234\n'
+>>> print()  #内置函数print()默认的结尾符号 '\n' 
+
+>>> print(fileobj.readline(),end = '')
+bbb222
+>>> print(fileobj.readline(),end = '')
+cc33
+>>> print(fileobj.readline(),end = '')
+>>> print(fileobj.readline(),end = '')
+>>> 
+
+[root@V20 PythonScripts]# vim  filex.py
+[root@V20 PythonScripts]# python3  filex.py
+aaaa1234
+bbb222
+cc33
+**********
+aaaa1234
+bbb222
+cc33
+[root@V20 PythonScripts]# cat  filex.py
+#!/usr/bin/env  python3
+
+fileobj = open('filex.txt')
+data = fileobj.read()
+fileobj.close()
+print(data,end= '')
+
+print('*' * 10)
+fobj = open('filex.txt')
+for line in fobj:    #表示一行一行读取数据
+ print(line,end='')
+fobj.close()
+[root@V20 PythonScripts]# 
+
+[root@V20 PythonScripts]# vim  filex.py
+[root@V20 PythonScripts]# python3  filex.py
+aaaa1234
+bbb222
+cc33
+**********
+aaaa1234
+bbb222
+cc33
+##########
+aaaa1234
+bbb222
+[root@V20 PythonScripts]# cat    filex.py
+#!/usr/bin/env  python3
+
+fileobj = open('filex.txt')
+data = fileobj.read()
+fileobj.close()
+print(data,end= '')
+
+print('*' * 10)
+fobj = open('filex.txt')
+for line in fobj:   #表示一行一行读取数据
+ print(line,end='')
+fobj.close()
+
+print('#' * 10)
+
+fobj2 = open('filex.txt')
+
+  for循环常与range函数一起使用
+•  range函数提供循环条件
+•  range函数的完整语法为:
+range(start, end, step =1)
+
+for  r  in  range(2):   #循环列表range,for 循环 2 次
+
+  print(fobj2.readline(),end = '')  # fobj2.readline()表示读取 一行数据
+
+fobj2.close()
+
+读数据：
+readlines（）可以按照行的方式把整个文件中的内容进行一次性读取，
+读取所有行(直到结束符 EOF)并返回列表，
+并且返回的是一个列表，
+其中每一行（按着换行符进行判断一行）的数据为一个元素
+ readline(),对原文件的数据按行读取，
+（行的划分是\n）.每次只读取一行。
+如果有多次读取的话，
+下面一次读取的偏移量是上面读取后的偏移量。
+
+readlines（）也有一个可选的size参数,默认为-1,
+代表读至行结束符
+•  如果提供了该参数,那么在超过size个字节后会返回
+不完整的行
+
+[root@V20 PythonScripts]# 
+[root@V20 PythonScripts]# vim   filex.py
+[root@V20 PythonScripts]# python3  filex.py
+aaaa123**********
+aaaa1234
+bbb222
+cc33
+##########
+aaaa1234
+bbb222
+[root@V20 PythonScripts]# ll  hello.txt 
+-rw-r--r-- 1 root root 10 3月  26 14:21 hello.txt
+[root@V20 PythonScripts]# cat  hello.txt
+hello	boy
+[root@V20 PythonScripts]# cat  filex.py
+#!/usr/bin/env  python3
+
+fileobj = open('filex.txt')
+data = fileobj.read(7)
+fileobj.close()
+print(data,end= '')
+
+print('*' * 10)
+fobj = open('filex.txt')
+
+  迭代文件的方法与处理其他序列类型的数据类似
+for line in fobj:
+ print(line,end='')
+fobj.close()
+
+print('#' * 10)
+
+fobj2 = open('filex.txt')
+for  r  in  range(2):
+  print(fobj2.readline(),end = '')
+fobj2.close()
+
+fobj3 = open('hello.txt','w')
+fobj3.write('hello\tboy\n')
+fobj3.close()
 
 
+[root@V20 PythonScripts]# 
+>>> help(open)
+
+>>> 
+open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, 
+closefd=True, opener=None)
+...............
+    Character Meaning
+    --------- ---------------------------------------------------------------
+    'r'       打开阅读（默认）
+    'w'       打开进行写入，首先清空文件
+    'x'       创建一个新文件并打开它进行写入
+    'a'     打开进行写入，如果文件存在，则附加到文件结尾
+    'b'       binary mode
+    't'       text mode (default)
+     '+'   打开磁盘文件进行更新（读写）
+    'U'       universal newline mode (deprecated)
+    ========= ===========================
+r+	打开用于读取和写入文件。文件指针将会在文件的开头。
+w+	打开用于写入和读取的文件。覆盖现有的文件，如果文件存在。
+如果该文件不存在，则创建读取和写入新的文件。
+
+a+	打开为追加和读取文件。文件指针在该文件的结束。
+该文件将为追加模式。
+如果该文件不存在，它创建并读取和写入的新文件。
 
 
+write()内建方法功能与read()和readline()相反。
+它把含有文本数据或二进制数据块的字符串写入到文件中去
+•  写入文件时,不会自动添加行结束标志,
+需要程序员手工输入
+
+写入文件用write:
+
+write()方法写入字符串到任何一个打开的文件。
+要注意的是Python字符串可以具有二进制数据，
+而不仅仅是文字。
+
+注意
+由于缓冲，字符串可能实际上没有出现在该文件中，
+直到调用flush()
+或close()方法被调用.
+
+一般的文件流操作都包含缓冲机制，
+write方法并不直接将数据写入文件，
+而是先写入内存中特定的缓冲区。
+
+  flush方法是用来刷新缓冲区的，
+即将缓冲区中的数据立刻写入文件，同时清空缓冲区。
+   正常情况下缓冲区满时，
+操作系统会自动将缓冲数据写入到文件中。
+   至于close方法，原理是
+内部先调用flush方法来刷新缓冲区，再执行关闭操作，
+这样即使缓冲区数据未满也能保证数据的完整性。
+
+   如果进程意外退出或正常退出时而未执行文件的close方法，
+缓冲区中的内容将会丢失。
+
+[root@V20 PythonScripts]# cat  hello.txt 
+hello	boy
+>>> fobj = open('hello.txt','w') # 打开进行写入，首先清空文件
+>>> 
+[root@V20 PythonScripts]# cat  hello.txt  # 文件内容被清空
+[root@V20 PythonScripts]# ll  hello.txt
+-rw-r--r-- 1 root root 0 3月  26 14:36 hello.txt
+>>> fobj.write('abc\n') # 写入 4 个字符
+4
+>>>
+[root@V20 PythonScripts]# cat  hello.txt 
+[root@V20 PythonScripts]# ll  hello.txt
+-rw-r--r-- 1 root root 0 3月  26 14:36 hello.txt
+
+>>> fobj.flush()  #刷新缓冲区
+>>> 
+[root@V20 PythonScripts]# cat  hello.txt 
+abc
+[root@V20 PythonScripts]# cat -E  hello.txt #-E将结尾的断行字符 $显示出来
+abc$
+[root@V20 PythonScripts]#
+writelines方法
+•  和readlines()一样,writelines()方法是针对列表的操作
+•  它接受一个字符串列表作为参数,将它们写入文件
+•  行结束符并不会被自动加入,
+所以如果需要的话,
+必须在调用writelines()前给每行结尾加上行结束符'\n'
+
+>>> fobj.writelines(['2line\n','3line\n']) #一次写入多行数据
+>>> fobj.close()
+
+>>> fobj = open('hello.txt','r')
+>>> fobj.read()
+'abc\n2line\n3line\n'
+>>> print(fobj.read(),end='')
+>>> fobj.close()  #先调用flush方法来刷新缓冲区，再执行关闭操作
+
+>>> fobj = open('hello.txt','r')
+>>> print(fobj.read(),end='')
+abc
+2line
+3line
+>>> fobj.close()
+>>> 
+[root@V20 PythonScripts]# scp  root@192.168.0.254:'/var/git/pythonScripts/xshell6.png'  .
+
+root@192.168.0.254's password: ....... 
+
+[root@V20 PythonScripts]# ll   xshell6.png 
+-rw-r--r-- 1 root root 28541 3月  26 15:03 xshell6.png
+
+----------- 终端命令行下 用命令 eog 打开图片  eog ( eye of gmone)   -------
+
+[root@V20 PythonScripts]# eog   xshell6.png
+
+[root@V20 PythonScripts]# type  eog
+eog 已被哈希 (/usr/bin/eog)
+
+>>> f = open('xshell6.png','b')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: Must have exactly one of create/read/write/append mode and at most one plus
+ValueError:必须正好有一个create/read/write/append模式，并且最多只能有一个加号
+
+>>> f = open('xshell6.png','rb') #以 二进制 读操作方式打开图片
+
+>>> f.read(16)   #行首 英文字母 'b' 表示二进制
+b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR'
+>>> f.read(16)   #行首 英文字母 'b' 表示二进制
+b'\x00\x00\x02X\x00\x00\x00\x86\x08\x06\x00\x00\x00\x01\xcd\xf4'
+>>> f.close()
+
+>>> f = open('filex.txt','rb')  #以 二进制 读操作方式打开文件
+>>> f.read(10)   #行首 英文字母 'b' 表示二进制
+b'aaaa1234\nb'
+>>> f.read(10)
+b'bb222\ncc33'
+>>> f.close()
+>>> 
+
+[root@V20 PythonScripts]# eog   xshell6.png 
+[root@V20 PythonScripts]# which  ls
+alias ls='ls --color=auto'
+	/usr/bin/ls
+[root@V20 PythonScripts]# type  ls
+ls 是 `ls --color=auto' 的别名
+[root@V20 PythonScripts]# ll  /usr/bin/ls
+-rwxr-xr-x. 1 root root 117656 6月  30 2016 /usr/bin/ls
+
+[root@V20 PythonScripts]#  file  /usr/bin/ls
+/usr/bin/ls: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.32, BuildID[sha1]=6129e7403942b90574b8c28439d128ff5515efeb, stripped
+
+[root@V20 PythonScripts]#  file  /usr/bin/env
+/usr/bin/env: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.32, BuildID[sha1]=4279a25ddbac2a7480923cd05d70e33a73dce721, stripped
 
 
+[root@V20 PythonScripts]#  file  /bin/bash
+/bin/bash: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.32, BuildID[sha1]=8bd6b05295658d71a9ff4eed7cae55609a703623, stripped
+
+文件对象访问模式
+文件模式     操作
+r        以读方式打开(文件不存在则报错)
+w        以写方式打开(文件存在则清空,不存在则创建)
+b        以二进制模式打开
+
+[root@V20 PythonScripts]# eog   xshell6.png
+[root@V20 PythonScripts]# type  eog
+eog 已被哈希 (/usr/bin/eog)
+[root@V20 PythonScripts]# vim filex.py 
+[root@V20 PythonScripts]# ll  /tmp/newls
+ls: 无法访问/tmp/newls: 没有那个文件或目录
+
+[root@V20 PythonScripts]# vim filex.py 
+[root@V20 PythonScripts]# python3   filex.py
+aaaa123**********
+aaaa1234
+bbb222
+cc33
+##########
+aaaa1234
+bbb222
+[root@V20 PythonScripts]# ll  /tmp/newls  #注意属性时间不一样
+-rw-r--r-- 1 root root 117656 3月  26 15:49 /tmp/newls
+[root@V20 PythonScripts]# ll  /usr/bin/ls
+-rwxr-xr-x. 1 root root 117656 6月  30 2016 /usr/bin/ls
+
+--------------------- 验证指纹信息 md5sum值(MD5校验证码) 一致 
+
+[root@V20 PythonScripts]# md5sum  /usr/bin/ls   /tmp/newls
+
+6ed7df5e820ec002898676631a03d475  /usr/bin/ls
+6ed7df5e820ec002898676631a03d475  /tmp/newls
+
+[root@V20 PythonScripts]# cat   filex.py
+#!/usr/bin/env  python3
+
+fileobj = open('filex.txt')
+data = fileobj.read(7)
+fileobj.close()
+print(data,end= '')
+
+print('*' * 10)
+fobj = open('filex.txt')
+for line in fobj:
+ print(line,end='')
+fobj.close()
+
+print('#' * 10)
+
+fobj2 = open('filex.txt')
+for  r  in  range(2):
+  print(fobj2.readline(),end = '')
+fobj2.close()
+
+fobj3 = open('hello.txt','w')
+fobj3.write('hello\tboy\n')
+fobj3.close()
+
+frb = open('/usr/bin/ls','rb')
+fwb = open('/tmp/newls','wb')
+
+frbdata = frb.read()
+
+fwb.write(frbdata)
+
+frb.close()
+fwb.close()
+
+[root@V20 PythonScripts]# 
+
+>>> fobj = open('filex.txt')
+
+>>> fileobj = open('filex.txt')
+
+>>> data = fileobj.read(7)
+
+>>> print(data,end= '')
+aaaa123>>> 
+
+>>> print(data,end= '')
+aaaa123>>> 
+
+>>> fileobj.read()
+'4\nbbb222\ncc33\n'
+>>> fileobj.read()
+''
+>>> fobj.read()
+'aaaa1234\nbbb222\ncc33\n'
+>>> 
+>>> fileobj.close()
+>>> fobj.close()
+>>> fobj = open('filex.txt','rb') # #以 二进制 读操作方式打开文件
+
+>>> fobj.read()  # #行首 英文字母 'b' 表示二进制
+b'aaaa1234\nbbb222\ncc33\n'
+>>> fobj.read()
+b''     #行首 英文字母 'b' 表示二进制
+>>> 
+>>> print(fobj.read() == b'' )  #判度是否 变量值 的 内容为空
+True
+>>> 
+
+[root@V20 PythonScripts]# rm  -f  /tmp/newls 
+
+[root@V20 PythonScripts]# vim    filex.py 
+
+[root@V20 PythonScripts]# python3  filex.py
+
+aaaa123**********
+aaaa1234
+bbb222
+cc33
+##########
+aaaa1234
+bbb222
+Normal closure-------
+[root@V20 PythonScripts]# md5sum  /usr/bin/ls   /tmp/newls
+6ed7df5e820ec002898676631a03d475  /usr/bin/ls
+6ed7df5e820ec002898676631a03d475  /tmp/newls
+
+[root@V20 PythonScripts]# ll  /usr/bin/ls   /tmp/newls
+-rw-r--r--  1 root root 117656 3月  26 16:30 /tmp/newls
+-rwxr-xr-x. 1 root root 117656 6月  30 2016 /usr/bin/ls
+
+[root@V20 PythonScripts]# cat   filex.py
+#!/usr/bin/env  python3
+
+fileobj = open('filex.txt')
+data = fileobj.read(7)
+fileobj.close()
+print(data,end= '')
+
+print('*' * 10)
+fobj = open('filex.txt')
+for line in fobj:
+ print(line,end='')
+fobj.close()
+
+print('#' * 10)
+
+fobj2 = open('filex.txt')
+for  r  in  range(2):
+  print(fobj2.readline(),end = '')
+fobj2.close()
+
+fobj3 = open('hello.txt','w')
+fobj3.write('hello\tboy\n')
+fobj3.close()
+
+src_frb = '/usr/bin/ls'
+dst_fwb = '/tmp/newls'
+
+src_frb_obj = open(src_frb,'rb')
+dst_fwb_obj = open(dst_fwb,'wb')
+
+booleanrun = True
+while  booleanrun :
+  frbdata = src_frb_obj.read(4096)
+  if  frbdata ==  b'':   #判度是否 变量值 的 内容为空
+    booleanrun = False
+  dst_fwb_obj.write(frbdata)
+else:
+  src_frb_obj.close()
+  dst_fwb_obj.close()
+  print('Normal closure-------')
+
+[root@V20 PythonScripts]# 
+=============================================
+
+with-as语句
+从python2.6开始，with就成为默认关键字了。
+With是一个控制流语句，
+跟if for while try之类的是一类，
+with可以用来简化 try-finally 代码，
+
+看起来比try finally 更清晰，
+所以说with用很优雅的方式处理上下文环境产生的异常。
+with关键字的用法如下：
+
+with expression as variable:
+  with block
+该代码快的执行过程是：
+1.先执行expression，
+然后执行该表达式返回的对象实例的__enter__函数，
+然后将该函数的返回值
+赋给as后面的变量。
+(注意，是将__enter__函数的 返回值 赋给 变量) 
+
+2.然后执行with block代码块，
+不论成功，错误，异常，
+在with block执行结束后，
+会执行第一步中的实例的__exit__函数
+
+有两个问题。
+一是可能忘记关闭文件句柄；
+二是文件读取数据发生异常，没有进行任何处理。
+
+----- try - finally 代码 ----------
+
+file = open("/tmp/foo.txt")
+try:
+  data = file.read()
+finally:
+  file.close()
+虽然这段代码运行良好，但是太冗长了。
+这时候 with 除了有更优雅的语法，
+with还可以很好的处理上下文环境产生的异常。
+
+下面是with版本的代码：
+----- 简化 try-finally 代码 ----------
+
+with open("/tmp/foo.txt") as file:
+  data = file.read()
+
+=====================
+[root@V20 PythonScripts]# vim  withas.py
+[root@V20 PythonScripts]# python3  withas.py
+Normal closure-------
+---- with  as  -------
+aaaa1234
+ ---as--aaaa1234
+ = = = = =
+[root@V20 PythonScripts]# cat   withas.py
+#!/usr/bin/env  python3
+
+src_frb = '/usr/bin/ls'
+dst_fwb = '/tmp/newls'
+
+src_frb_obj = open(src_frb,'rb')
+dst_fwb_obj = open(dst_fwb,'wb')
+
+booleanrun = True
+while  booleanrun :
+  frbdata = src_frb_obj.read(4096)
+  if  frbdata ==  b'':
+    booleanrun = False
+  dst_fwb_obj.write(frbdata)
+else:
+  src_frb_obj.close()
+  dst_fwb_obj.close()
+  print('Normal closure-------')
+
+print('---- with  as  -------')
+with open('filex.txt') as fobj:
+  data = fobj.readline()
+  print(data,end=' ---as--')
+print(data,end= " = = = = =\n")
+
+[root@V20 PythonScripts]# cat   filex.txt 
+aaaa1234
+bbb222
+cc33
+[root@V20 PythonScripts]# 
+>>> fobj = open('filex.txt')
+>>> try:
+...   data = fobj.readline()
+...   print(data,end=' ---as--\n')
+... finally:
+...   fobj.close()
+... 
+aaaa1234
+ ---as--
+>>> print(data,end= " = = = = =\n")
+aaaa1234
+ = = = = =
+>>> 
+读数据： ------------------- 注意 单复数 readline[ s ] ----------
+
+readlines（）可以按照行的方式把整个文件中的内容进行一次性读取，
+读取所有行(直到结束符 EOF)并返回列表，
+并且返回的是一个列表，
+其中每一行（按着换行符进行判断一行）的数据为一个元素
+
+-------------- 注意 单复数 readline[ s ] ---------
+
+ readline(),对原文件的数据按行读取，
+（行的划分是\n）.每次只读取一行。
+如果有多次读取的话，
+下面一次读取的偏移量是上面读取后的偏移量。
+
+fobj = open('filex.txt')
+try:
+  data = fobj.readline()
+  print(data,end=' ---as--\n')
+finally:
+  fobj.close()
+
+print(data,end= " = = = = =\n")
+
+-----------------------------------------------------------
+[root@V20 PythonScripts]# python   #注意这是 Python 2.7.5版本
+Python 2.7.5 (default, May  3 2017, 07:55:04) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-14)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> frx = open('filex.txt')
+>>> frx.tell()
+0
+>>> frx.read(4)
+'aaaa'
+>>> frx.tell()
+4
+>>> frx.seek(-3,2)  #注意 python3版本 不支持seek(-3,2) 中的负数-3
+>>> frx.tell()
+18     #返回当前文件指针的位置
+>>> frx.read()
+'33\n'
+>>> frx.tell()
+21        #返回当前文件指针的位置
+>>>   
+--------------------------------------------------
+[root@V20 PythonScripts]# python3     #注意这是 Python3.6.4 版本
+
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+>>> fr = open('filex.txt')
+-----------  tell():返回当前文件指针的位置
+>>> fr.tell()
+0
+>>> fr.read
+fr.read(       fr.readable(   fr.readline(   fr.readlines(
+>>> fr.read(4)
+'aaaa'
+  ----------------  tell():返回当前文件指针的位置
+>>> fr.tell()
+4
+>>> fr.seek(0,2)  #“2”代表从末尾算起，“0”代表偏移0个单位
+21
+>>> fr.tell()
+21
+>>> fr.read()   #因为是从末尾算起，内容已结束。所以读取内容为空''
+''
+>>> fr.seek(0,1)   #“1”代表从当前位置算起，“0”代表偏移0个单位
+21
+>>> fr.seek(-3,1)     #python3 不支持 从末尾偏移指针
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+io.UnsupportedOperation: can't do nonzero cur-relative seeks
+                               无法执行非零 cur相对 查找
+>>> 
+>>> fr.seek(0,2)
+21
+>>> fr.tell()
+21
+>>> fr.seek(17,0) #python3只能正向从开头查找偏移指针(offset=17,whence=0)
+17
+>>> fr.read()
+'c33\n'
+>>> fr.tell()
+21
+>>> 
+seek(offset[, whence]):移动文件指针到不同的位置
+
+–  offset是相对于某个位置的偏移量
+–  whence的值,
+ 0 表示文件开头,
+ 1 表示当前位置,
+ 2 表示文件的结尾
 
 
+frx = open('filex.txt')
+frx.tell()
+frx.read(4)
+frx.tell()
+frx.seek(0,2)    #“2”代表从末尾算起，“0”代表偏移0个单位
 
+[root@V20 PythonScripts]# python3
 
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> fr = open('filex.txt')
+>>> fr.tell()
+0
+>>> fr.read(8)
+'aaaa1234'
+>>> fr.tell()
+8
+>>> fr.seek(6,0)
+6
+>>> fr.tell()
+6
+>>> fr.read(8)
+'34\nbbb22'
+>>> fr.tell()
+14
 
+/****  seek(offset[, whence]):移动文件指针到不同的位置
 
+–  offset是相对于某个位置的偏移量
+–  whence的值,
+ 0 表示文件开头,
+ 1 表示当前位置,
+ 2 表示文件的结尾
 
+>>> fr.seek(10,1)  #python3 只支持 0 文件开头 ,不支持 1 当前位置 ,2 结尾
 
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+io.UnsupportedOperation: can't do nonzero cur-relative seeks
 
+>>> fr.tell()
+14
+>>> fr.seek(10,0)
+10
+>>> fr.tell()
+10
+>>> fr.read(8)
+'bb222\ncc'
+>>> fr.tell()
+18
+>>> 
+==============================
 
+程序一执行,就可以访问三个标准文件
+–  标准输入:一般是键盘,使用sys.stdin
+
+–  标准输出:一般是显示器缓冲输出,使用 sys.stdout
+–  标准错误:一般是显示器的非缓冲输出,使用 sys.stderr
+
+1. sys.stdout与print：
+在python中调用print时，事实上调用了sys.stdout.write(obj+'\n')
+print 将需要的内容打印到控制台，然后追加一个换行符
+
+以下两行代码等价：
+sys.stdout.write('hello' + '\n')
+print('hello')
+
+2. sys.stdin与input
+
+sys.stdin.readline( )会将标准输入全部获取，包括末尾的'\n'，
+因此用len计算长度时是把换行符'\n'算进去了的，
+但是input( )获取输入时返回的结果是
+不包含末尾的换行符'\n'的。
+
+因此如果在平时使用sys.stdin.readline( )获取输入的话，
+不要忘了去掉末尾的换行符，
+可以用strip( )函数（sys.stdin.readline( ).strip('\n')）
+或sys.stdin.readline( )[:-1]
+这两种方法去掉换行。
+
+3. 从控制台重定向到文件
+
+原始的sys.stdout指向控制台，
+如果把文件的对象引用赋给sys.stdout，
+那么print调用的就是文件对象的write方法。
+
+[root@V20 PythonScripts]# vim   std.py
+[root@V20 PythonScripts]# cat   std.py
+#!/usr/bin/env  python3
+import  sys
+
+name = sys.stdin.readline() ## sys.stdin.readline( )会将标准输入全部获取
+                                   # 包括末尾的'\n'
+print("your name is %s " % name)
+print('ok')
+
+# 注意
+# sys.stdin.readline( )会将标准输入全部获取，
+包括末尾的'\n'，
+因此用len计算长度时是把换行符'\n'算进去了的，
+但是input( )获取输入时返回的结果是
+不包含末尾的换行符'\n'的。
+
+[root@V20 PythonScripts]# python3   std.py # 包含末尾的换行符'\n'
+liliy
+your name is liliy
+ 
+ok
+[root@V20 PythonScripts]# python3   std.py  # 包含末尾的换行符'\n'
+mhiuik
+your name is mhiuik
+ 
+ok
+[root@V20 PythonScripts]# 
+
+[root@V20 PythonScripts]# type  uuidgen 
+Display all 2483 possibilities? (y or n)
+显示所有2483种可能性
+Linux下取得UUID的方法
+GUID (global unique identifier) 是微软对UUID的叫法.
+UUID( Universal Unique Identifier)通用唯一识别码
+
+HP和RedHat上可以使用uuidgen来生成,
+solaris上命令:makeuuid
+
+[root@ligle2 network-scripts]# vi ifcfg-eth1
+DEVICE=eth1
+HWADDR=08:00:27:06:a3:94
+TYPE=Ethernet
+UUID=9420c638-16e9-41a1-bf59-325c6f601871
+..........
+网卡的UUID如何确定呢
+在Linux或CentOS中，可以通过如下命令获取网卡的uuid信息：
+
+[root@ligle2 ~]# uuidgen eth1
+07d07031-eb0f-4691-8606-befb46645433
+获取到eth1网卡的uuid，
+即可完成对ifcfg-eth1配置文件的修改，
+最后通过service network restart命令重启网卡，OK
+---------------------------------
+
+2. sys.stdin与input
+
+sys.stdin.readline( )会将标准输入全部获取，包括末尾的'\n'，
+因此用len计算长度时是把换行符'\n'算进去了的，
+但是input( )获取输入时返回的结果是
+不包含末尾的换行符'\n'的。
+
+因此如果在平时使用sys.stdin.readline( )获取输入的话，
+不要忘了去掉末尾的换行符，
+可以用strip( )函数（sys.stdin.readline( ).strip('\n')）
+或sys.stdin.readline( )[:-1]
+这两种方法去掉换行。
+[root@V20 PythonScripts]# vim   std.py
+[root@V20 PythonScripts]# cat   std.py
+#!/usr/bin/env  python3
+import  sys
+
+name = sys.stdin.readline().strip('\n')
+print("your name is %s " % name)
+print('ok')
+
+[root@V20 PythonScripts]# python3   std.py #注意已经 不包含末尾的换行符"\n"
+peri
+your name is peri 
+ok
+[root@V20 PythonScripts]# 
+---------------------------------------------
+# sys.stdout与print：
+
+在python中调用print时，事实上调用了sys.stdout.write(obj+'\n')
+print 将需要的内容打印到控制台，然后追加一个换行符
+
+[root@V20 PythonScripts]# vim     std.py
+[root@V20 PythonScripts]# cat   std.py
+#!/usr/bin/env  python3
+import  sys
+
+name = sys.stdin.readline().strip('\n')
+sys.stdout.write("your name is %s --stdout.write\n" % name)
+print('ok')
+
+[root@V20 PythonScripts]# python3   std.py
+xixiname
+your name is xixiname --stdout.write
+ok
+[root@V20 PythonScripts]# 
+[root@V20 PythonScripts]# vim  std.py 
+[root@V20 PythonScripts]# cat   std.py
+#!/usr/bin/env  python3
+import  sys
+
+sys.stdout.write("Please input your name  --stdout.write\n")
+name = sys.stdin.readline().strip('\n')
+sys.stdout.write("your name is %s --stdout.write\n" % name)
+
+sys.stderr.write("your name is %s --stderr\n" % name)
+
+------ #  标准错误:一般是显示器的非缓冲输出,使用sys.stderr -----------
+
+[root@V20 PythonScripts]# python3   std.py
+Please input your name  --stdout.write
+hahaname
+your name is hahaname --stdout.write
+your name is hahaname --stderr
+[root@V20 PythonScripts]# echo  $?
+0
+[root@V20 PythonScripts]# 
 
 
 

@@ -585,7 +585,7 @@ Guess Rightly!
 [root@V20 PythonScripts]# 
 
 
-pythn print格式化输出。
+python print格式化输出。
 
 %r 用来做 debug 比较好，因为它会显示变量的原始数据（raw data），
 而其它的符号则是用来向用户显示输出的
