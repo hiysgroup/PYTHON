@@ -1,4 +1,32 @@
 
+vim  " shift  +  p " 快捷键插入空行
+
+[root@V20 PythonScripts]# python3
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> frx = open('filex.txt')
+>>> frx.tell()
+0
+>>> frx.read()
+'aaaa1234\nbbb222\ncc33\n'
+>>> frx.tell()
+21
+>>> frx.seek(0,2)
+21
+>>> frx.tell()
+21
+>>> frx.seek(0,0)
+0
+>>> frx.tell()
+0
+>>> frx.read(21)
+'aaaa1234\nbbb222\ncc33\n'
+>>> frx.tell()
+21
+>>> 
+
+
 [root@V20 PythonScripts]# vim  std.py 
 [root@V20 PythonScripts]# cat   std.py
 #!/usr/bin/env  python3
@@ -94,25 +122,929 @@ sys.stdout.write('\033[30;41;1m %s \n\033[0m' % function())
  lucky number is 3 
 [root@V20 PythonScripts]# 
 
+[root@V20 PythonScripts]# python3   multiply.py
+ input digital length: 
+ The integer length is 8  red
+ num is 5  green
+1 * 1= 1$  
+1 * 2= 2$ 2 * 2= 4$  
+1 * 3= 3$ 2 * 3= 6$ 3 * 3= 9$  
+1 * 4= 4$ 2 * 4= 8$ 3 * 4= 12$ 4 * 4= 16$  
+1 * 5= 5$ 2 * 5= 10$ 3 * 5= 15$ 4 * 5= 20$ 5 * 5= 25$  
+1 * 6= 6$ 2 * 6= 12$ 3 * 6= 18$ 4 * 6= 24$ 5 * 6= 30$ 6 * 6= 36$  
+1 * 7= 7$ 2 * 7= 14$ 3 * 7= 21$ 4 * 7= 28$ 5 * 7= 35$ 6 * 7= 42$ 7 * 7= 49$  
+1 * 8= 8$ 2 * 8= 16$ 3 * 8= 24$ 4 * 8= 32$ 5 * 8= 40$ 6 * 8= 48$ 7 * 8= 56$ 8 * 8= 64$  
+ lucky number is 5 
+[root@V20 PythonScripts]# cat   multiply.py
+#!/usr/bin/env   python3
+import  random
+import  getpass
+import  sys
+
+length = int(getpass.getpass('\033[30;43;1m input digital length: \033[0m'))
+num = random.randint(1,length)
+def  multiply(length,num):
+  print('\033[31;1m The integer length is %d  red\033[0m' % length)
+  print('\033[32;1m num is %d  green\033[0m' % num)
+  for i in range(1, length+1):    # [1, 2, 3,...]
+    for j in range(1, i+1):      # i->1:[1], i->2: [1, 2],...
+      print('%s * %s\033[33;1m=\033[0m %s' % (j, i, i*j), end='\033[30;42;1m$ \033[0m')
+    print(end='\033[31;43;1m \n\033[0m')
+  return  'lucky number is '+str(num)
+sys.stdout.write('\033[30;41;1m %s \n\033[0m' % multiply(length,num))
+
+[root@V20 PythonScripts]# 
+
+[root@V20 PythonScripts]# vim  multiply.py
+[root@V20 PythonScripts]# python3   multiply.py
+ yellow input digital length:   #黄色背景
+ The integer length is 5  red
+ num is 4  green
+1 * 1= 1$  
+1 * 2= 2$ 2 * 2= 4$  
+1 * 3= 3$ 2 * 3= 6$ 3 * 3= 9$  
+1 * 4= 4$ 2 * 4= 8$ 3 * 4= 12$ 4 * 4= 16$  
+1 * 5= 5$ 2 * 5= 10$ 3 * 5= 15$ 4 * 5= 20$ 5 * 5= 25$  
+ green [0, 1, 1, 2, 3]    #绿色背景
+ red write into fib.txt   #红色背景
+ try-finally add  green
+ yellow fib.txt content is ['[0, 1, 1, 2, 3]add try-finally\n']
+                      ## readlines()方法读取所有(剩余的)行
+                                               然后把它们作为一个 " 字符串列表 " 返回
+[root@V20 PythonScripts]# cat  fib.txt 
+[0, 1, 1, 2, 3]add try-finally
+[root@V20 PythonScripts]# cat   multiply.py 
+#!/usr/bin/env   python3
+import  random
+import  getpass
+import  sys
+
+length = int(getpass.getpass('\033[30;43;1m yellow input digital length: \033[0m'))
+num = random.randint(1,length)
+def  multiply(length,num):
+  print('\033[31;1m The integer length is %d  red\033[0m' % length)
+  print('\033[32;1m num is %d  green\033[0m' % num)
+  for i in range(1, length+1):    # [1, 2, 3,...]
+    for j in range(1, i+1):      # i->1:[1], i->2: [1, 2],...
+      print('%d * %d\033[33;1m=\033[0m %d' % (j, i, i*j), end='\033[30;42;1m$ \033[0m')
+    sys.stdout.write('\033[31;43;1m \n\033[0m')
+  fib = [0,1]
+  for k  in  range(length - 2):
+    fib.append(fib[-1] + fib [-2])
+  sys.stdout.write('\033[30;42;1m green %s \n\033[0m' % fib)
+  return  fib
+
+outer = multiply(length,num)
+with  open('fib.txt','w') as fobj:
+  sys.stdout.write('\033[30;41;1m red write into fib.txt\n\033[0m')
+  fobj.write(str(outer))
+
+fobja = open('fib.txt','a')
+try:
+  fobja.seek(0,2)
+  fobja.write('add try-finally\n')
+  print('\033[32;1m try-finally add  green\033[0m')
+finally:
+  fobja.close()
+
+with  open('fib.txt','r') as frobj:
+  sys.stdout.write('\033[30;43;1m yellow fib.txt content is \033[0m')
+  print(frobj.readlines())
+           ## readlines()方法读取所有(剩余的)行
+                      然后把它们作为一个 " 字符串列表 " 返回
+
+[root@V20 PythonScripts]# cat  -A  fib.txt 
+[0, 1, 1, 2, 3]add try-finally$
+[root@V20 PythonScripts]# 
+
+[root@V20 PythonScripts]# scp  multiply.py  root@192.168.0.254:/var/git/pythonScripts
+
+文件内移动(python3 有限制 位置的偏移 ,python2 没有负数的限制)
+•  seek(offset[, whence]):移动文件指针到不同的位置
+–  offset是相对于某个位置的偏移量
+–  whence的值,0 表示文件开头,1 表示当前位置,
+   2 表示文件的结尾
+•  tell():返回当前文件指针的位置
+
+同大多数语言相同,python用一对(圆括号)调用函数
+•  如果没有加 (圆括号),只是对函数的引用
+
+位置参数
+•  与shell脚本类似,
+程序名 以及 参数
+都以 位置参数
+的方式
+传递 给 python程序
+•  使用sys模块的 argv 列表 接收
+
+[root@V20 PythonScripts]# vim   sysargv.py
+[root@V20 PythonScripts]# python3  sysargv.py
+['sysargv.py']    # 程序名
+[root@V20 PythonScripts]# python3  sysargv.py  aaa  bbb
+['sysargv.py', 'aaa', 'bbb']
+[root@V20 PythonScripts]# cat    sysargv.py
+#!/usr/bin/env   python3
+import  random
+import  getpass
+import  sys
+
+print(sys.argv)
+def  input():
+  lgth = int(getpass.getpass('\033[30;43;1m yellow input digital length: \033[0m'))
+  return  lgth
+
+def  ranum():
+  num = random.randint(1,length)
+  return  num
+
+def  multiply(length,num):
+  print('\033[31;1m The integer length is %d  red\033[0m' % length)
+  print('\033[32;1m num is %d  green\033[0m' % num)
+  for i in range(1, length+1):    # [1, 2, 3,...]
+    for j in range(1, i+1):      # i->1:[1], i->2: [1, 2],...
+      print('%d * %d\033[33;1m=\033[0m %d' % (j, i, i*j), end='\033[30;42;1m$ \033[0m')
+    sys.stdout.write('\033[31;43;1m \n\033[0m')
+  fib = [0,1]
+  for k  in  range(length - 2):
+    fib.append(fib[-1] + fib [-2])
+  sys.stdout.write('\033[30;42;1m green %s \n\033[0m' % fib)
+  return  fib
 
 
+def  withtry(outer):
+  with  open('fib.txt','w') as fobj:
+    sys.stdout.write('\033[30;41;1m red write into fib.txt\n\033[0m')
+    fobj.write(str(outer))
+  
+  fobja = open('fib.txt','a')
+  try:
+    fobja.seek(0,2)
+    fobja.write('add try-finally\n')
+    print('\033[32;1m try-finally add  green\033[0m')
+  finally:
+    fobja.close()
+  
+  with  open('fib.txt','r') as frobj:
+    sys.stdout.write('\033[30;43;1m yellow fib.txt content is \033[0m')
+    print(frobj.readlines())
+  
+[root@V20 PythonScripts]#  =================================
+
+[root@V20 PythonScripts]# ll   /usr/bin/ls   /tmp/newls 
+ls: 无法访问/tmp/newls: 没有那个文件或目录
+-rwxr-xr-x. 1 root root 117656 6月  30 2016 /usr/bin/ls
+
+[root@V20 PythonScripts]# python3  sysargv.py  '/usr/bin/ls'  '/tmp/newls'
+['sysargv.py', '/usr/bin/ls', '/tmp/newls']
+Normal closure-------
+
+[root@V20 PythonScripts]# ll   /usr/bin/ls   /tmp/newls 
+-rw-r--r--  1 root root 117656 3月  27 14:17 /tmp/newls
+-rwxr-xr-x. 1 root root 117656 6月  30 2016 /usr/bin/ls
+
+[root@V20 PythonScripts]# md5sum   /usr/bin/ls   /tmp/newls 
+6ed7df5e820ec002898676631a03d475  /usr/bin/ls
+6ed7df5e820ec002898676631a03d475  /tmp/newls
+
+[root@V20 PythonScripts]# cat   sysargv.py 
+#!/usr/bin/env   python3
+import  random
+import  getpass
+import  sys
+
+print(sys.argv)
+def  copy(src_frb,dst_fwb):
+#  src_frb = '/usr/bin/ls'
+#  dst_fwb = '/tmp/newls'
+  
+  src_frb_obj = open(src_frb,'rb')
+  dst_fwb_obj = open(dst_fwb,'wb')
+  
+  booleanrun = True
+  while  booleanrun :
+    frbdata = src_frb_obj.read(4096)
+    if  frbdata ==  b'':
+      booleanrun = False
+    dst_fwb_obj.write(frbdata)
+  else:
+    src_frb_obj.close()
+    dst_fwb_obj.close()
+    print('Normal closure-------')
+copy(sys.argv[1],sys.argv[2])
+
+def  input():
+  lgth = int(getpass.getpass('\033[30;43;1m yellow input digital length: \033[0m'))
+  return  lgth
+
+def  ranum():
+  num = random.randint(1,length)
+  return  num
+
+#length = input()
+#num = ranum()
+def  multiply(length = 4, num = 3):  # 因为给参数 num 赋予了默认值 4 , 3 ,
+                                      所以在函数调用时,不向该参数传入值也是允许的
+  print('\033[31;1m The integer length is %d  red\033[0m' % length)
+  print('\033[32;1m num is %d  green\033[0m' % num)
+  for i in range(1, length+1):    # [1, 2, 3,...]
+    for j in range(1, i+1):      # i->1:[1], i->2: [1, 2],...
+      print('%d * %d\033[33;1m=\033[0m %d' % (j, i, i*j), end='\033[30;42;1m$ \033[0m')
+    sys.stdout.write('\033[31;43;1m \n\033[0m')
+  fib = [0,1]
+  for k  in  range(length - 2):
+    fib.append(fib[-1] + fib [-2])
+  sys.stdout.write('\033[30;42;1m green %s \n\033[0m' % fib)
+  return  fib
+
+# outer = multiply(length,num)
+def  withtry(outer):
+  with  open('fib.txt','w') as fobj:
+    sys.stdout.write('\033[30;41;1m red write into fib.txt\n\033[0m')
+    fobj.write(str(outer))
+  
+  fobja = open('fib.txt','a')
+  try:
+    fobja.seek(0,2)
+    fobja.write('add try-finally\n')
+    print('\033[32;1m try-finally add  green\033[0m')
+  finally:
+    fobja.close()
+  
+  with  open('fib.txt','r') as frobj:
+    sys.stdout.write('\033[30;43;1m yellow fib.txt content is \033[0m')
+    print(frobj.readlines())
+  
+[root@V20 PythonScripts]# 
+
+[root@V20 PythonScripts]# file  .sysargv.py.swp  #交换文件
+.sysargv.py.swp: Vim swap file, version 7.4
+
+[root@V20 PythonScripts]# rm  -f   .sysargv.py.swp
+[root@V20 PythonScripts]# vim   sysargv.py 
+
+[root@V20 PythonScripts]# python3  sysargv.py
+[root@V20 PythonScripts]# echo  $?
+0
+
+--------------- 模块名称切记不要与系统中已存在的模块重名
+•  模块文件名字去掉后面的扩展名(.py)即为模块名
+
+[root@V20 PythonScripts]# cat  sysargv.py   #模块文件名字xx.py
+#!/usr/bin/env   python3
+import  random
+import  getpass
+import  sys
+
+#print(sys.argv)
+def  copy(src_frb,dst_fwb):
+#  src_frb = '/usr/bin/ls'
+#  dst_fwb = '/tmp/newls'
+  
+  src_frb_obj = open(src_frb,'rb')
+  dst_fwb_obj = open(dst_fwb,'wb')
+  
+  booleanrun = True
+  while  booleanrun :
+    frbdata = src_frb_obj.read(4096)
+    if  frbdata ==  b'':
+      booleanrun = False
+    dst_fwb_obj.write(frbdata)
+  else:
+    src_frb_obj.close()
+    dst_fwb_obj.close()
+    print('Normal closure-------')
+
+#copy(sys.argv[1],sys.argv[2])
+
+def  input():
+  lgth = int(getpass.getpass('\033[30;43;1m yellow input digital length: \033[0m'))
+  return  lgth
+
+def  ranum():
+  num = random.randint(1,length)
+  return  num
+
+#length = input()
+#num = ranum()
+def  multiply(length = 4, num = 3):
+  print('\033[31;1m The integer length is %d  red\033[0m' % length)
+  print('\033[32;1m num is %d  green\033[0m' % num)
+  for i in range(1, length+1):    # [1, 2, 3,...]
+    for j in range(1, i+1):      # i->1:[1], i->2: [1, 2],...
+      print('%d * %d\033[33;1m=\033[0m %d' % (j, i, i*j), end='\033[30;42;1m$ \033[0m')
+    sys.stdout.write('\033[31;43;1m \n\033[0m')
+  fib = [0,1]
+  for k  in  range(length - 2):
+    fib.append(fib[-1] + fib [-2])
+  sys.stdout.write('\033[30;42;1m green %s \n\033[0m' % fib)
+  return  fib
+
+# outer = multiply(length,num)
+def  withtry(outer):
+  with  open('fib.txt','w') as fobj:
+    sys.stdout.write('\033[30;41;1m red write into fib.txt\n\033[0m')
+    fobj.write(str(outer))
+  
+  fobja = open('fib.txt','a')
+  try:
+    fobja.seek(0,2)
+    fobja.write('add try-finally\n')
+    print('\033[32;1m try-finally add  green\033[0m')
+  finally:
+    fobja.close()
+  
+  with  open('fib.txt','r') as frobj:
+    sys.stdout.write('\033[30;43;1m yellow fib.txt content is \033[0m')
+    print(frobj.readlines())
+  
+[root@V20 PythonScripts]# 
+[root@V20 PythonScripts]# rm  -f  '/tmp/newls'
+[root@V20 PythonScripts]# ls  '/tmp/newls'
+ls: 无法访问/tmp/newls: 没有那个文件或目录
+
+[root@V20 PythonScripts]# python3
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+--------------- 模块名称切记不要与系统中已存在的模块重名
+•  模块文件名字去掉后面的扩展名(.py)即为模块名
+
+>>> import   sysargv
+>>> sysargv
+sysargv
+>>> sysargv
+<module 'sysargv' from '/root/PythonScripts/sysargv.py'>
+>>> 
+
+>>> sysargv.
+sysargv.copy(      sysargv.input(     sysargv.random     sysargv.sys
+sysargv.getpass    sysargv.multiply(  sysargv.ranum(     sysargv.withtry(
+
+>>> sysargv.copy('/usr/bin/ls','/tmp/newls')
+Normal closure-------
+>>> 
+[root@V20 PythonScripts]# ll  '/tmp/newls'
+-rw-r--r-- 1 root root 117656 3月  27 14:41 /tmp/newls
+
+[root@V20 PythonScripts]# ls  __pycache__/
+guess_while.cpython-36.pyc  multiply.cpython-36.pyc  sysargv.cpython-36.pyc
+
+模块被导入后,程序会自动生成pyc的 字节码文件 
+以 提升性能
+•  模块属性通过“模块名.属性”的方法调用
+•  如果仅需要模块中的某些属性,也可以单独导入模块的特性
+•  模块具有一个__name__特殊属性
+
+•  当模块文件直接执行时,__name__的值为'__main__'
+
+•  当模块被另一个文件导入时,__name__的值就是该模块的名字
+
+[root@V20 PythonScripts]# vim   bar.py
+[root@V20 PythonScripts]# cat  bar.py
+#!/usr/bin/env  python3
+import  foo
+
+[root@V20 PythonScripts]# vim   foo.py
+[root@V20 PythonScripts]# cat   foo.py
+#!/usr/bin/env  python3
+print(__name__)  #模块具有一个__name__特殊属性
+
+-----------------  # 当模块文件直接执行时,__name__的值为'__main__'
+
+[root@V20 PythonScripts]# python3  foo.py 
+__main__  ## 当模块文件直接执行时,__name__的值为'__main__'
+
+[root@V20 PythonScripts]# python3  bar.py 
+foo    #当模块被另一个文件导入时,__name__的值就是该模块的名字 foo
+
+[root@V20 PythonScripts]# ll   __pycache__/foo.cpython-36.pyc 
+-rw-r--r-- 1 root root 131 3月  27 15:14 __pycache__/foo.cpython-36.pyc
+
+[root@V20 PythonScripts]# 
+
+>>> sysargv.input  #没有加圆括号,只是对函数的引用
+<function input at 0x7f969d4d1bf8>
+>>> 
+>>> print(sysargv)
+<module 'sysargv' from '/root/PythonScripts/sysargv.py'>
+
+>>> print(type(sysargv))
+<class 'module'>
+
+>>> print(type(sysargv.input))
+<class 'function'>
+>>> 
+
+--------------------------------
+•  当模块文件直接执行时,__name__的值为'__main__'
+
+[root@V20 PythonScripts]# python3  sysargv.py  /usr/bin/ls  /tmp/newls
+
+__name__  is   __main__
+['sysargv.py', '/usr/bin/ls', '/tmp/newls']
+Normal closure-------
+ yellow input digital length: 
+ The integer length is 4  red
+ num is 2  green
+1 * 1= 1$  
+1 * 2= 2$ 2 * 2= 4$  
+1 * 3= 3$ 2 * 3= 6$ 3 * 3= 9$  
+1 * 4= 4$ 2 * 4= 8$ 3 * 4= 12$ 4 * 4= 16$  
+ green [0, 1, 1, 2] 
+ red write into fib.txt
+ try-finally add  green
+ yellow fib.txt content is ['[0, 1, 1, 2]add try-finally\n']
+[root@V20 PythonScripts]# echo  $?
+0
+[root@V20 PythonScripts]# cat   sysargv.py 
+#!/usr/bin/env   python3
+import  random
+import  getpass
+import  sys
+
+nuber = random.randint(1,100)
+
+#  #当模块被另一个文件导入时,__name__的值就是该模块的名字
+
+print("__name__  is  ",__name__)  
+
+def  copy(src_frb,dst_fwb):
+#  src_frb = '/usr/bin/ls'
+#  dst_fwb = '/tmp/newls'
+  
+  src_frb_obj = open(src_frb,'rb')
+  dst_fwb_obj = open(dst_fwb,'wb')
+  
+  booleanrun = True
+  while  booleanrun :
+    frbdata = src_frb_obj.read(4096)
+    if  frbdata ==  b'':
+      booleanrun = False
+    dst_fwb_obj.write(frbdata)
+  else:
+    src_frb_obj.close()
+    dst_fwb_obj.close()
+    print('Normal closure-------')
+
+def  multiply(length = 4, num = 3):
+  print('\033[31;1m The integer length is %d  red\033[0m' % length)
+  print('\033[32;1m num is %d  green\033[0m' % num)
+  for i in range(1, length+1):    # [1, 2, 3,...]
+    for j in range(1, i+1):      # i->1:[1], i->2: [1, 2],...
+      print('%d * %d\033[33;1m=\033[0m %d' % (j, i, i*j), end='\033[30;42;1m$ \033[0m')
+    sys.stdout.write('\033[31;43;1m \n\033[0m')
+  fib = [0,1]
+  for k  in  range(length - 2):
+    fib.append(fib[-1] + fib [-2])
+  sys.stdout.write('\033[30;42;1m green %s \n\033[0m' % fib)
+  return  fib
+
+def  withtry(outer):
+  with  open('fib.txt','w') as fobj:
+    sys.stdout.write('\033[30;41;1m red write into fib.txt\n\033[0m')
+    fobj.write(str(outer))
+  
+  fobja = open('fib.txt','a')
+  try:
+    fobja.seek(0,2)
+    fobja.write('add try-finally\n')
+    print('\033[32;1m try-finally add  green\033[0m')
+  finally:
+    fobja.close()
+  
+  with  open('fib.txt','r') as frobj:
+    sys.stdout.write('\033[30;43;1m yellow fib.txt content is \033[0m')
+    print(frobj.readlines())
+  
+if __name__ == '__main__':
+
+  print(sys.argv)
+  copy(sys.argv[1],sys.argv[2])
+  
+  length = int(getpass.getpass('\033[30;43;1m yellow input digital length: \033[0m'))
+  
+  num = random.randint(1,length)
+  
+  outer = multiply(length,num)
+  withtry(outer)
+  
+[root@V20 PythonScripts]# 
+[root@V20 PythonScripts]# cat  fib.txt 
+[0, 1, 1, 2]add try-finally
+[root@V20 PythonScripts]# ll  /tmp/newls   /usr/bin/ls
+-rw-r--r--  1 root root 117656 3月  27 15:52 /tmp/newls
+-rwxr-xr-x. 1 root root 117656 6月  30 2016 /usr/bin/ls
+
+[root@V20 PythonScripts]# md5sum   /tmp/newls   /usr/bin/ls
+6ed7df5e820ec002898676631a03d475  /tmp/newls
+6ed7df5e820ec002898676631a03d475  /usr/bin/ls
+
+[root@V20 PythonScripts]# 
+
+[root@V20 PythonScripts]# python3
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+/***** #  #当模块被另一个文件导入时,__name__的值就是该模块的名字
+  #模块文件名字 sysargv.py 去掉后面的扩展名(.py)即为模块名
+
+print("__name__  is  ",__name__)  
+*******/
+
+>>> import  sysargv
+__name__  is   sysargv
+
+>>> print(sysargv)
+<module 'sysargv' from '/root/PythonScripts/sysargv.py'>
+>>> print(type(sysargv))
+<class 'module'>
+>>> sysargv.
+sysargv.copy(      sysargv.multiply(  sysargv.random     sysargv.withtry(
+sysargv.getpass    sysargv.nuber      sysargv.sys        
+>>> sysargv.nuber
+9
+>>> print(sysargv.nuber)
+9
+>>> print(type(sysargv.nuber))
+<class 'int'>
+>>> print(sysargv.copy)
+<function copy at 0x7f801f63e598>
+>>> print(type(sysargv.copy))
+<class 'function'>
+>>> print(sysargv.multiply())
+ The integer length is 4  red
+ num is 3  green
+1 * 1= 1$  
+1 * 2= 2$ 2 * 2= 4$  
+1 * 3= 3$ 2 * 3= 6$ 3 * 3= 9$  
+1 * 4= 4$ 2 * 4= 8$ 3 * 4= 12$ 4 * 4= 16$  
+ green [0, 1, 1, 2] 
+[0, 1, 1, 2]
+>>> print(sysargv.multiply(5,9))
+ The integer length is 5  red
+ num is 9  green
+1 * 1= 1$  
+1 * 2= 2$ 2 * 2= 4$  
+1 * 3= 3$ 2 * 3= 6$ 3 * 3= 9$  
+1 * 4= 4$ 2 * 4= 8$ 3 * 4= 12$ 4 * 4= 16$  
+1 * 5= 5$ 2 * 5= 10$ 3 * 5= 15$ 4 * 5= 20$ 5 * 5= 25$  
+ green [0, 1, 1, 2, 3] 
+[0, 1, 1, 2, 3]
+>>> 
 
 
+[root@V20 PythonScripts]# python3
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+>>> import  random
+>>> import  string
+>>> print(random)
+<module 'random' from '/usr/local/lib/python3.6/random.py'>
+
+>>> print(string)
+<module 'string' from '/usr/local/lib/python3.6/string.py'>
+
+>>> print(type(string))
+<class 'module'>
+
+>>> string.
+string.Formatter(       string.digits
+string.Template(        string.hexdigits
+string.ascii_letters    string.octdigits
+string.ascii_lowercase  string.printable
+string.ascii_uppercase  string.punctuation
+string.capwords(        string.whitespace
+
+>>> print(string.digits)
+0123456789
+
+>>> print(type(string.digits))
+<class 'str'>
+
+>>> print(string.ascii_letters)
+abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+>>> print(type(string.ascii_letters))
+<class 'str'>
+>>> 
 
 
+[root@V20 PythonScripts]# vim   randpass.py
+[root@V20 PythonScripts]# python3  randpass.py
+ nuber  is  3 
+ __name__  is  __main__ 
+choce is h
+result is h 
+choce is y
+result is hy 
+choce is y
+result is hyy 
+choce is f
+result is hyyf 
+Default 4-bit password is red hyyf
+choce is 3
+result is 3 
+choce is z
+result is 3z 
+choce is i
+result is 3zi 
+The password you chose is 3zi
+[root@V20 PythonScripts]# cat  randpass.py
+#!/usr/bin/env   python3
+import  random
+import  string
+import  getpass
+import  sys
+
+nuber = random.randint(2,6)
+sys.stdout.write("\033[30;42;1m nuber  is  %s \n\033[0m" % nuber)
+sys.stdout.write("\033[30;43;1m __name__  is  %s \n\033[0m" % __name__)
+
+all_chs = string.digits + string.ascii_letters
+def  gen_pass(n = 4 ):
+  result = ''
+  for i  in range(n):
+    choce = random.choice(all_chs)
+    print("choce is %s" % choce)
+    result += choce
+    print("result is %s " % result)
+  return  result
+
+if  __name__ == '__main__' :
+
+  print("\033[31;1mDefault 4-bit password is red %s\033[0m" % gen_pass())
+  print('The password you chose is ' + gen_pass(nuber))
+
+[root@V20 PythonScripts]# python3
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import  randpass
+ nuber  is  3 
+ __name__  is  randpass 
+>>> print(type(randpass))
+<class 'module'>
+>>> print(randpass)
+<module 'randpass' from '/root/PythonScripts/randpass.py'>
+>>> randpass.
+randpass.all_chs    randpass.nuber      randpass.sys
+randpass.gen_pass(  randpass.random     
+randpass.getpass    randpass.string     
+>>> randpass.all_chs
+'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+>>> randpass.gen_pass()
+choce is 0
+result is 0 
+choce is r
+result is 0r 
+choce is O
+result is 0rO 
+choce is R
+result is 0rOR 
+'0rOR'
+>>> 
+
+[root@V20 PythonScripts]# scp   randpass.py    root@192.168.0.254:/var/git/pythonScripts
 
 
+[root@V20 PythonScripts]# vim   choicefor.py
+[root@V20 PythonScripts]# python3   choicefor.py
+ nuber  is  9 
+ __name__  is  __main__ 
+result  is ['M', 'U', 'E', '7']	 type is  <class 'list'>
+Default 4-bit password is red MUE7
+result  is ['O', 'W', 'N', '3', 'j', 'J', '2', 'a', 'E']	 type is  <class 'list'>
+The password random selection is OWN3jJ2aE
+[root@V20 PythonScripts]# cat   choicefor.py
+#!/usr/bin/env   python3
+import  sys,random
+from  string  import  digits,ascii_letters
+
+nuber = random.randint(3,9)
+sys.stdout.write("\033[30;42;1m nuber  is  %s \n\033[0m" % nuber)
+sys.stdout.write("\033[30;43;1m __name__  is  %s \n\033[0m" % __name__)
+
+#all_chars = string.digits + string.ascii_letters
+all_chars = digits + ascii_letters
+
+def  gen_pass(length = 4 ):
+  result = [random.choice(all_chars)  for  i  in range(length)]
+  print("result  is %s\t type is " % result,type(result))
+  return  ''.join(result)  #将列表的字符拼接起来
+
+if  __name__ == '__main__' :
+
+  print("\033[31;1mDefault 4-bit password is red %s\033[0m" % gen_pass())
+  print('The password random selection is ' + gen_pass(nuber))
+
+[root@V20 PythonScripts]# python3
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import  choicefor
+ nuber  is  4 
+ __name__  is  choicefor 
+>>> choicefor.
+choicefor.all_chars      choicefor.nuber
+choicefor.ascii_letters  choicefor.random
+choicefor.digits         choicefor.sys
+choicefor.gen_pass(      
+>>> choicefor.gen_pass()
+result  is ['N', 'a', 'Z', 'T']	 type is  <class 'list'>
+'NaZT'
+>>> 
+[root@V20 PythonScripts]# 
+>>> import  time
+>>> time.
+time.CLOCK_MONOTONIC           time.gmtime(
+time.CLOCK_MONOTONIC_RAW       time.localtime(
+time.CLOCK_PROCESS_CPUTIME_ID  time.mktime(
+time.CLOCK_REALTIME            time.monotonic(
+time.CLOCK_THREAD_CPUTIME_ID   time.perf_counter(
+time.altzone                   time.process_time(
+time.asctime(                  time.sleep(
+time.clock(                    time.strftime(
+time.clock_getres(             time.strptime(
+time.clock_gettime(            time.struct_time(
+time.clock_settime(            time.time(
+time.ctime(                    time.timezone
+time.daylight                  time.tzname
+time.get_clock_info(           time.tzset(
+>>> 
+>>> datetime.datetime.now()
+datetime.datetime(2019, 3, 27, 20, 18, 14, 997470)
+>>> time.time()
+1553690736.6301467
+>>> time.time()
+1553690739.8455634
+>>> 
+>>> time.localtime()
+time.struct_time(tm_year=2019, tm_mon=3, tm_mday=27, tm_hour=20, tm_min=46, tm_sec=54, tm_wday=2, tm_yday=86, tm_isdst=0)
+>>> 
+>>> time.strftime('%Y-%m-%d %H:%M:%S',time.localtime())
+'2019-03-27 20:48:35'
+>>> 
+>>> type(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime()))
+<class 'str'>
+>>> type(datetime.datetime.now())
+<class 'datetime.datetime'>
+>>> 
+
+>>> print(100/3)
+33.333333333333336
+                     打印浮点数（指定保留小数点位数）
+>>> print("decimal fraction is  %.3f " % (100/3))
+decimal fraction is  33.333 
+>>> print("decimal fraction is  %.6f " % (100/3))
+decimal fraction is  33.333333 
+>>>                     打印浮点数（指定保留小数点位数）
+>>> print("decimal fraction is  %.f " % (100/3))
+decimal fraction is  33 
+
+--------------------------------- 打印浮点数
+>>> print("decimal fraction is  %f " % (100/3))
+decimal fraction is  33.333333 
+
+>>> print("decimal fraction is  %.8f " % (100/3))
+decimal fraction is  33.33333333 
+>>> 
 
 
+cock  英 [kɒk]  美 [kɑ:k]  
+       n.公鸡;龙头;成熟雄鸟;首领，领导
+       vt.使某物竖起;
+
+hen   英 [hen]  美 [hɛn]  
+      n.母鸡;雌禽;女人
+
+chick   英 [tʃɪk]  美 [tʃɪk]  
+        n.小鸡;少妇;小鸟;<口>小姐
+        adj.胆小的;雅致的
+
+chicken   英 [ˈtʃɪkɪn]  美 [ˈtʃɪkən]  
+           n.鸡;鸡肉;胆小鬼;懦夫
 
 
+[root@V20 PythonScripts]# vim   chick.py
+[root@V20 PythonScripts]# python3  chick.py
+local time is time.struct_time(tm_year=2019, tm_mon=3, tm_mday=27, tm_hour=20, tm_min=41, tm_sec=55, tm_wday=2, tm_yday=86, tm_isdst=0)  type is  <class 'time.struct_time'> 
+LocalTime is 2019-03-27 20:41:55 
+cock is 0	hen is 25	chick is 75
+cock is 4	hen is 18	chick is 78
+cock is 8	hen is 11	chick is 81
+cock is 12	hen is 4	chick is 84
+0.00298309326171875 --end-start
+There are  4 answers
+2019-03-27 20:41:55.799391
+[root@V20 PythonScripts]# cat   chick.py
+#!/usr/bin/env  python3
 
+#cock公鸡 + hen母鸡 + chick小鸡 = 100
+#5 * cock + 3 * hen + z/3 = 100
+import  time, datetime
+#时间模块  time.time()函数
 
+localt = time.localtime()
+print('local time is %s  type is  %s ' % (localt,type(localt)))
 
+#将元组的时间格式转换成字符串格式的时间
+print('LocalTime is %s ' % time.strftime('%Y-%m-%d %H:%M:%S',localt))
+start = time.time()
+count = 0
+for cock in range(0,21):
+  for hen in range(0,34):
+    for chick in range (3,101,3):
+      if (cock + hen + chick == 100) and (cock * 5 + hen * 3 + chick /3 == 100):
+        print('cock is %d\then is %d\tchick is %d' % (cock, hen, chick))
+        count += 1
+end = time.time()
+print(end - start,end=' --end-start\n')
 
+print("\033[32;40;1mThere are  %d answers\033[0m" % count)
+print(datetime.datetime.now())
+[root@V20 PythonScripts]# 
 
+[root@V20 PythonScripts]# vim  hen.py
+[root@V20 PythonScripts]# python3  hen.py
+local time is time.struct_time(tm_year=2019, tm_mon=3, tm_mday=27, tm_hour=21, tm_min=0, tm_sec=38, tm_wday=2, tm_yday=86, tm_isdst=0)  type is  <class 'time.struct_time'> 
+LocalTime is 2019-03-27 21:00:38 
+cock is 0	hen is 25	chick is 75
+cock is 4	hen is 18	chick is 78
+cock is 8	hen is 11	chick is 81
+cock is 12	hen is 4	chick is 84
+0.00028228759765625 --end-start
+There are  4 answers
+2019-03-27 21:00:38.473669
+[root@V20 PythonScripts]# cat   hen.py
+#!/usr/bin/env  python3
 
+#cock公鸡 + hen母鸡 + chick小鸡 = 100
+#5 * cock + 3 * hen + z/3 = 100
+import  time, datetime
+#时间模块  time.time()函数
 
+localt = time.localtime()
+print('local time is %s  type is  %s ' % (localt,type(localt)))
+
+#将元组的时间格式转换成字符串格式的时间
+print('LocalTime is %s ' % time.strftime('%Y-%m-%d %H:%M:%S',localt))
+start = time.time()
+count = 0
+for cock in range(0,21):
+  for hen in range(0,34):
+    chick = 100 - cock - hen
+    if (cock * 5 + hen * 3 + chick /3 == 100) and chick % 3 == 0 :
+      print('cock is %d\then is %d\tchick is %d' % (cock, hen, chick))
+      count += 1
+end = time.time()
+print(end - start,end=' --end-start\n')
+
+print("\033[32;40;1mThere are  %d answers\033[0m" % count)
+print(datetime.datetime.now())
+[root@V20 PythonScripts]# 
+
+[root@V20 PythonScripts]# vim  hen.py
+[root@V20 PythonScripts]# python3  hen.py
+local time is time.struct_time(tm_year=2019, tm_mon=3, tm_mday=27, tm_hour=21, tm_min=5, tm_sec=55, tm_wday=2, tm_yday=86, tm_isdst=0)  type is  <class 'time.struct_time'> 
+LocalTime is 2019-03-27 21:05:55 
+cock is 0	hen is 25	chick is 75
+cock is 4	hen is 18	chick is 78
+cock is 8	hen is 11	chick is 81
+cock is 12	hen is 4	chick is 84
+0.0002799034118652344 --end-start
+There are  4 answers
+2019-03-27 21:05:55.788268
+[root@V20 PythonScripts]# cat   hen.py
+#!/usr/bin/env  python3
+
+#cock公鸡 + hen母鸡 + chick小鸡 = 100
+#5 * cock + 3 * hen + z/3 = 100
+import  time, datetime
+#时间模块  time.time()函数
+
+localt = time.localtime()
+print('local time is %s  type is  %s ' % (localt,type(localt)))
+
+#将元组的时间格式转换成字符串格式的时间
+print('LocalTime is %s ' % time.strftime('%Y-%m-%d %H:%M:%S',localt))
+start = time.time()
+count = 0
+for cock in range(0,21):
+  for hen in range(0,34):
+    chick = 100 - cock - hen
+    if cock * 5 + hen * 3 + chick /3 == 100 :
+      print('cock is %d\then is %d\tchick is %d' % (cock, hen, chick))
+      count += 1
+end = time.time()
+print(end - start,end=' --end-start\n')
+
+print("\033[32;40;1mThere are  %d answers\033[0m" % count)
+print(datetime.datetime.now())
+[root@V20 PythonScripts]# 
 
 
 
