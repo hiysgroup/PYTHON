@@ -1,0 +1,689 @@
+
+[root@V20 PythonScripts]# cat  -E   filex.txt
+aaaa1234$
+bbb222$
+cc33$
+dddd4444$
+[root@V20 PythonScripts]# vim   shutilcopy.py
+[root@V20 PythonScripts]# rm  -f  filex2.txt 
+[root@V20 PythonScripts]# python3   shutilcopy.py   filex.txt   filex2.txt
+
+ __name__  is  __main__ 
+local time is time.struct_time(tm_year=2019, tm_mon=3, tm_mday=28, tm_hour=12, tm_min=30, tm_sec=47, tm_wday=3, tm_yday=87, tm_isdst=0)  type is  <class 'time.struct_time'> 
+LocalTime is 2019-03-28 12:30:47 
+Datetime now is 2019-03-28 12:30:47.986043 yellow
+['shutilcopy.py', 'filex.txt', 'filex2.txt']
+ The running time is  0.010984  seconds
+
+[root@V20 PythonScripts]# md5sum   filex.txt   filex2.txt
+
+81540de0291ffa0906cc656bb6a3dbfd  filex.txt
+81540de0291ffa0906cc656bb6a3dbfd  filex2.txt
+
+[root@V20 PythonScripts]# cat   filex2.txt 
+aaaa1234
+bbb222
+cc33
+dddd4444
+[root@V20 PythonScripts]# python3
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import  shutilcopy
+ __name__  is  shutilcopy 
+local time is time.struct_time(tm_year=2019, tm_mon=3, tm_mday=28, tm_hour=12, tm_min=31, tm_sec=34, tm_wday=3, tm_yday=87, tm_isdst=0)  type is  <class 'time.struct_time'> 
+LocalTime is 2019-03-28 12:31:34 
+Datetime now is 2019-03-28 12:31:34.651906 yellow
+>>> print(shutilcopy.localt)
+time.struct_time(tm_year=2019, tm_mon=3, tm_mday=28, tm_hour=12, tm_min=31, tm_sec=34, tm_wday=3, tm_yday=87, tm_isdst=0)
+>>> shutilcopy.copyx()
+ The running time is  0.001401  seconds
+>>> 
+====================================
+
+[root@V20 PythonScripts]# cat    shutilcopy.py 
+#!/usr/bin/env   python3
+import  shutil, sys, time, datetime
+sys.stdout.write("\033[31;1m __name__  is  %s \n\033[0m" % __name__)
+
+#时间模块  time.time()函数
+localt = time.localtime()
+print('local time is %s  type is  %s ' % (localt,type(localt)))
+
+#将元组的时间格式转换成字符串格式的时间
+print('LocalTime is %s ' % time.strftime('%Y-%m-%d %H:%M:%S',localt))
+
+sys.stdout.write('\033[30;43;1mDatetime now is %s yellow\n\033[0m' % datetime.datetime.now())
+def  copyx(srcrb = 'filex.txt',dstwb = 'filecopy.txt'):
+  start = time.time()
+  with open(srcrb) as src_fobj:
+    with open(dstwb,'w') as dst_fobj:
+      shutil.copyfileobj(src_fobj,dst_fobj)
+  end = time.time()
+  print("\033[32;40;1m The running time is  %f  seconds\033[0m" % (end - start))
+
+if __name__ == '__main__':
+  print(sys.argv)
+  copyx(sys.argv[1],sys.argv[2])
+
+[root@V20 PythonScripts]# 
+echo  -ne
+参 数：-n 不要在最后自动换行
+　　-e 若字符串中出现以下字符，则特别加以处理，而不会将它当成一般文字输出：
+　　\a 发出警告声；
+
+   -n 不输出最后的\n
+　　-e解释转义字符
+--------------------------------------------------------------
+复制和移动
+•  shutil.copyfileobj(fsrc, fdst[, length])
+将类似文件的对象fsrc的内容复制到类似文件的对象fdst。
+•  shutil.copyfile(src, dst, *, follow_symlinks=True)
+将名为src的文件的内容(无元数据)复制到名为dst的文
+件,然后返回dst。
+
+权限管理
+•  shutil.copymode(src, dst, *, follow_symlinks=True)
+将权限位从src复制到dst。文件内容,所有者和组不受影响。
+src和dst是以字符串形式给出的路径名称。
+
+[root@V20 PythonScripts]# chmod   755  filex.txt   filey.txt 
+[root@V20 PythonScripts]# ll   filex.txt   filey.txt
+-rwxr-xr-x 1 root root 30 3月  28 11:38 filex.txt
+-rwxr-xr-x 1 root root 14 3月  28 12:37 filey.txt
+
+[root@V20 PythonScripts]# rm  -f  filex2.txt   filey2.txt 
+
+[root@V20 PythonScripts]# ll   filemode.txt    ##注意变化 -rwxr-xr-x
+-rw-r--r-- 1 root root 30 3月  28 12:32 filemode.txt
+
+shutil.copystat(src, dst, *, follow_symlinks=True)
+将权限位,最后访问时间,上次修改时间和标志
+从src  复制到 dst。
+
+[root@V20 PythonScripts]# stat    filestat.txt  #注意变化 最近更改：2019-03-28 13:37:20
+                                                         #注意变化最近更改：2019-03-28 11:38:39
+
+  文件："filestat.txt"
+  大小：30        	块：8          IO 块：4096   普通文件
+设备：fd00h/64768d	Inode：38758176    硬链接：1
+权限：(0755/-rwxr-xr-x)  Uid：(    0/    root)   Gid：(    0/    root)
+最近访问：2019-03-28 13:37:20.817389240 +0800
+最近更改：2019-03-28 13:37:20.817389240 +0800
+最近改动：2019-03-28 13:37:20.817389240 +0800
+创建时间：-
+[root@V20 PythonScripts]# 
+
+[root@V20 PythonScripts]# stat   filex.txt 
+  文件："filex.txt"
+  大小：30        	块：8          IO 块：4096   普通文件
+设备：fd00h/64768d	Inode：38758179    硬链接：1
+权限：(0755/-rwxr-xr-x)  Uid：(    0/    root)   Gid：(    0/    root)
+最近访问：2019-03-28 11:38:44.147389240 +0800
+最近更改：2019-03-28 11:38:39.632389240 +0800
+最近改动：2019-03-28 13:17:09.900389240 +0800
+创建时间：-
+[root@V20 PythonScripts]# 
+[root@V20 PythonScripts]# vim   shutilcopy.py 
+
+
+[root@V20 PythonScripts]# python3   shutilcopy.py    filex.txt   filex2.txt
+ __name__  red-is  __main__ 
+LocalTime is 2019-03-28 13:40:39 
+Datetime now is 2019-03-28 13:40:39.160268 yellow
+['shutilcopy.py', 'filex.txt', 'filex2.txt']
+ The runningtime green-is  0.000325  seconds
+
+
+[root@V20 PythonScripts]# cat   shutilcopy.py 
+#!/usr/bin/env   python3
+import  shutil, sys, time, datetime
+sys.stdout.write("\033[31;1m __name__  red-is  %s \n\033[0m" % __name__)
+
+#时间模块  time.time()函数
+localt = time.localtime()
+#print('local time is %s  type is  %s ' % (localt,type(localt)))
+
+#将元组的时间格式转换成字符串格式的时间
+print('LocalTime is %s ' % time.strftime('%Y-%m-%d %H:%M:%S',localt))
+
+sys.stdout.write('\033[30;43;1mDatetime now is %s yellow\n\033[0m' % datetime.datetime.now())
+def  copyx(srcrb = 'filex.txt',dstwb = 'filecopy.txt'):
+  start = time.time()
+  with open(srcrb) as src_fobj:
+    with open(dstwb,'w') as dst_fobj:
+      shutil.copyfileobj(src_fobj,dst_fobj) 
+#注意"类似文件的对象"和"文件"的区别.copyfile(src_f,dst_f)
+  end = time.time()
+  print("\033[32;40;1m The runningtime green-is  %f  seconds\033[0m" % (end - start))
+  src_f = 'filey.txt'
+  dst_f = 'filey2.txt'
+#注意"类似文件的对象"和"文件"的区别.copyfile(src_f,dst_f)
+  shutil.copyfile(src_f,dst_f) 
+
+#将权限位从'filex.txt'复制到'filemode.txt'。
+#文件内容,所有者和组不受影响。windows 不支持
+  shutil.copymode('filex.txt','filemode.txt')
+
+#将权限位,最后访问时间,上次修改时间和标志
+#从src  复制到 dst。
+  shutil.copystat('filex.txt','filestat.txt')
+
+if __name__ == '__main__':
+  print(sys.argv)
+  copyx(sys.argv[1],sys.argv[2])
+
+[root@V20 PythonScripts]# 
+
+[root@V20 PythonScripts]# stat    filestat.txt   #注意变化最近更改：2019-03-28 11:38:39.632389240
+
+  文件："filestat.txt"
+  大小：30        	块：8          IO 块：4096   普通文件
+设备：fd00h/64768d	Inode：38758176    硬链接：1
+权限：(0755/-rwxr-xr-x)  Uid：(    0/    root)   Gid：(    0/    root)
+最近访问：2019-03-28 13:37:20.817389240 +0800
+最近更改：2019-03-28 13:37:20.817389240 +0800
+最近改动：2019-03-28 13:37:20.817389240 +0800
+创建时间：-
+[root@V20 PythonScripts]# stat   filex.txt  filestat.txt  # #注意变化 最近更改
+  文件："filex.txt"
+  大小：30        	块：8          IO 块：4096   普通文件
+设备：fd00h/64768d	Inode：38758179    硬链接：1
+权限：(0755/-rwxr-xr-x)  Uid：(    0/    root)   Gid：(    0/    root)
+最近访问：2019-03-28 13:37:20.817389240 +0800
+最近更改：2019-03-28 11:38:39.632389240 +0800
+最近改动：2019-03-28 13:17:09.900389240 +0800
+创建时间：-
+  文件："filestat.txt"
+  大小：30        	块：8          IO 块：4096   普通文件
+设备：fd00h/64768d	Inode：38758176    硬链接：1
+权限：(0755/-rwxr-xr-x)  Uid：(    0/    root)   Gid：(    0/    root)
+最近访问：2019-03-28 13:37:20.817389240 +0800
+最近更改：2019-03-28 11:38:39.632389240 +0800
+最近改动：2019-03-28 13:40:39.159389240 +0800
+创建时间：-
+[root@V20 PythonScripts]# 
+[root@V20 PythonScripts]# ll   filex.txt   filemode.txt  ##注意变化 -rwxr-xr-x
+-rwxr-xr-x 1 root root 30 3月  28 12:32 filemode.txt
+-rwxr-xr-x 1 root root 30 3月  28 11:38 filex.txt
+[root@V20 PythonScripts]# ll   filey.txt   filey2.txt  ##注意变化 -rwxr-xr-x
+-rw-r--r-- 1 root root 14 3月  28 13:40 filey2.txt
+-rwxr-xr-x 1 root root 14 3月  28 12:37 filey.txt
+[root@V20 PythonScripts]# 
+
+=========================
+复制和移动(续1)
+•  shutil.copy(src, dst, *, follow_symlinks=True)
+
+将文件src复制到文件或目录dst
+src和dst应为字符串。
+如果dst指定目录,
+则文件将使用src的基本文件名复制到dst中。
+返回新创建的文件的路径。
+
+[root@V20 PythonScripts]# mkdir newdir
+[root@V20 PythonScripts]# ls  newdir/
+
+[root@V20 PythonScripts]# python3   shutilcopy.py   filex.txt   filex2.txt
+ __name__  red-is  __main__ 
+LocalTime is 2019-03-28 14:11:05 
+Datetime now is 2019-03-28 14:11:05.597140 yellow
+['shutilcopy.py', 'filex.txt', 'filex2.txt']
+ The runningtime green-is  0.000368  seconds
+
+[root@V20 PythonScripts]# ls  newdir/
+filex.txt  fx.txt
+[root@V20 PythonScripts]# sed  -n  '33,42p'    shutilcopy.py
+
+#将文件src复制到文件或目录dst
+#src和dst应为字符串。
+#如果dst指定目录,
+#则文件将使用src的基本文件名复制到dst中。
+#返回新创建的文件的路径。
+#注意与 shutil.copyfile(src_f,dst_f) 的区别
+
+  shutil.copy('filex.txt','newdir/')
+  shutil.copy('filex.txt','newdir/fx.txt')
+
+[root@V20 PythonScripts]# 
+
+shutil.copy2(src, dst, *, follow_symlinks=True)
+与copy()相同,但copy2()也尝试保留所有文件元数据。
+
+[root@V20 PythonScripts]# python3   shutilcopy.py   filex.txt   filex2.txt
+ __name__  red-is  __main__ 
+LocalTime is 2019-03-28 14:37:42 
+Datetime now is 2019-03-28 14:37:42.765815 yellow
+['shutilcopy.py', 'filex.txt', 'filex2.txt']
+ The runningtime green-is  0.000332  seconds
+[root@V20 PythonScripts]# ll   newdir/
+总用量 12
+-rwxr-xr-x 1 root root 30 3月  28 14:37 filex.txt
+-rwxr-xr-x 1 root root 14 3月  28 12:37 filey.txt
+-rwxr-xr-x 1 root root 30 3月  28 14:37 fx.txt
+
+[root@V20 PythonScripts]# ll   newdir/filey.txt 
+-rwxr-xr-x 1 root root 14 3月  28 12:37 newdir/filey.txt
+
+-----------------  shutil.copy2(src, dst, *, follow_symlinks=True)
+     与copy()相同,
+但copy2()也尝试保留所有文件元数据。
+
+[root@V20 PythonScripts]# sed  -n  '40,45p'    shutilcopy.py
+  shutil.copy('filex.txt','newdir/')
+  shutil.copy('filex.txt','newdir/fx.txt')
+
+#相当于 cp -p
+  shutil.copy2('filey.txt','newdir')
+
+[root@V20 PythonScripts]# 
+
+目录操作
+•  shutil.copytree(src, dst, symlinks=False, 
+         ignore=None, copy_function=copy2, 
+         ignore_dangling_symlinks=False)
+递归地复制以src为根的整个目录树,返回目标目录。
+由dst命名的目标目录不能已经存在。
+
+[root@V20 PythonScripts]# vim   shutilcopy.py 
+[root@V20 PythonScripts]# sed  -n  45,49p   shutilcopy.py
+
+#递归地复制以src为根的整个目录树,返回目标目录。
+#由dst命名的目标目录不能已经存在。
+  shutil.copytree('newdir/', '/root/zidyidir')
+
+[root@V20 PythonScripts]# python3   shutilcopy.py   filex.txt   filex2.txt
+
+ __name__  red-is  __main__ 
+LocalTime is 2019-03-28 14:47:15 
+Datetime now is 2019-03-28 14:47:15.953911 yellow
+['shutilcopy.py', 'filex.txt', 'filex2.txt']
+ The runningtime green-is  0.000353  seconds
+
+[root@V20 PythonScripts]# ls   /root/zidyidir/
+filex.txt  filey.txt  fx.txt
+[root@V20 PythonScripts]# ls  -ld  /root/zidyidir/
+drwxr-xr-x 2 root root 54 3月  28 14:37 /root/zidyidir/
+
+---- shutil.rmtree (path, ignore_errors=False, onerror=None)
+删除整个目录树; 
+路径必须指向目录
+(而不是指向目录的符号链接)。
+
+[root@V20 PythonScripts]# python3   shutilcopy.py   filex.txt   filex2.txt
+ __name__  red-is  __main__ 
+LocalTime is 2019-03-28 14:54:49 
+Datetime now is 2019-03-28 14:54:49.960459 yellow
+['shutilcopy.py', 'filex.txt', 'filex2.txt']
+ The runningtime green-is  0.000490  seconds
+
+[root@V20 PythonScripts]# ls  -ld  /root/zidyidir/
+ls: 无法访问/root/zidyidir/: 没有那个文件或目录
+
+[root@V20 PythonScripts]# sed  -n  49,52p   shutilcopy.py
+
+#删除整个目录树
+  shutil.rmtree('/root/zidyidir')
+
+[root@V20 PythonScripts]# 
+
+shutil.move(src, dst, copy_function=copy2)
+递归地 将 文件 或 目录 (src) 移动到
+另一个位置(dst),
+并返回目标。
+
+[root@V20 PythonScripts]# vim  shutilcopy.py 
+[root@V20 PythonScripts]# sed  -n  52,56p   shutilcopy.py
+
+#递归地 将 文件 或 目录 (src) 移动到
+#另一个位置(dst),并返回目标。
+  shutil.move('filestat.txt', 'newdir/')
+
+[root@V20 PythonScripts]# ls   filestat.txt  #文件将被移动filestat.txt
+filestat.txt
+[root@V20 PythonScripts]# ls   newdir/
+filex.txt  filey.txt  fx.txt
+[root@V20 PythonScripts]# python3   shutilcopy.py   filex.txt   filex2.txt
+ __name__  red-is  __main__ 
+Datetime now is 2019-03-28 15:05:19.310970 yellow
+['shutilcopy.py', 'filex.txt', 'filex2.txt']
+ The runningtime green-is  0.000356  seconds
+
+[root@V20 PythonScripts]# ls   newdir/     #文件被移动了filestat.txt
+filestat.txt  filex.txt  filey.txt  fx.txt
+[root@V20 PythonScripts]# ls   filestat.txt
+ls: 无法访问filestat.txt: 没有那个文件或目录
+[root@V20 PythonScripts]# 
+
+------  shutil.chown(path, user=None, group=None)
+更改给定路径的所有者用户 和/或 组
+
+[root@V20 PythonScripts]# vim  shutilcopy.py 
+[root@V20 PythonScripts]# sed   -n   55,59p  shutilcopy.py
+#  shutil.move('filestat.txt', 'newdir/')
+
+#更改给定路径的所有者用户 和/或 组
+  shutil.chown('newdir/fx.txt','lisi','lisi')
+
+[root@V20 PythonScripts]# 
+[root@V20 PythonScripts]# ls   /home/
+lisi
+[root@V20 PythonScripts]# grep  -n  lisi  /etc/passwd
+40:lisi:x:1000:1000:lisi:/home/lisi:/bin/bash
+
+[root@V20 PythonScripts]# ls   -l  newdir/fx.txt
+-rwxr-xr-x 1 root root 30 3月  28 14:47 newdir/fx.txt
+
+[root@V20 PythonScripts]# python3   shutilcopy.py   filex.txt   filex2.txt
+ __name__  red-is  __main__ 
+Datetime now is 2019-03-28 15:16:28.240485 yellow
+['shutilcopy.py', 'filex.txt', 'filex2.txt']
+ The runningtime green-is  0.000415  seconds
+
+[root@V20 PythonScripts]# ls   -l  newdir/fx.txt
+-rwxr-xr-x 1 lisi lisi 30 3月  28 14:47 newdir/fx.txt
+##所有者用户 和  组改变成 lisi
+
+[root@V20 PythonScripts]# 
+[root@V20 PythonScripts]# scp   shutilcopy.py   root@192.168.0.254:/var/git/pythonScripts/day04/
+
+
+>>> type(a)
+<type 'int'>
+
+>>> a = 5
+>>> print(a ** 2) #打印 变量a 的二次方 (幂运算)
+25
+>>> print(a == 5)   # 判断是否 相等
+True
+>>> print(a != 5)  # 判断是否 不相等
+False
+
+********/
+
+>>> 10 < 20 < 30  #python 支持 连续比较, 独有的语法
+True
+>>> 10 < 12 > 11   #python 支持 连续比较, 独有的语法, #可读性差,不推荐, 
+True
+
+>>> (10 < 12) and ( 12 > 11)   #可读性差,不推荐, 
+True
+>>> (10 < 12) and ( 12 > 11)
+True
+
+>>> (10 < 12)  or  ( 12 > 110 )
+True
+>>> (10 < 12)  and  ( 12 > 110 )  #且一个是假,则假
+False
+>>> (100 < 12)  or  ( 12 > 110 )
+False
+>>> (100 < 12)  or  ( 12 > 11 )   #或 一个是真,则真
+True
+
+>>> print(True and True)
+True
+>>> print(True and False)
+False
+
+>>> print(True  or  False)
+True
+>>> print(True  or  True)
+True
+>>> print(False  or  False)
+False
+
+>>> print(alist)
+[10, 102.22, 'bobbobbob', 'alice', True, False, -3.33, [100, -100, -0.8], 2]
+>>> print(type(alist[-2][0]))
+<class 'int'>
+>>> print(alist[-2][0])
+100
+
+>>> print(alist[-3])
+-3.33
+>>> print(type(alist[-3]))
+<class 'float'>
+
+>>> print(alist[-2][1])
+-100
+>>> print(type(alist[-2][1]))
+<class 'int'>
+
+>>> print(alist + [1000])  #必须是同一类型的列表类型,才能列表拼加
+[10, 102.22, 'bobbobbob', 'alice', True, False, -3.33, [100, -100, -0.8], 2, 1000]
+
+>>> print(alist)
+[10, 102.22, 'bobbobbob', 'alice', True, False, -3.33, [100, -100, -0.8], 2]
+
+元组的定义及操作
+•  可以认为元组是“静态”的列表
+•  元组一旦定义,不能改变
+
+>>> tuple_x = (10, True, 2.02, -3, False, [50,-10,True])
+
+>>> print(len(tuple_x))
+6
+>>> print(tuple_x)
+(10, True, 2.02, -3, False, [50, -10, True])
+
+>>> tuple_x[-1]
+[50, -10, True]
+
+可以认为元组是“静态”的列表
+•  元组一旦定义,不能改变
+
+>>> tuple_x[-1] = [5000]   # 元组不支持元素的改变
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'tuple' object does not support item assignment
+   类型错误：“tuple”对象不支持项分配
+
+>>> if not ():
+...   print('可以认为元组是"静态"的列表,空元组也是 False')
+... 
+可以认为元组是"静态"的列表,空元组也是 False
+>>> 
+
+>>> if not {}:
+...   print("字典没有顺序的说法,空字典 也是 False")
+... 
+字典没有顺序的说法,空字典 也是 False
+>>> 
+
+
+[root@V20 PythonScripts]# python2
+Python 2.7.5 (default, May  3 2017, 07:55:04) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-14)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+[root@V20 PythonScripts]# python3
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> x = y = 10
+>>> id(x) ; id(y)
+9327040
+9327040
+>>> 
+>>> a, b = 10, 20
+>>> print(a,b)
+10 20
+>>> a, b = b, a
+>>> print(a,b)
+20 10
+>>> 
+>>> id(a); id(b)
+9327360
+9327040
+>>> 
+
+变量赋值
+•  python支持链式多重赋值
+x = y = 10
+•  另一种将多个变量同时赋值的方法称为多元赋值,采
+用这种方式赋值时,等号两边的对象都是元组
+a, b = 10, 20
+
+列表：清单可重复，类型可不同 list 用“[]”表示
+元组: 类似列表,只读的,不可修改类型  tuple 用“()”表示
+
+集合：就是我们数学学的集合应用是去重 set
+字典：字典存储键值对数据,价值是查询，通过键，查找值 dict
+字典{最外面用大括号，每一组用冒号连起来，然后各组用逗号隔开}
+
+关键字列表
+和iskeyword()函数都放入了keyword模
+块以便查阅
+
+>>> import  keyword
+>>> 
+>>> keyword.kwlist
+['False', 'None', 'True', 'and', 'as', 'assert', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
+>>> 
+>>> keyword.iskeyword('as')
+True
+>>> keyword.iskeyword('asxx')
+False
+>>> print('pass' in keyword.kwlist)
+True
+>>> 
+[root@V20 PythonScripts]# vim  keywordxx.py
+[root@V20 PythonScripts]# python3  keywordxx.py
+__name__ yellow is __main__
+sys.argv[0] is keywordxx.py red
+sys.argv is ['keywordxx.py'] 
+['False', 'None', 'True', 'and', 'as', 'assert', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
+False
+True
+True
+[root@V20 PythonScripts]# cat   keywordxx.py
+#!/usr/bin/env  python3
+import  keyword, sys
+
+sys.stdout.write('\033[30;43;1m__name__ yellow is %s\n\033[0m' % __name__)
+
+
+if __name__ == '__main__':
+  sys.stdout.write('\033[31;47;1msys.argv[0] is %s red\n\033[0m' % sys.argv[0])
+  sys.stdout.write('\033[32;48;1msys.argv is %s \n\033[0m' % sys.argv)
+  print(keyword.kwlist)
+  print(keyword.iskeyword('asxx'))
+  print(keyword.iskeyword('as'))
+  print('pass' in keyword.kwlist)
+[root@V20 PythonScripts]# 
+
+===============  shell =======================
+
+readonly指令：定义只读shell变量或函数
+【语    法】readonly  [-fap][变量定义]
+参  数      功    能
+-f        定义只读函数
+-a        定义只读数组变量
+-p        显示系统中全部的变量列表
+
+
+[root@V21 PythonScripts]# export blgxx='abc'
+[root@V21 PythonScripts]# echo   $blgxx
+abc
+[root@V21 PythonScripts]# unset  blgxx   #取消此变量的值
+[root@V21 PythonScripts]# echo   $blgxx
+
+[root@V21 PythonScripts]# readonly   rdoy=123
+-bash: rdoy: 只读变量
+[root@V21 PythonScripts]# echo  ${rdoy}
+
+[root@V21 PythonScripts]# type  readonly 
+readonly 是 shell 内嵌
+[root@V21 PythonScripts]# readonly    #显示系统中所有的已经定义的 只读变量 
+declare -r BASHOPTS="checkwinsize:cmdhi...............
+....................
+declare -r SHELLOPTS="braceexpand:emacs:hashall:histexpand:history:interactive-comments:monitor"
+declare -ir UID="0"
+declare -r rdoy
+[root@V21 PythonScripts]# 
+[root@V21 PythonScripts]# readonly  |grep  rdoy
+declare -r rdoy
+[root@V21 PythonScripts]# unset   rdoy
+-bash: unset: rdoy: 无法反设定: 只读 variable
+
+attach   英 [əˈtætʃ]   美 [əˈtætʃ]  
+       vt.& vi. 附上;贴上，系
+detach   英 [dɪˈtætʃ]   美 [dɪˈtætʃ]  
+         vt.派遣;分离，拆开;分派;使超然
+unbind   英 ['ʌn'baɪnd]   美 [ʌnˈbaɪnd]  
+       vt.解开，解放
+---------------------------  shell只读变量删除 -------
+
+[root@V21 PythonScripts]# cat  << EOF |gdb
+> attach  $$
+> call  unbind_variable("rdoy")
+> detach
+> EOF
+GNU gdb (GDB) Red Hat Enterprise Linux 7.6.1-100.el7
+Copyright (C) 2013 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+.......................
+Reading symbols from /lib64/libnss_files.so.2...(no debugging symbols found)...done.
+Loaded symbols for /lib64/libnss_files.so.2
+0x00007f027122edbc in waitpid () from /lib64/libc.so.6
+Missing separate debuginfos, use: debuginfo-install bash-4.2.46-28.el7.x86_64
+(gdb) $1 = 0
+(gdb) Detaching from program: /usr/bin/bash, process 2333
+(gdb) quit
+[root@V21 PythonScripts]# readonly  |grep  rdoy
+[root@V21 PythonScripts]# echo  $?
+1
+[root@V21 PythonScripts]# echo  $$
+2333
+[root@V21 PythonScripts]# 
+
+python变量占用了内存，仅仅通过 del 变量名 的方式，
+只是让这个变量无法再使用；
+del变量会使得变量的引用次数-1，
+如果这个数成为0，
+会被垃圾回收，但是回收的速度缓慢
+调用gc模块的回收函数，这样就能立刻释放内存
+>>> import  gc
+>>> gc.collect()
+0
+>>> help(gc)
+ collect() -- Do a full collection right now.
+           现在就做一个完整的收集
+
+>>> import  random
+>>> help(random)
+
+>>>   
+  class Random(_random.Random):
+     | 绑定模块函数使用的随机数生成器基类。
+       |  
+     |  choice(self, seq)
+     |        从非空序列中选择一个随机元素。
+     |  randint(self, a, b)
+     |        返回范围[a，b]内的随机整数，包括两个端点。
+     |  
+  all_choice = [ 'rock', 'clipper', 'cloth' ]
+  computer = random.choice(all_choice)
+  num = random.randint(1,4)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
