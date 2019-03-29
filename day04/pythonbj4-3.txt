@@ -1,0 +1,673 @@
+
+[root@V20 PythonScripts]# python3
+Python 3.6.4 (default, Mar 19 2019, 09:53:28) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> print(10+20)
+30
+>>> print([10+20])
+[30]
+>>> [10 + 20]
+[30]
+>>> print(type(10+20))
+<class 'int'>
+>>> print(type([10+20]))
+<class 'list'>
+
+>>> print([elem * 3 for elem in [10,11,22,30]])
+[30, 33, 66, 90]
+
+>>> print([10,11,22,30])
+[10, 11, 22, 30]
+
+>>> print([elem * 2 for elem in [10, 1.001, True, 'abcd'] ] )
+[20, 2.002, 2, 'abcdabcd']
+
+>>> print([elem * 4 for elem in [10, 1.001, True, 'ab'] ] )
+[40, 4.004, 4, 'abababab']
+
+>>> print([elem * 4 for elem in [10, 1.001, False, 'ab'] ] )
+[40, 4.004, 0, 'abababab']
+
+>>> print(['%s\n' %  elem * 3 for elem in [10, 1.001, True, 'abc'] ] )
+['10\n10\n10\n', '1.001\n1.001\n1.001\n', 'True\nTrue\nTrue\n', 'abc\nabc\nabc\n']
+>>> 
+>>> print(['192.168.0.%d' %  (elem + 10)  for elem in range(1,12) ] )
+['192.168.0.11', '192.168.0.12', '192.168.0.13', '192.168.0.14', '192.168.0.15', '192.168.0.16', '192.168.0.17', '192.168.0.18', '192.168.0.19', '192.168.0.20', '192.168.0.21']
+
+>>> print(['192.168.0.%d' %  (elem + 10)  for elem in range(1,12,3) ] )
+['192.168.0.11', '192.168.0.14', '192.168.0.17', '192.168.0.20']
+>>> print(['192.168.0.%d' %  (elem + 100)  for elem in range(1,12,3) ] )
+['192.168.0.101', '192.168.0.104', '192.168.0.107', '192.168.0.110']
+>>> 
+
+函数语法
+range(stop)
+range(start, stop[, step])
+参数说明：
+start: 计数从 start 开始。默认是从 0 开始。例如range（5）等价于range（0， 5）;
+stop: 计数到 stop 结束，但不包括 stop。例如：range（0， 5） 是[0, 1, 2, 3, 4]没有5
+step：步长，默认为1。例如：range（0， 5） 等价于 range(0, 5, 1)
+
+Python3 range() 函数返回的是一个可迭代对象（类型是对象），
+而不是列表类型，
+ 所以打印的时候不会打印列表。
+>>> print(type(range(1,12,3)))
+<class 'range'>
+>>> print(range(1,12,3))
+range(1, 12, 3)
+
+Python3 list() 函数是对象迭代器，
+可以把range()返回的可迭代对象转为一个列表，
+返回的变量类型为列表。
+
+>>> print(type(list(range(1,12,3))))
+<class 'list'>
+>>> 
+
+>>> print(list(range(1,12,3)))
+[1, 4, 7, 10]
+>>> 
+
+Python2 range() 函数返回的是列表。
+
+
+# 遍历key值，value值（下面写法完全等价）：
+a = {'a': '1', 'b': '2', 'c': '3'}
+for key in a:
+    print(key+':'+a[key],sep=' -- ',end=' $')
+
+print('directory 方式一 for key in a')
+
+for key in a.keys():
+    print(key+':'+a[key],sep=' -- ',end=' $')
+
+print('directory 方式2 for key in a.keys()')
+
+for key,value in a.items():
+       print(key+':'+value,sep=' -- ',end=' $')
+
+print('directory 方式3 for key,value in a.items()')
+
+
+for (key,value) in a.items():
+    print(key+':'+value,sep=' -- ',end=' $')
+
+print('directory 方式4 for (key,value) in a.items()')
+
+
+
+#在for 循环中,遍历元组的每一项
+mytuple = ('yuanzu',111,True,('ziyuan',11.002))
+print('mytuple is ',mytuple)
+
+for value in mytuple:
+  print('tuple value type is ',value,type(value))
+
+
+#使用for...in语句遍历列表中的元素
+mylist = ['a0',11,False,['aa0',True,22]]
+print('mylist is %s' % mylist)
+for value in  mylist:
+  print('list value type is ',value,type(value))
+
+getlist = ['%s\n' % element for element in mylist]
+print('getlist is  %s ' % getlist)
+
+/***************
+mylist is ['a0', 11, False, ['aa0', True, 22]]
+list value type is  a0 <class 'str'>
+list value type is  11 <class 'int'>
+list value type is  False <class 'bool'>
+list value type is  ['aa0', True, 22] <class 'list'>
+getlist is  ['a0\n', '11\n', 'False\n', "['aa0', True, 22]\n"] 
+**********************/
+
+
+
+intlist = [1, 2, 3, 4, 5]
+print('intlist is %s' % intlist)
+
+#每个列表元素的二次方
+get_intlist = [element ** 2 for element in intlist ]
+print('get_intlist is %s' % get_intlist)
+
+
+
+
+#找出30以内的能够被3整除的正整数
+int3list = [element for element  in  range(1,30) if  element % 3 == 0 ]
+print('The positive integer divided by three is \n %s' % int3list)
+
+/**************
+The positive integer divided by three is 
+ [3, 6, 9, 12, 15, 18, 21, 24, 27]
+*****/
+
+
+
+tplist = ['a0',11,False,['aa0',True,22],('tuple-element',100,['cc00',1.002])]
+print('tplist is %s' % tplist)
+
+#内置函数enumerate 实现功能:同时得到元素编号和元素
+#enumerate   英 [ɪˈnju:məreɪt]   美 [ɪˈnu:məreɪt]  
+              vt.列举，枚举，数
+
+for (index,value) in  enumerate(tplist):
+  print('index is %d value is %s  type value is  %s' % (index,value,type(value)))
+
+/********************
+
+tplist is ['a0', 11, False, ['aa0', True, 22], ('tuple-element', 100, ['cc00', 1.002])]
+index is 0 value is a0  type value is  <class 'str'>
+index is 1 value is 11  type value is  <class 'int'>
+index is 2 value is False  type value is  <class 'bool'>
+index is 3 value is ['aa0', True, 22]  type value is  <class 'list'>
+index is 4 value is ('tuple-element', 100, ['cc00', 1.002])  type value is  <class 'tuple'>
+
+********************/
+---------------------------------------------------
+import sys
+try:
+ while True:
+  print('Please input a number:')
+  n = int(sys.stdin.readline().strip('\n')) 
+#strip('\n')表示以\n分隔，否则输出是“字符串+\n”的形式
+
+  print('Please input some numbers:')
+  sn = sys.stdin.readline().strip()
+#若是多输入，strip()默认是以空格分隔，返回一个包含多个字符串的list。
+
+  if sn == '':
+    break
+  sn = list(map(int,sn.split())) #如果要强制转换成int等类型，可以调用map()函数。
+    print(n)
+
+
+内建
+•  除了关键字之外,
+python还有可以在任何一级代码使用的“内建”的名字集合,
+这些名字可以由解释器设置或使用
+•  虽然built-in不是关键字,
+但是应该把它当作“系统保留字”
+•  保留的常量如:True、False、None
+
+
+序列操作符        作用
+seq[ind]       获得下标为ind的元素
+seq[ind1:ind2] 获得下标从ind1到ind2间的元素集合
+seq * expr     序列重复expr次
+seq1 + seq2    连接序列seq1和seq2
+obj in seq      判断obj元素是否包含在seq中
+obj not in seq  判断obj元素是否不包含在seq中
+
+
+
+内建函数
+函 数          含 义
+list(iter)  把可迭代对象转换为列表
+str(obj)    把obj对象转换成字符串
+tuple(iter) 把一个可迭代对象转换成一个元组对象
+
+内建函数(续1)
+•  len(seq):返回seq的长度
+•  max(iter,key=None):返回iter中的最大值
+•  enumerate:接受一个可迭代对象作为参数,
+返回一个enumerate对象
+
+tplist = ['a0',11,False,['aa0',True,22],('tuple-element',100,['cc00',1.002])]
+print('tplist is %s' % tplist)
+
+/$*****************
+tplist is ['a0', 11, False, ['aa0', True, 22], ('tuple-element', 100, ['cc00', 1.002])]
+*****************/
+
+#内置函数enumerate 实现功能:同时得到元素编号和元素
+#enumerate   英 [ɪˈnju:məreɪt]   美 [ɪˈnu:məreɪt]  
+              vt.列举，枚举，数
+
+for (index,value) in  enumerate(tplist):
+  print('index is %d value is %s  type value is  %s' % (index,value,type(value)))
+
+/********************
+index is 0 value is a0  type value is  <class 'str'>
+index is 1 value is 11  type value is  <class 'int'>
+index is 2 value is False  type value is  <class 'bool'>
+index is 3 value is ['aa0', True, 22]  type value is  <class 'list'>
+index is 4 value is ('tuple-element', 100, ['cc00', 1.002])  type value is  <class 'tuple'>
+
+********************/
+
+>>> print(range(1,12,3))
+range(1, 12, 3)
+>>> print(list(range(1,12,3)))
+[1, 4, 7, 10]
+
+>>> print(type(range(1,12,3)))
+<class 'range'>
+#list(iter)  把可迭代对象转换为列表
+
+>>> print(type(list(range(1,12,3))))
+<class 'list'>
+>>> 
+
+>>> alist = list()
+>>> print(type(alist))
+<class 'list'>
+
+>>> blist = list('ab123')
+>>> print(type(('aa',11,False)))
+<class 'tuple'>  #元组类型
+
+内建函数
+函 数          含 义
+list(iter)  把可迭代对象转换为列表
+str(obj)    把obj对象转换成字符串
+tuple(iter) 把一个可迭代对象转换成一个元组对象
+
+>>> print(('aa',11,False))
+('aa', 11, False)
+
+>>> print(type(list(('aa',11,False))))
+<class 'list'>
+
+>>> print(list(('aa',11,False)))
+['aa', 11, False]
+
+>>> 
+>>> ax = ('aa',11,False)
+>>> print(ax)
+('aa', 11, False)
+>>> print(list(ax))
+['aa', 11, False]
+>>> print(type(ax)
+... )
+<class 'tuple'>
+>>> print(type(list(ax)))
+<class 'list'>
+>>> 
+
+>>> atuple = tuple()
+>>> print(atuple)
+()
+>>> print(type(atuple))
+<class 'tuple'>
+
+
+>>> btuple = tuple('abc')
+>>> print(type(btuple))
+<class 'tuple'>
+>>> print(btuple)
+('a', 'b', 'c')
+>>> 
+>>> ctuple =([10,11,22,'abc'])
+>>> print(ctuple)
+[10, 11, 22, 'abc']
+>>> print(type(ctuple))
+<class 'list'>
+>>> 
+
+>>> btuple = tuple('abc123')
+>>> print(type(btuple)
+... )
+<class 'tuple'>
+>>> print(btuple)
+('a', 'b', 'c', '1', '2', '3')
+>>> 
+
+>>> import  random
+>>> num_list = [ random.randint(1,100) for i in range(5) ]
+>>> print(type(num_list))
+<class 'list'>
+>>> print(num_list)
+[45, 2, 20, 9, 96]
+>>> 
+>>> len(num_list)
+5
+>>> for (index,value) in enumerate(num_list):
+...  print('index is %d value is %s  '% (index,value))
+... 
+index is 0 value is 45  
+index is 1 value is 2  
+index is 2 value is 20  
+index is 3 value is 9  
+index is 4 value is 96  
+>>> 
+>>> for i  in  range(len(num_list)):
+...   print('index : value is %d:%s' % (i,num_list[i]))
+... 
+index : value is 0:45
+index : value is 1:2
+index : value is 2:20
+index : value is 3:9
+index : value is 4:96
+>>> 
+>>> print(num_list)
+[45, 2, 20, 9, 96]
+>>> print(type(num_list))
+<class 'list'>
+
+>>> for item  in enumerate(num_list):
+...   print('%s: %s' % (item[0],item[1]),item,type(item),sep='\t')
+... 
+0: 45	(0, 45)	<class 'tuple'>
+1: 2	(1, 2)	<class 'tuple'>
+2: 20	(2, 20)	<class 'tuple'>
+3: 9	(3, 9)	<class 'tuple'>
+4: 96	(4, 96)	<class 'tuple'>
+>>> 
+
+内建函数(续1)
+•  len(seq):返回seq的长度
+•  max(iter,key=None):返回iter中的最大值
+•  enumerate:接受一个可迭代对象作为参数,
+返回一个enumerate对象
+
+>>> enumerate(num_list)
+<enumerate object at 0x7fa58160c1b0>
+
+>>> print(type(enumerate(num_list)))
+<class 'enumerate'>
+
+>>> print(list(enumerate(num_list)))
+[(0, 45), (1, 2), (2, 20), (3, 9), (4, 96)]
+>>> 
+>>> for item  in enumerate(num_list):
+...   print('%s: %s' % (item[0],item[1]),item,type(item),sep='\t')
+... 
+0: 45	(0, 45)	<class 'tuple'>
+1: 2	(1, 2)	<class 'tuple'>
+2: 20	(2, 20)	<class 'tuple'>
+3: 9	(3, 9)	<class 'tuple'>
+4: 96	(4, 96)	<class 'tuple'>
+>>> 
+
+reverse     英 [rɪˈvɜ:s]   美 [rɪˈvɜ:rs]  
+vt.& vi.（使）反转;（使）颠倒;掉换，交换;[法]撤消，推翻
+
+
+内建函数(续2)
+•  reversed(seq):接受一个序列作为参数,
+返回一个以逆序访问的迭代器
+•  sorted(iter):接受一个可迭代对象作为参数,
+返回一个有序的列表
+
+>>> alist = [ random.randint(10,99) for i  in range(6) ]
+>>> print(type(alist))
+<class 'list'>
+>>> print(alist)
+[18, 76, 91, 13, 99, 11]
+
+>>> print(sorted(alist))
+[11, 13, 18, 76, 91, 99]
+
+>>> print(reversed(alist))
+<list_reverseiterator object at 0x7fa583b91fd0>
+>>> for item in reversed(alist):
+...   print(item,end= '  ')
+... 
+11  99  13  91  76  18  >>> 
+>>> 
+>>> print(list(reversed(alist)))
+[11, 99, 13, 91, 76, 18]
+>>> 
+>>> print(alist)
+[18, 76, 91, 13, 99, 11]
+
+>>> print(reversed(alist))
+<list_reverseiterator object at 0x7fa583b91fd0>
+>>> print(type(reversed(alist)))
+<class 'list_reverseiterator'>
+>>> 
+
+>>> blist = [random.randint(3,300) for i in range(9) ]
+>>> print(blist)
+[149, 62, 218, 92, 275, 218, 81, 211, 38]
+>>> print(sorted(blist))
+[38, 62, 81, 92, 149, 211, 218, 218, 275]
+
+>>> print(reversed(blist))
+<list_reverseiterator object at 0x7fa583b91fd0>
+>>> for item in reversed(blist):
+...   print(item,end = ' --- ')
+...             #将数据  头 与 尾巴  调换位置
+38 --- 211 --- 81 --- 218 --- 275 --- 92 --- 218 --- 62 --- 149 --- >>> 
+>>> print(blist)
+[149, 62, 218, 92, 275, 218, 81, 211, 38]
+>>> 
+>>> 
+>>> ord('a')
+97
+>>> bin(97)  #bin()  转2进制方法
+'0b1100001'
+
+>>> int(99)  #int()   转10进制方法
+99
+>>> bin(99)
+'0b1100011'
+>>> int(0b1100011) #int()   转10进制方法
+99
+>>> 
+>>> bin(98)
+'0b1100010'
+>>> int('0b1100010',2)
+98
+>>> int(0b1100010)
+98
+>>> 
+>>> int('0o143',8)
+99
+>>> int(0o143)
+99
+>>> oct(99)
+'0o143'
+>>> print(type(oct(99)))
+<class 'str'>
+>>> print('string 0o143 is number %d' %  int(0o143))
+string 0o143 is number 99
+
+>>> print('number 99 is string %s' % oct(99))
+number 99 is string 0o143
+>>> 
+>>> ord('N')
+78
+>>> chr(77)
+'M'
+>>> chr(78)
+'N'
+>>> print('char N is number %d' % ord('N'))
+char N is number 78
+
+>>> print('%s is %s years  old' % ('lucy',28)
+... )
+lucy is 28 years  old
+>>> '%c' % 98
+'b'
+>>> print('%c' % 78)  #把数字78 转换成ASCII码 字符
+N
+>>> print('%s age is %d' % ('lucy',28)
+... )
+lucy age is 28
+>>> o
+
+>>> oct(99)  #oct() 返回一个整数的八进制表示( 转8进制方法)
+'0o143'
+>>> int('0o143',8)  # 八进制 转 十进制
+99
+>>> int(0o143)
+99
+>>> print('%o number' % 9)
+11 number
+>>> print('%o  is  Octal number'  %  9)
+11  is  Octal number
+>>> print('%#o  is  Octal number'  %  9)
+0o11  is  Octal number
+>>> 
+>>> oct(9)
+'0o11'
+>>> 
+hexadecimal     英 [ˌheksəˈdesɪml]  美 [ˌhɛksəˈdɛsəməl]  
+              n.& adj.十六进制（的）
+
+>>> hex(99)    #hex() 转换一个整数对象为十六进制的字符串表示( 转16进制方法)
+'0x63'
+>>> int(0x63)
+99
+>>> 
+
+>>> hex(15)  #hex() 转换一个整数对象为十六进制的字符串表示( 转16进制方法)
+'0xf'
+>>> oct(8)
+'0o10'
+>>> ord('b')  # ord('b')将字符 b 转换为整数型
+98
+>>> ord('c')
+99
+>>> 
+>>> chr(65)
+'A'
+>>> ord('A')
+65
+>>> 
+chr(i)   #返回整数i对应的ASCII字符。与ord()作用相反。
+            参数x：取值范围[0, 255]之间的正数
+>>> chr(0)
+'\x00'
+>>> chr(255)
+'ÿ'
+>>> chr(99)
+'c'
+>>> chr(97)
+'a'
+>>> 
+
+其他进制–》十进制 
+int(‘0b…’,2)–>10进制数据 
+int(‘0o…’,8)–>10进制数据 
+int(‘0x…’,16)–>10进制数据 
+第一个参数的标志0b、0o、0x要与第二个参数对应起来 
+
+
+字符串操作符
+•  比较操作符:字符串大小按ASCII码值大小进行比较
+•  切片操作符:[ ]、[ : ]、[ : : ]
+•  成员关系操作符:in、not in
+
+字符串可以使用格式化符号来表示特定含义
+格式化字符        转换方式
+%c           转换成字符
+%s           优先用str()函数进行字符串转换
+%d / %i      转成有符号十进制数
+%o           转成无符号八进制数
+%e / %E      转成科学计数法
+%f / %F      转成浮点数
+%%	输出% （格式化字符串里面包括百分号，那么必须使用%%）
+
+>>> print('%8.3f'  %  (50005/9))  #总的宽度是8位,小数占3位
+5556.111
+>>> print('%8.2f'  %  (50005/9))  #总的宽度是8位,小数占2位
+ 5556.11
+>>> print('%8.1f'  %  (50005/9))
+  5556.1
+>>> 
+ >>> print('%e'  %  40000000066)
+4.000000e+10
+>>> print('%e'  %  4022000000066)
+4.022000e+12
+>>> print('%f'  %  (4/9))
+0.444444
+>>> print('%.3f'  %  (4/9))
+0.444
+>>> print('%.3f'  %  (504/9))
+56.000
+
+
+格式化操作符辅助符
+
+通过”%”可以进行字符串格式化，但是”%”经常会结合下面的辅助符一起使用。
+
+辅助符号	说明
+*	定义宽度或者小数点精度
+–	用做左对齐
++	在正数前面显示加号(+)
+#	在八进制数前面显示零(0)，在十六进制前面显示”0x”
+        或者”0X”（取决于用的是”x”还是”X”）
+0	显示的数字前面填充”0″而不是默认的空格
+(var)	映射变量（通常用来处理字段类型的参数）
+m.n	m 是显示的最小总宽度，n 是小数点后的位数（如果可用的话）
+
+
+>>> print('%c' % 98)
+b
+>>> print('%i number' % 29)
+29 number
+>>> print('%d number' % 29)
+29 number
+>>> print('%f number' % 29)
+29.000000 number
+>>> print('%.f number' % 29)
+29 number
+>>> print('%.3f number' % 29)
+29.000 number
+>>> 
+>>> print('%o number' % 9)
+11 number
+>>> print('%o  is  Octal number'  %  9)
+11  is  Octal number
+>>> oct(9)
+'0o11'
+
+octal   英 ['ɒktl]   美 ['ɒktəl]  
+        adj.八进制的
+
+
+字符串可以使用格式化符号来表示特定含义
+辅助指令              作用
+*             定义宽度或者小数点精度
+-             左对齐
++            在正数前面显示加号
+<sp>        在正数前面显示空格
+             在八进制数前面显示零0,
+             在十六进制前面显示'0x'或者'0X'
+
+0       显示的数字前面填充0而不是默认的空格
+
+
+>>> import  string
+>>> print(string.ascii_letters)
+abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+>>> 
+>>> print(string.digits)
+0123456789
+>>> len('')
+0
+>>> print(len('') == 0 )
+True
+>>> import keyword
+
+>>> keyword.iskeyword('len')
+False
+>>> keyword.iskeyword('pass')
+True
+>>>
+identifier    英 [aɪˈdentɪfaɪə(r)]  
+            n.识别符;检验人，标识符;鉴别器;编号
+valid   英 [ˈvælɪd]   美 [ˈvælɪd]  
+        adj.有效的;有法律效力的;正当的;
+
+[root@V20 PythonScripts]# scp  checkchar.py    root@192.168.0.254:/var/git/pythonScripts/day04
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
