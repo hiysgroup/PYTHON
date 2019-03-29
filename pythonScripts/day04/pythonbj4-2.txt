@@ -667,20 +667,608 @@ del变量会使得变量的引用次数-1，
   num = random.randint(1,4)
 
 
+[root@V21 PythonScripts]# python3  directoryfor.py
+a:1 $b:2 $c:3 $directory 方式一 for key in a
+a:1 $b:2 $c:3 $directory 方式2 for key in a.keys()
+a:1 $b:2 $c:3 $directory 方式3 for key,value in a.items()
+a:1 $b:2 $c:3 $directory 方式4 for (key,value) in a.items()
+mylist is ['a0', 11, False, ['aa0', True, 22]]
+list value type is  a0 <class 'str'>
+list value type is  11 <class 'int'>
+list value type is  False <class 'bool'>
+list value type is  ['aa0', True, 22] <class 'list'>
+getlist is  ['a0\n', '11\n', 'False\n', "['aa0', True, 22]\n"] 
+intlist is [1, 2, 3, 4, 5]
+get_intlist is [1, 4, 9, 16, 25]
+mytuple is  ('yuanzu', 111, True, ('ziyuan', 11.002))
+tuple value type is  yuanzu <class 'str'>
+tuple value type is  111 <class 'int'>
+tuple value type is  True <class 'bool'>
+tuple value type is  ('ziyuan', 11.002) <class 'tuple'>
+[root@V21 PythonScripts]# cat  directoryfor.py
+#!/usr/bin/env   python
+
+# 遍历key值，value值（下面写法完全等价）：
+a = {'a': '1', 'b': '2', 'c': '3'}
+for key in a:
+    print(key+':'+a[key],sep=' -- ',end=' $')
+
+print('directory 方式一 for key in a')
+
+for key in a.keys():
+    print(key+':'+a[key],sep=' -- ',end=' $')
+
+print('directory 方式2 for key in a.keys()')
+
+for key,value in a.items():
+       print(key+':'+value,sep=' -- ',end=' $')
+
+print('directory 方式3 for key,value in a.items()')
+
+for (key,value) in a.items():
+    print(key+':'+value,sep=' -- ',end=' $')
+
+print('directory 方式4 for (key,value) in a.items()')
+
+#使用for...in语句遍历列表中的元素
+mylist = ['a0',11,False,['aa0',True,22]]
+print('mylist is %s' % mylist)
+for value in  mylist:
+  print('list value type is ',value,type(value))
+
+getlist = ['%s\n' % element for element in mylist]
+print('getlist is  %s ' % getlist)
+
+/**********
+mylist is ['a0', 11, False, ['aa0', True, 22]]
+list value type is  a0 <class 'str'>
+list value type is  11 <class 'int'>
+list value type is  False <class 'bool'>
+list value type is  ['aa0', True, 22] <class 'list'>
+getlist is  ['a0\n', '11\n', 'False\n', "['aa0', True, 22]\n"] 
+
+**************/
+
+
+intlist = [1, 2, 3, 4, 5]
+print('intlist is %s' % intlist)
+
+get_intlist = [element ** 2 for element in intlist ]
+print('get_intlist is %s' % get_intlist)
+
+/**************
+intlist is [1, 2, 3, 4, 5]
+get_intlist is [1, 4, 9, 16, 25]
+****************/
+
+#在for 循环中,遍历元组的每一项
+mytuple = ('yuanzu',111,True,('ziyuan',11.002))
+print('mytuple is ',mytuple)
+
+for value in mytuple:
+  print('tuple value type is ',value,type(value))
+
+/************
+mytuple is  ('yuanzu', 111, True, ('ziyuan', 11.002))
+tuple value type is  yuanzu <class 'str'>
+tuple value type is  111 <class 'int'>
+tuple value type is  True <class 'bool'>
+tuple value type is  ('ziyuan', 11.002) <class 'tuple'>
+****************/
+
+[root@V21 PythonScripts]# 
+[root@V21 PythonScripts]# vim    listforinif.py
+[root@V21 PythonScripts]# cat   listforinif.py
+#!/usr/bin/env   python
+
+# 遍历key值，value值（下面写法完全等价）：
+a = {'a': '1', 'b': '2', 'c': '3'}
+for key in a:
+    print(key+':'+a[key],sep=' -- ',end=' $')
+
+print('directory 方式一 for key in a')
+
+for key in a.keys():
+    print(key+':'+a[key],sep=' -- ',end=' $')
+
+print('directory 方式2 for key in a.keys()')
+
+for key,value in a.items():
+       print(key+':'+value,sep=' -- ',end=' $')
+
+print('directory 方式3 for key,value in a.items()')
+
+
+for (key,value) in a.items():
+    print(key+':'+value,sep=' -- ',end=' $')
+
+print('directory 方式4 for (key,value) in a.items()')
 
 
 
+#在for 循环中,遍历元组的每一项
+mytuple = ('yuanzu',111,True,('ziyuan',11.002))
+print('mytuple is ',mytuple)
+
+for value in mytuple:
+  print('tuple value type is ',value,type(value))
+
+
+#使用for...in语句遍历列表中的元素
+mylist = ['a0',11,False,['aa0',True,22]]
+print('mylist is %s' % mylist)
+for value in  mylist:
+  print('list value type is ',value,type(value))
+
+getlist = ['%s\n' % element for element in mylist]
+print('getlist is  %s ' % getlist)
+
+/******************
+mylist is ['a0', 11, False, ['aa0', True, 22]]
+list value type is  a0 <class 'str'>
+list value type is  11 <class 'int'>
+list value type is  False <class 'bool'>
+list value type is  ['aa0', True, 22] <class 'list'>
+getlist is  ['a0\n', '11\n', 'False\n', "['aa0', True, 22]\n"] 
+**************************/
+
+intlist = [1, 2, 3, 4, 5]
+print('intlist is %s' % intlist)
+
+#每个列表元素的二次方
+get_intlist = [element ** 2 for element in intlist ]
+print('get_intlist is %s' % get_intlist)
+
+
+#找出30以内的能够被3整除的正整数
+int3list = [element for element  in  range(1,30) if  element % 3 == 0 ]
+print('The positive integer divided by three is \n %s' % int3list)
+
+/*************
+intlist is [1, 2, 3, 4, 5]
+get_intlist is [1, 4, 9, 16, 25]
+The positive integer divided by three is 
+ [3, 6, 9, 12, 15, 18, 21, 24, 27]
+********/
+
+
+[root@V21 PythonScripts]# scp    listforinif.py   root@192.168.0.254:/var/git/pythonScripts/day04
+
+>>> import keyword
+>>> print(keyword.kwlist)
+['False', 'None', 'True', 'and', 'as', 'assert', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
+>>> 
+[root@V21 PythonScripts]# python3   listforinif.py['False', 'None', 'True', 'and', 'as', 'assert', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
+a:1 $b:2 $c:3 $directory 方式一 for key in a
+a:1 $b:2 $c:3 $directory 方式2 for key in a.keys()
+a:1 $b:2 $c:3 $directory 方式3 for key,value in a.items()
+a:1 $b:2 $c:3 $directory 方式4 for (key,value) in a.items()
+mytuple is  ('yuanzu', 111, True, ('ziyuan', 11.002))
+tuple value type is  yuanzu <class 'str'>
+tuple value type is  111 <class 'int'>
+tuple value type is  True <class 'bool'>
+tuple value type is  ('ziyuan', 11.002) <class 'tuple'>
+mylist is ['a0', 11, False, ['aa0', True, 22]]
+list value type is  a0 <class 'str'>
+list value type is  11 <class 'int'>
+list value type is  False <class 'bool'>
+list value type is  ['aa0', True, 22] <class 'list'>
+getlist is  ['a0\n', '11\n', 'False\n', "['aa0', True, 22]\n"] 
+intlist is [1, 2, 3, 4, 5]
+get_intlist is [1, 4, 9, 16, 25]
+The positive integer divided by three is 
+ [3, 6, 9, 12, 15, 18, 21, 24, 27]
+mylist is ['a0', 11, False, ['aa0', True, 22]]
+index is 0 value is a0  type value is  <class 'str'>
+index is 1 value is 11  type value is  <class 'int'>
+index is 2 value is False  type value is  <class 'bool'>
+index is 3 value is ['aa0', True, 22]  type value is  <class 'list'>
+index is 4 value is ('tuple-element', 100, ['cc00', 1.002])  type value is  <class 'tuple'>
+[root@V21 PythonScripts]# cat   listforinif.py
+#!/usr/bin/env   python
+import  keyword
+print(keyword.kwlist)
+
+# 遍历key值，value值（下面写法完全等价）：
+a = {'a': '1', 'b': '2', 'c': '3'}
+for key in a:
+    print(key+':'+a[key],sep=' -- ',end=' $')
+
+print('directory 方式一 for key in a')
+
+for key in a.keys():
+    print(key+':'+a[key],sep=' -- ',end=' $')
+
+print('directory 方式2 for key in a.keys()')
+
+for key,value in a.items():
+       print(key+':'+value,sep=' -- ',end=' $')
+
+print('directory 方式3 for key,value in a.items()')
+
+
+for (key,value) in a.items():
+    print(key+':'+value,sep=' -- ',end=' $')
+
+print('directory 方式4 for (key,value) in a.items()')
 
 
 
+#在for 循环中,遍历元组的每一项
+mytuple = ('yuanzu',111,True,('ziyuan',11.002))
+print('mytuple is ',mytuple)
+
+for value in mytuple:
+  print('tuple value type is ',value,type(value))
+
+
+#使用for...in语句遍历列表中的元素
+mylist = ['a0',11,False,['aa0',True,22]]
+print('mylist is %s' % mylist)
+for value in  mylist:
+  print('list value type is ',value,type(value))
+
+getlist = ['%s\n' % element for element in mylist]
+print('getlist is  %s ' % getlist)
+
+intlist = [1, 2, 3, 4, 5]
+print('intlist is %s' % intlist)
+
+#每个列表元素的二次方
+get_intlist = [element ** 2 for element in intlist ]
+print('get_intlist is %s' % get_intlist)
+
+
+#找出30以内的能够被3整除的正整数
+int3list = [element for element  in  range(1,30) if  element % 3 == 0 ]
+print('The positive integer divided by three is \n %s' % int3list)
+
+
+tplist = ['a0',11,False,['aa0',True,22],('tuple-element',100,['cc00',1.002])]
+print('mylist is %s' % mylist)
+#内置函数enumerate 实现功能:同时得到元素编号和元素
+for (index,value) in  enumerate(tplist):
+  print('index is %d value is %s  type value is  %s' % (index,value,type(value)))
+
+/**************
+[root@V21 PythonScripts]# vim    listforinif.py
+[root@V21 PythonScripts]# python3   listforinif.py['False', 'None', 'True', 'and', 'as', 'assert', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
+a:1 $b:2 $c:3 $directory 方式一 for key in a
+a:1 $b:2 $c:3 $directory 方式2 for key in a.keys()
+a:1 $b:2 $c:3 $directory 方式3 for key,value in a.items()
+a:1 $b:2 $c:3 $directory 方式4 for (key,value) in a.items()
+mytuple is  ('yuanzu', 111, True, ('ziyuan', 11.002))
+tuple value type is  yuanzu <class 'str'>
+tuple value type is  111 <class 'int'>
+tuple value type is  True <class 'bool'>
+tuple value type is  ('ziyuan', 11.002) <class 'tuple'>
+mylist is ['a0', 11, False, ['aa0', True, 22]]
+list value type is  a0 <class 'str'>
+list value type is  11 <class 'int'>
+list value type is  False <class 'bool'>
+list value type is  ['aa0', True, 22] <class 'list'>
+getlist is  ['a0\n', '11\n', 'False\n', "['aa0', True, 22]\n"] 
+intlist is [1, 2, 3, 4, 5]
+get_intlist is [1, 4, 9, 16, 25]
+The positive integer divided by three is 
+ [3, 6, 9, 12, 15, 18, 21, 24, 27]
+tplist is ['a0', 11, False, ['aa0', True, 22], ('tuple-element', 100, ['cc00', 1.002])]
+index is 0 value is a0  type value is  <class 'str'>
+index is 1 value is 11  type value is  <class 'int'>
+index is 2 value is False  type value is  <class 'bool'>
+index is 3 value is ['aa0', True, 22]  type value is  <class 'list'>
+index is 4 value is ('tuple-element', 100, ['cc00', 1.002])  type value is  <class 'tuple'>
+[root@V21 PythonScripts]# cat   listforinif.py
+#!/usr/bin/env   python
+import  keyword
+print(keyword.kwlist)
+
+# 遍历key值，value值（下面写法完全等价）：
+a = {'a': '1', 'b': '2', 'c': '3'}
+for key in a:
+    print(key+':'+a[key],sep=' -- ',end=' $')
+
+print('directory 方式一 for key in a')
+
+for key in a.keys():
+    print(key+':'+a[key],sep=' -- ',end=' $')
+
+print('directory 方式2 for key in a.keys()')
+
+for key,value in a.items():
+       print(key+':'+value,sep=' -- ',end=' $')
+
+print('directory 方式3 for key,value in a.items()')
+
+
+for (key,value) in a.items():
+    print(key+':'+value,sep=' -- ',end=' $')
+
+print('directory 方式4 for (key,value) in a.items()')
 
 
 
+#在for 循环中,遍历元组的每一项
+mytuple = ('yuanzu',111,True,('ziyuan',11.002))
+print('mytuple is ',mytuple)
+
+for value in mytuple:
+  print('tuple value type is ',value,type(value))
 
 
+#使用for...in语句遍历列表中的元素
+mylist = ['a0',11,False,['aa0',True,22]]
+print('mylist is %s' % mylist)
+for value in  mylist:
+  print('list value type is ',value,type(value))
+
+getlist = ['%s\n' % element for element in mylist]
+print('getlist is  %s ' % getlist)
+
+/***************
+mylist is ['a0', 11, False, ['aa0', True, 22]]
+list value type is  a0 <class 'str'>
+list value type is  11 <class 'int'>
+list value type is  False <class 'bool'>
+list value type is  ['aa0', True, 22] <class 'list'>
+getlist is  ['a0\n', '11\n', 'False\n', "['aa0', True, 22]\n"] 
+**********************/
+
+intlist = [1, 2, 3, 4, 5]
+print('intlist is %s' % intlist)
+
+#每个列表元素的二次方
+get_intlist = [element ** 2 for element in intlist ]
+print('get_intlist is %s' % get_intlist)
 
 
+#找出30以内的能够被3整除的正整数
+int3list = [element for element  in  range(1,30) if  element % 3 == 0 ]
+print('The positive integer divided by three is \n %s' % int3list)
 
+/**************
+The positive integer divided by three is 
+ [3, 6, 9, 12, 15, 18, 21, 24, 27]
+*****/
+
+tplist = ['a0',11,False,['aa0',True,22],('tuple-element',100,['cc00',1.002])]
+print('tplist is %s' % tplist)
+#内置函数enumerate 实现功能:同时得到元素编号和元素
+#enumerate   英 [ɪˈnju:məreɪt]   美 [ɪˈnu:məreɪt]  
+              vt.列举，枚举，数
+
+for (index,value) in  enumerate(tplist):
+  print('index is %d value is %s  type value is  %s' % (index,value,type(value)))
+
+/********************
+
+tplist is ['a0', 11, False, ['aa0', True, 22], ('tuple-element', 100, ['cc00', 1.002])]
+index is 0 value is a0  type value is  <class 'str'>
+index is 1 value is 11  type value is  <class 'int'>
+index is 2 value is False  type value is  <class 'bool'>
+index is 3 value is ['aa0', True, 22]  type value is  <class 'list'>
+index is 4 value is ('tuple-element', 100, ['cc00', 1.002])  type value is  <class 'tuple'>
+
+********************/
+
+[root@V21 PythonScripts]# scp    listforinif.py   root@192.168.0.254:/var/git/pythonScripts/day04 
+root@192.168.0.254's password: 
+listforinif.py                                  100% 1797     1.9MB/s   00:00    
+[root@V21 PythonScripts]# 
+
+>>> import  os
+>>> filename = input('Please input filename: ')
+Please input filename: filex.txt
+>>> print(os.path.exists(filename))
+True           #表示判断文件是否存在 os.path.exists(filename)
+
+>>> filename = input('Please input filename: ')
+Please input filename: xxxx.txt
+>>> print(os.path.exists(filename))
+False
+>>> 
+>>> 
+[root@V20 PythonScripts]# ll   filex.txt  xxxx.txt
+ls: 无法访问xxxx.txt: 没有那个文件或目录
+-rwxr-xr-x 1 root root 30 3月  28 11:38 filex.txt
+[root@V20 PythonScripts]# 
+
+confirm    英 [kənˈfɜ:m]   美 [kənˈfɜ:rm]  
+            vt.证实;[法]确认，批准;
+
+[root@V20 PythonScripts]# vim  mktxtfile.py 
+
+[root@V20 PythonScripts]# python3  mktxtfile.py
+
+__name__ yellow is __main__
+sys.argv[0] is mktxtfile.py red
+sys.argv is ['mktxtfile.py'] 
+Please input filename: filey2.txt
+ filey2.txt already exists
+Please input filename: newfile.txt
+ Please input content end with end
+input content: 
+input content: 
+input content: 
+input content: 
+input filename to be deleted: filey22.txt       
+ filey22.txt not exists
+input filename to be deleted: filey2.txt
+ filey2.txt already exists
+remove filename  yes or no?: yes
+ filey2.txt is removed
+ file filey2.txt has been removed
+
+[root@V20 PythonScripts]# ll filey2.txt   newfile.txt
+ls: 无法访问filey2.txt: 没有那个文件或目录
+-rw-r--r-- 1 root root 20 3月  29 14:58 newfile.txt
+
+[root@V20 PythonScripts]# cat   mktxtfile.py
+#!/usr/bin/env  python3
+import  keyword, sys, os, getpass, shutil
+"This  is a test module"
+sys.stdout.write('\033[30;43;1m__name__ yellow is %s\n\033[0m' % __name__)
+
+def  get_fname():
+  while True:
+    filename = input('Please input filename: ')
+    if not  os.path.exists(filename):
+      break
+    print('\033[31;40;1m %s already exists\033[0m' % filename)
+  return filename
+
+def  get_contents():
+  contents = []
+  sys.stdout.write('\033[29;42;1m Please input content end with end\n\033[0m')
+  while True:
+    line = getpass.getpass('input content: ')
+    if  line == 'end':
+      break
+    contents.append(line)
+  return  contents
+
+def  wfile(fname,contents):
+  with open(fname,'w') as fobj:
+    fobj.writelines(contents)
+
+def  rmfile():
+  boolrun = True
+  filename = ''
+  while boolrun:
+    filename = input('input filename to be deleted: ')
+    if not  os.path.exists(filename):
+      print('\033[30;41;1m %s not exists\033[0m' % filename)
+    else:
+      print('\033[31;40;1m %s already exists\033[0m' % filename)
+      confirm = input('remove filename  yes or no?: ')
+      if confirm == 'yes':
+        os.remove(filename)
+        print('\033[31;40;1m %s is removed\033[0m' % filename)
+        boolrun = False
+  else:
+    print('\033[32;40;1m file %s has been removed\033[0m' % filename)
+    
+
+if __name__ == '__main__':
+  sys.stdout.write('\033[31;47;1msys.argv[0] is %s red\n\033[0m' % sys.argv[0])
+  sys.stdout.write('\033[32;48;1msys.argv is %s \n\033[0m' % sys.argv)
+#  print(keyword.kwlist)
+#  print(keyword.iskeyword('asxx'))
+#  print(keyword.iskeyword('as'))
+#  print('pass' in keyword.kwlist)
+  fname = get_fname()
+  contents = get_contents()
+  contents = ['%s \n' % line for line  in contents]
+  wfile(fname,contents)
+  rmfile()
+
+[root@V20 PythonScripts]# 
+[root@V20 PythonScripts]# cat  newfile.txt
+hahha 
+xiix 
+12345 
+[root@V20 PythonScripts]# 
+ 
+[root@V20 PythonScripts]# vim   touchfile.py 
+[root@V20 PythonScripts]# python3  touchfile.py
+__name__ yellow is __main__
+sys.argv[0] is touchfile.py red
+sys.argv is ['touchfile.py'] 
+Please input filename: filex.txt
+ filex.txt already exists
+Please input filename: newfile.txt
+ newfile.txt already exists
+Please input filename: newfile2.txt
+ newfile2.txt not exists
+ Please input content end with end
+input end with end
+haha
+input end with end
+xixi
+input end with end
+end
+[root@V20 PythonScripts]# cat   newfile2.txt 
+haha
+xixi
+[root@V20 PythonScripts]# cat  touchfile.py
+#!/usr/bin/env  python3
+import  keyword, sys, os, getpass
+"This  is a test module"
+sys.stdout.write('\033[30;43;1m__name__ yellow is %s\n\033[0m' % __name__)
+
+def  get_fname():
+  while True:
+    filename = input('Please input filename: ')
+ #表示判断文件是否存在 os.path.exists(filename)
+    if  os.path.exists(filename):
+      print('\033[30;41;1m %s already exists\033[0m' % filename)
+    else:
+      print('\033[31;40;1m %s not exists\033[0m' % filename)
+      break
+  return filename
+
+def  get_contents():
+  contents = []
+  sys.stdout.write('\033[29;42;1m Please input content end with end\n\033[0m')
+  while True:
+    print('input end with end')
+#sys.stdin.readline()输入,输出的是"字符串+\n"的形式
+    line = sys.stdin.readline()
+    if  line == 'end\n':
+      break
+    contents.append(line)
+  return  contents
+
+def  wfile(fname,contents):
+  with open(fname,'w') as fobj:
+    fobj.writelines(contents)
+
+if __name__ == '__main__':
+  sys.stdout.write('\033[31;47;1msys.argv[0] is %s red\n\033[0m' % sys.argv[0])
+  sys.stdout.write('\033[32;48;1msys.argv is %s \n\033[0m' % sys.argv)
+#  print(keyword.kwlist)
+#  print(keyword.iskeyword('asxx'))
+#  print(keyword.iskeyword('as'))
+#  print('pass' in keyword.kwlist)
+  fname = get_fname()
+  contents = get_contents()
+#  contents = ['%s \n' % line for line  in contents]
+  wfile(fname,contents)
+
+[root@V20 PythonScripts]# scp   touchfile.py   root@192.168.0.254:/var/git/pythonScripts/day04 
+root@192.168.0.254's password: 
+touchfile.py                                100% 1366     1.6MB/s   00:00    
+[root@V20 PythonScripts]# 
+
+
+ sys.stdin是一个标准化输入的方法,输出是“字符串+\n”的形式
+python3中使用sys.stdin.readline()可以实现标准输入，
+其中默认输入的格式是字符串，
+如果是int，float类型
+则需要强制转换。
+import sys
+try:
+ while True:
+  print('Please input a number:')
+  n = int(sys.stdin.readline().strip('\n')) 
+#strip('\n')表示以\n分隔，否则输出是“字符串+\n”的形式
+
+  print('Please input some numbers:')
+  sn = sys.stdin.readline().strip()
+#若是多输入，strip()默认是以空格分隔，返回一个包含多个字符串的list。
+
+  if sn == '':
+    break
+  sn = list(map(int,sn.split())) #如果要强制转换成int等类型，可以调用map()函数。
+    print(n)
+
+import  sys
+
+sys.stdout.write("Please input your name  --stdout.write\n")
+name = sys.stdin.readline().strip('\n')
+sys.stdout.write("your name is %s --stdout.write\n" % name)
+
+sys.stderr.write("your name is %s --stderr\n" % name)
 
 
 
